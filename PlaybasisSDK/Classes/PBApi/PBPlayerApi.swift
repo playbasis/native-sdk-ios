@@ -232,6 +232,13 @@ public class PBPlayerApi: PBBaseApi {
         }, failureBlock:failureBlock)
         
     }
+    
+    public class func getActionReportWithPlayerId(pbActionReportForm:PBActionReportForm,completionBlock:PBActionReportsCompletionBlock, failureBlock:PBFailureErrorBlock){
+        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(pbActionReportForm.playerId)/actionReport"), parameters: pbActionReportForm.params(), completionBlock: { (response) in
+            let actionReports:[PBActionReport] = PBActionReport.pbActionReportFromApiResponse(response)
+            completionBlock(actionReports)
+            }, failureBlock:failureBlock)
+    }
 
     // MARK: - Private
     

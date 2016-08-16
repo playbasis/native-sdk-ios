@@ -32,19 +32,18 @@ public class PBLeaderBoard: PBModel {
  
     }
     
-    override init() {
+    public override init() {
         super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
     }
     
     init(apiResponse:PBApiResponse) {
         super.init()
         Mapper<PBLeaderBoard>().map(apiResponse.parsedJson!["player_data"], toObject: self)
     }
-    
-    required public init?(_ map: Map) {
-         super.init(map)
-    }
-    
     
     class func pbLeaderBoardDataFromApiResponse(apiResponse:PBApiResponse) -> (leaderBoardList:[PBLeaderBoard], playerData:PBLeaderBoard?) {
         var pbLeaderBoardList:[PBLeaderBoard] = []

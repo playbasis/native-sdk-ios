@@ -40,6 +40,8 @@ public typealias PBContentCompletionBlock = ([PBContent]) -> Void
 
 public typealias PBRanksCompletionBlock = ([PBRank]) -> Void
 
+public typealias PBActionReportsCompletionBlock = ([PBActionReport]) -> Void
+
 
 /**
  Represents a response from the server.

@@ -38,8 +38,13 @@ public class PBRank: PBModel{
         token <- map["token"]
     }
     
-    func getFullName() -> String {
-      return "\(firstName)  \(lastName)"
+    public func getFullName() -> String {
+        if self.firstName != nil && self.lastName != nil {
+            return "\(firstName)  \(lastName)"
+        }else if self.firstName != nil {
+            return firstName
+        }
+        return ""
     }
     
     class func pbrankFromApiResponse(apiResponse:PBApiResponse) -> [PBRank] {
