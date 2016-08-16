@@ -1,0 +1,112 @@
+//
+//  ApiResponse.swift
+//  Idea
+//
+//  Created by Médéric Petit on 4/20/2559 BE.
+//  Copyright © 2559 playbasis. All rights reserved.
+//
+
+import Alamofire
+import ObjectMapper
+
+typealias PBFailureErrorBlock = (error:PBError) -> Void
+
+typealias PBEmptyCompletionBlock = () -> Void
+
+typealias PBAuthenticationCompletionBlock = (authenticationToken:PBAuthenticationToken) -> Void
+
+typealias PBPlayerCompletionBlock = (player:PBPlayer) -> Void
+
+typealias PBPlayerCustomFieldsCompletionBlock = (customFields:[String:String]) -> Void
+
+typealias PBPlayerAuthCompletionBlock = (playerId:String) -> Void
+
+typealias PBPlayerBadgesCompletionBlock = ([PBBadge]) -> Void
+
+typealias PBQuestCompletionBlock = (PBQuest) -> Void
+
+typealias PBQuestsCompletionBlock = ([PBQuest]) -> Void
+
+typealias PBGoodsCompletionBlock = ([PBRewardData]) -> Void
+
+typealias PBRewardsCompletionBlock = ([PBReward]) -> Void
+
+typealias PBPointsCompletionBlock = ([PBPoint]) -> Void
+
+
+typealias PBLeaderBoardCompletionBlock = (leadearBoard:[PBLeaderBoard], playerData:PBLeaderBoard?) -> Void
+
+typealias PBContentCompletionBlock = ([PBContent]) -> Void
+
+typealias PBRanksCompletionBlock = ([PBRank]) -> Void
+
+
+/**
+ Represents a response from the server.
+ */
+public class PBApiResponse:Mappable {
+    
+    
+    /// Response JSON parsed into a dictionary, or nil if no JSON in response
+    private(set) public var parsedJson:AnyObject?
+    /// Whether the request was successful or not
+    public var success: Bool = false
+    /// The raised error, if any
+    public var apiError:PBError?
+    /// The message returned
+    public var message:String = ""
+    /// The error code
+    public var errorCode:String = "0000"
+    
+    
+    // MARK: - Initialisation
+    
+    init() {
+        
+    }
+    
+    required public init?(_ map: Map){}
+    
+    public func mapping(map: Map) {
+        
+        success <- map["success"]
+        message <- map["message"]
+        parsedJson <- map["response"]
+        errorCode <- map["error_code"]
+        
+        self.processError()
+    }
+    
+    public convenience init(response:Response<AnyObject, NSError>) {
+        let jsonResponse = response.result.value as? [String:AnyObject]
+        
+        if response.result.isFailure {
+            self.init(nsError: response.result.error!, json: jsonResponse)
+        }
+        else if let jsonResponse = jsonResponse {
+            self.init()
+            Mapper<PBApiResponse>().map(jsonResponse, toObject: self)
+        }
+        else {
+            print("Failed to get a valid JSON from server")
+            let nsError = NSError(domain: API_ERROR_DOMAIN, code: -1, userInfo: nil)
+            self.init(nsError: nsError, json: nil)
+        }
+    }
+    
+    // Private
+    
+    private init(nsError: NSError, json: [String:AnyObject]?) {
+        self.success = false
+        self.message = nsError.localizedDescription
+        self.errorCode = String(nsError.code)
+        
+        self.processError()
+    }
+    
+    private func processError() {
+        guard success == false else { return }
+        self.apiError =  PBError(code: errorCode, message: message)
+    }
+    
+}

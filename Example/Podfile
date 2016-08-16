@@ -1,0 +1,6 @@
+use_frameworks!
+target 'PlaybasisSDK_Tests' do
+  pod 'PlaybasisSDK', :path => '../'
+  
+  
+end
