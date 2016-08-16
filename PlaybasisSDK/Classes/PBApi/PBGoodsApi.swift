@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PBGoodsApi: PBBaseApi {
+public class PBGoodsApi: PBBaseApi {
 
     private class func goodsEndPointWithPath(path:String) -> String {
         return PBEndPoint.GOODS_END_POINT + path

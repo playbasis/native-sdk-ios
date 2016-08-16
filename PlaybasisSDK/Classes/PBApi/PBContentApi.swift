@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PBContentApi: PBBaseApi {
+public class PBContentApi: PBBaseApi {
     
     private class func contentEndPointWithPath(path:String) -> String {
         return PBEndPoint.CONTENT_END_POINT + path

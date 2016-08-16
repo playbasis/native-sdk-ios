@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PBRedeemApi: PBBaseApi {
+public class PBRedeemApi: PBBaseApi {
     
     private class func redeemEndPointWithPath(path:String) -> String {
         return PBEndPoint.REDEEM_END_POINT + path

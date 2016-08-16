@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PBDeviceForm: PBForm {
+public final class PBDeviceForm: PBForm {
 
     //Required
     var playerId:String!
@@ -16,7 +16,7 @@ class PBDeviceForm: PBForm {
     var deviceDescription:String!
     var deviceName:String!
     
-    override func params() -> [String:String] {
+    override public func params() -> [String:String] {
         var params:[String:String] = [:]
         params["player_id"] = playerId
         params["device_token"] = deviceToken

@@ -9,13 +9,13 @@
 import UIKit
 import ObjectMapper
 
-class PBPoint: PBModel {
+public class PBPoint: PBModel {
 
     var value:Int! = 0
     var rewardName:String! = ""
     var rewardId:String! = ""
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         value <- map["value"]
         rewardName <- map["reward_name"]

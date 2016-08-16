@@ -14,7 +14,7 @@ enum ApproveStatus:String {
     case Pending = "pending"
 }
 
-class PBPlayerForm: PBForm {
+public class PBPlayerForm: PBForm {
 
     //Required
     var playerId:String!
@@ -29,7 +29,7 @@ class PBPlayerForm: PBForm {
     var customFields:[String:String]?
     var approveStatus:ApproveStatus = .Approved
     
-    override internal func validate()  {
+    override public func validate()  {
         super.validate()
         guard self.playerId != nil else {
             self.validationError =  PBError(message: PBLocalizedFormatString("validation_player_id_required"), validationErrorType: .PlayerIdRequired)
@@ -43,7 +43,7 @@ class PBPlayerForm: PBForm {
         return
     }
     
-    override func params() -> [String:String] {
+    override public func params() -> [String:String] {
         var params:[String:String] = [:]
         params["id"] = playerId!
         params["approve_status"] = approveStatus.rawValue

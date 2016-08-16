@@ -8,9 +8,9 @@
 
 import UIKit
 
-final class PBRegisterForm: PBPlayerForm {
+public final class PBRegisterForm: PBPlayerForm {
     
-    override internal func validate()  {
+    override public func validate()  {
         super.validate()
         guard self.playerId != nil else {
             self.validationError =  PBError(message: PBLocalizedFormatString("validation_player_id_required"), validationErrorType: .PlayerIdRequired)

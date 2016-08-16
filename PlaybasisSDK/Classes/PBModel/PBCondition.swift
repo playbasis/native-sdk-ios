@@ -9,19 +9,19 @@
 import UIKit
 import ObjectMapper
 
-class PBCondition: PBModel {
+public class PBCondition: PBModel {
 
     var conditionId:String?
     var type:String?
     var value:String?
     var conditionData:[PBConditionData] = []
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
         super.init(map)
     }
     
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         conditionId <- map["condition_id"]
         type <- map["condition_type"]

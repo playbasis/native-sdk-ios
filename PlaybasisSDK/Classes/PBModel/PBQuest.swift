@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 
-class PBQuest: PBModel {
+public class PBQuest: PBModel {
     
     var name:String! = ""
     var desc:String! = ""
@@ -42,12 +42,12 @@ class PBQuest: PBModel {
         Mapper<PBQuest>().map(apiResponse.parsedJson!["quests"], toObject: self)
     }
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
         super.init(map)
     }
     
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         name <- map["quest_name"]
         desc <- map["description"]

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PBCommunicationApi: PBBaseApi {
+public class PBCommunicationApi: PBBaseApi {
 
     private class func pushEndPointWithPath(path:String) -> String {
         return PBEndPoint.PUSH_END_POINT + path

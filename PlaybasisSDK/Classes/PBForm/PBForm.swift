@@ -8,31 +8,31 @@
 
 import UIKit
 
-protocol Validatable {
+public protocol Validatable {
     func validate()
     func isValid() -> Bool
 }
 
-protocol Parametrable {
+public protocol Parametrable {
     func params() -> [String:String]
 }
 
 
-class PBForm:NSObject, Validatable, Parametrable {
+public class PBForm:NSObject, Validatable, Parametrable {
     
     var validationError:PBError?
 
-    func validate() {
+    public func validate() {
         // Default implementation does nothing
         // Override in subclass
     }
     
-    func isValid() -> Bool {
+    public func isValid() -> Bool {
         self.validate()
         return self.validationError == nil
     }
     
-    func params() -> [String:String] {
+    public func params() -> [String:String] {
         // Default implementation does nothing
         // Override in subclass
         return [:]

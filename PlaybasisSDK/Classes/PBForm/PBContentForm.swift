@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum PBSortContent:String {
+public enum PBSortContent:String {
     case Title = "title"
     case DateStart = "date_start"
     case DateEnd = "date_end"
@@ -19,7 +19,7 @@ enum PBSortContent:String {
     case Action = "action"
 }
 
-class PBContentForm: PBForm {
+public final class PBContentForm: PBForm {
     
     //Required
     var dateCheck:Bool! = true
@@ -42,7 +42,7 @@ class PBContentForm: PBForm {
     var onlyNewFeedback:Bool?
     
     
-    override func params() -> [String:String] {
+    override public func params() -> [String:String] {
         var params:[String:String] = [:]
         params["date_check"] = String(dateCheck)
         params["sort"] = sort.rawValue

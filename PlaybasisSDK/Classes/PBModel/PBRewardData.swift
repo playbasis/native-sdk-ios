@@ -9,32 +9,32 @@
 import UIKit
 import ObjectMapper
 
-class PBRedeem: PBModel {
+public class PBRedeem: PBModel {
     var point:PBRedeemPoint!
     var custom:[PBRedeemCustom]! = []
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         point <- map["point"]
         custom <- map["custom"]
     }
 }
 
-class PBRedeemPoint:PBModel {
+public class PBRedeemPoint:PBModel {
     var pointValue:Int! = 0
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         pointValue <- map["point_value"]
     }
 }
 
-class PBRedeemCustom:PBModel {
+public class PBRedeemCustom:PBModel {
     var customId:String?
     var customName:String?
     var customValue:Int! = 0
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         customId <- map["custom_id"]
         customName <- map["custom_name"]
@@ -42,7 +42,7 @@ class PBRedeemCustom:PBModel {
     }
 }
 
-class PBRewardData: PBModel {
+public class PBRewardData: PBModel {
     
     var rewardDataId:String?
     var desc:String! = ""
@@ -71,7 +71,7 @@ class PBRewardData: PBModel {
     
     
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         rewardDataId <- map["_id"]
         desc <- map["description"]

@@ -8,12 +8,13 @@
 
 import UIKit
 
-enum RankType:String{
+public enum RankType:String{
     case Point = "point"
     case Token = "token"
     case Gold = "gold"
 }
-class PBPlayerApi: PBBaseApi {
+
+public class PBPlayerApi: PBBaseApi {
         
     private class func playerEndPointWithPath(path:String) -> String {
         return PBEndPoint.PLAYER_END_POINT + path

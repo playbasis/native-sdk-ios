@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct PBEndPoint {
+public struct PBEndPoint {
     
     static let AUTHENTICATION_END_POINT = "Auth/"
     static let PLAYER_END_POINT = "Player/"

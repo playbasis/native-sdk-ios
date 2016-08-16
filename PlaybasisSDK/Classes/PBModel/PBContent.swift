@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PBContent: PBModel {
+public class PBContent: PBModel {
     
     var title:String! = ""
     var detail:String! = ""
@@ -27,12 +27,12 @@ class PBContent: PBModel {
         Mapper<PBContent>().map(apiResponse.parsedJson!["result"], toObject: self)
     }
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
         super.init(map)
     }
     
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         title <- map["title"]
         detail <- map["detail"]

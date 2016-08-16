@@ -9,20 +9,20 @@
 import UIKit
 import ObjectMapper
 
-enum RewardType:String {
+public enum RewardType:String {
     case Goods = "GOODS"
     case Badge = "BADGE"
 }
 
 
-class PBReward: PBModel {
+public class PBReward: PBModel {
     
     var value:String?
     var type:RewardType = .Goods
     var rewardId:String?
     var rewardData:PBRewardData?
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         value <- map["reward_value"]
         type <- (map["reward_type"], EnumTransform<RewardType>())

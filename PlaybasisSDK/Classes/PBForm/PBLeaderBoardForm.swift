@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum PBLeaderBoardStatus:String {
+public enum PBLeaderBoardStatus:String {
     case Join = "join"
     case Finish = "finish"
 }
 
-class PBLeaderBoardForm: PBForm {
+public final class PBLeaderBoardForm: PBForm {
     
     //Required
     var questId:String!
@@ -25,7 +25,7 @@ class PBLeaderBoardForm: PBForm {
     var limit:Int? = 20
     var status:PBLeaderBoardStatus?
     
-    override func params() -> [String:String] {
+    override public func params() -> [String:String] {
         var params:[String:String] = [:]
         params["quest_id"] = questId!
 

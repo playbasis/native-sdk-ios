@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PBModel: NSObject, Mappable{
+public class PBModel: NSObject, Mappable{
 
     var uid:String?
     
@@ -17,10 +17,10 @@ class PBModel: NSObject, Mappable{
         super.init()
     }
     
-    required init?(_ map: Map){
+    required public init?(_ map: Map){
     }
     
-    func mapping(map: Map) {
+    public func mapping(map: Map) {
         uid <- map["_id"]
     }
 

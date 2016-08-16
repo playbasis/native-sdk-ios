@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PBIncomplete: PBModel {
+public class PBIncomplete: PBModel {
 
 
     var incompletionId:String?
@@ -18,7 +18,7 @@ class PBIncomplete: PBModel {
     var elementId:String?
     var filter:String?
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         incompletionId <- map["incompletion_id"]
         type <- map["incompletion_type"]

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PBQuestApi: PBBaseApi {
+public class PBQuestApi: PBBaseApi {
     private class func questEndPointWithPath(path:String) -> String {
         return PBEndPoint.QUEST_END_POINT + path
     }

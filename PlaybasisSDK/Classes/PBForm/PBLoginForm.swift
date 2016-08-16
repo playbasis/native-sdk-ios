@@ -12,14 +12,14 @@ import UIKit
 //    var message:String = ""
 //}
 
-class PBLoginForm:PBForm {
+public final class PBLoginForm:PBForm {
 
     var email:String?
     var username:String?
     var password:String?
     
     
-    override internal func validate()  {
+    override public func validate()  {
         guard self.email != nil || self.username != nil else {
             
             self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_or_username_required"), validationErrorType: .EmailOrUserNameRequired)
@@ -38,7 +38,7 @@ class PBLoginForm:PBForm {
         return
     }
     
-    override func params() -> [String:String] {
+    override public func params() -> [String:String] {
       //  guard isValid() else { return  nil }
         var params:[String:String] = [:]
         params["password"] = password!

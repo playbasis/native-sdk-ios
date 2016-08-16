@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PBRank: PBModel{
+public class PBRank: PBModel{
     
     var playerId:String! = ""
     var imageURL:String! = ""
@@ -23,11 +23,11 @@ class PBRank: PBModel{
         super.init()
     }
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
         super.init(map)
     }
 
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         firstName <- map["first_name"]
         lastName <- map["last_name"]

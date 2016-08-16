@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PBCompletionData: PBModel {
+public class PBCompletionData: PBModel {
     var actionId:String?
     var name:String?
     var desc:String?
@@ -17,7 +17,7 @@ class PBCompletionData: PBModel {
     var color:String?
     
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         name <- map["name"]
         desc <- map["description"]

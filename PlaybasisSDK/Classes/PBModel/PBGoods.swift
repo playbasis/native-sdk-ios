@@ -9,12 +9,12 @@
 import UIKit
 import ObjectMapper
 
-class PBGoods: PBModel {
+public class PBGoods: PBModel {
     
     var good:PBRewardData?
     var amount:Int! = 0
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         self.good <- map["goods"]
         self.amount <- map["amount"]
@@ -26,7 +26,7 @@ class PBGoods: PBModel {
         Mapper<PBGoods>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
         super.init(map)
     }
 

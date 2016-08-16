@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PBConditionData: PBModel {
+public class PBConditionData: PBModel {
 
     var questName:String?
     var desc:String?
@@ -17,7 +17,7 @@ class PBConditionData: PBModel {
     var imageURL:String?
   
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         questName <- map["quest_name"]
         desc <- map["description"]

@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class PBLeaderBoard: PBModel {
+public class PBLeaderBoard: PBModel {
     
     var dateCompleted:NSDate?
     var dateJoined:NSDate?
@@ -20,7 +20,7 @@ class PBLeaderBoard: PBModel {
     var rank:Int! = 0
     
     
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         self.dateCompleted <- (map["date_completed"],ISO8601DateTransform())
         self.dateJoined <- (map["date_join"], ISO8601DateTransform())
@@ -41,7 +41,7 @@ class PBLeaderBoard: PBModel {
         Mapper<PBLeaderBoard>().map(apiResponse.parsedJson!["player_data"], toObject: self)
     }
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
          super.init(map)
     }
     

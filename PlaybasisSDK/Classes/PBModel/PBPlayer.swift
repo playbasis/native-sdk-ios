@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-class PBPlayer:PBModel {
+public class PBPlayer:PBModel {
     
     var playerId:String!
     var email:String?
@@ -32,7 +32,7 @@ class PBPlayer:PBModel {
         super.init()
     }
   
-    override func mapping(map: Map) {
+    override public func mapping(map: Map) {
         super.mapping(map)
         uid <- map["cl_player_id"]
         email <- map["email"]
@@ -57,7 +57,7 @@ class PBPlayer:PBModel {
         self.customFields = registerForm.customFields
     }
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
         fatalError("init has not been implemented")
     }
     
