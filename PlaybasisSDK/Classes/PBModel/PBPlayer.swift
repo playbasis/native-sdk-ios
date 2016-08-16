@@ -28,8 +28,12 @@ public class PBPlayer:PBModel {
         Mapper<PBPlayer>().map(apiResponse.parsedJson!["player"], toObject: self)
     }
     
-    override init() {
+    public override init() {
         super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
     }
   
     override public func mapping(map: Map) {
@@ -55,10 +59,6 @@ public class PBPlayer:PBModel {
         self.playerId = registerForm.playerId
         self.profilePictureUrl = registerForm.profilePictureUrl
         self.customFields = registerForm.customFields
-    }
-    
-    required public init?(_ map: Map) {
-        fatalError("init has not been implemented")
     }
     
 }

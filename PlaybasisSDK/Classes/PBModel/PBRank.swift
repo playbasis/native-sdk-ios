@@ -19,7 +19,7 @@ public class PBRank: PBModel{
     public var gold:Int = 0
     public var token:Int = 0
     
-    override init() {
+    public override init() {
         super.init()
     }
     

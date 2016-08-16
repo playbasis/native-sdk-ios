@@ -20,6 +20,14 @@ public class PBMission: PBModel {
     public var status:String?
     public var completion:[PBCompletion] = []
     public var pending:[PBPending] = []
+    
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
 
     override public func mapping(map: Map) {
         super.mapping(map)

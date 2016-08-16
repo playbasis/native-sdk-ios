@@ -29,5 +29,9 @@ public class PBGoods: PBModel {
     required public init?(_ map: Map) {
         super.init(map)
     }
+    
+    public override init() {
+        super.init()
+    }
 
 }

@@ -18,7 +18,7 @@ public class PBContent: PBModel {
     public var summary:String! = ""
     public var date:NSDate?
     
-    override init() {
+    public override init() {
         super.init()
     }
     

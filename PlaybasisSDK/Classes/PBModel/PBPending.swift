@@ -14,6 +14,14 @@ public class PBPending: PBModel {
     public var eventType:String! = ""
     public var message:String! = ""
     public var incomplete:PBIncomplete?
+    
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
  
     override public func mapping(map: Map) {
         super.mapping(map)

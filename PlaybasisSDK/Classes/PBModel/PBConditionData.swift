@@ -16,6 +16,13 @@ public class PBConditionData: PBModel {
     public var hint:String?
     public var imageURL:String?
   
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
     
     override public func mapping(map: Map) {
         super.mapping(map)

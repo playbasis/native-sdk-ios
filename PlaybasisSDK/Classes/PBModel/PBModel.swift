@@ -13,7 +13,7 @@ public class PBModel: NSObject, Mappable{
 
     public var uid:String?
     
-    override init() {
+    public override init() {
         super.init()
     }
     

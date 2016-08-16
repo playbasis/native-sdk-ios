@@ -10,7 +10,7 @@ import UIKit
 
 public class Playbasis: NSObject {
     
-    static let sharedInstance = Playbasis()
+    public static let sharedInstance = Playbasis()
     
     var apiKey:String!
     var apiSecret:String!

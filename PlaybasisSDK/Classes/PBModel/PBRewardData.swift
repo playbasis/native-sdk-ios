@@ -69,7 +69,13 @@ public class PBRewardData: PBModel {
     public var redeem:PBRedeem!
   
     
+    public override init() {
+        super.init()
+    }
     
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
     
     override public func mapping(map: Map) {
         super.mapping(map)

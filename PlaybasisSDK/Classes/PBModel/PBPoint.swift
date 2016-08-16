@@ -15,6 +15,14 @@ public class PBPoint: PBModel {
     public var rewardName:String! = ""
     public var rewardId:String! = ""
     
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
+    
     override public func mapping(map: Map) {
         super.mapping(map)
         value <- map["value"]

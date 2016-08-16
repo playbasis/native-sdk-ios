@@ -18,6 +18,14 @@ public class PBIncomplete: PBModel {
     public var elementId:String?
     public var filter:String?
     
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
+    
     override public func mapping(map: Map) {
         super.mapping(map)
         incompletionId <- map["incompletion_id"]

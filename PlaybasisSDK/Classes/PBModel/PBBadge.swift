@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-public class PBBadge: NSObject,Mappable {
+public class PBBadge: PBModel {
 
     public var imageURL:String! = ""
     public var name:String! = ""
@@ -19,14 +19,15 @@ public class PBBadge: NSObject,Mappable {
     public var sponsor:Bool! = false
     public var amount:Int! = 0
     
-    override init() {
+    public override init() {
         super.init()
     }
     
-    required public init?(_ map: Map){
+    required public init?(_ map: Map) {
+        super.init(map)
     }
     
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         name <- map["name"]
         desc <- map["description"]
         badgeId <- map["badge_id"]

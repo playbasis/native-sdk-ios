@@ -33,17 +33,17 @@ public class PBQuest: PBModel {
     public var condition:[PBCondition] = []
     public var playerStatus:String! = ""
     
-    override init() {
+    public override init() {
         super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
     }
     
     init(apiResponse:PBApiResponse) {
         super.init()
         Mapper<PBQuest>().map(apiResponse.parsedJson!["quests"], toObject: self)
-    }
-    
-    required public init?(_ map: Map) {
-        super.init(map)
     }
     
     

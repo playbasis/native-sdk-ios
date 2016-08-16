@@ -16,6 +16,13 @@ public class PBCompletionData: PBModel {
     public var icon:String?
     public var color:String?
     
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
     
     override public func mapping(map: Map) {
         super.mapping(map)

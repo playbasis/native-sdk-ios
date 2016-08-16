@@ -21,6 +21,13 @@ public class PBCompletion: PBModel {
     public var completionId:String?
     public var completionData:PBCompletionData?
     
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
     
     override public func mapping(map: Map) {
         super.mapping(map)

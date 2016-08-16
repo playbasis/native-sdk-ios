@@ -20,6 +20,9 @@ public class PBCondition: PBModel {
         super.init(map)
     }
     
+    public override init() {
+        super.init()
+    }
     
     override public func mapping(map: Map) {
         super.mapping(map)

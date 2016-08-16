@@ -16,6 +16,13 @@ public class PBPlayerBasic: PBModel {
     public var firstName:String! = ""
     public var lastName:String! = ""
     
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(_ map: Map) {
+        super.init(map)
+    }
     
     override public func mapping(map: Map) {
         super.mapping(map)
