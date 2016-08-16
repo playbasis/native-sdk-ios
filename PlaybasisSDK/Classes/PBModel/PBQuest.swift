@@ -12,26 +12,26 @@ import ObjectMapper
 
 public class PBQuest: PBModel {
     
-    var name:String! = ""
-    var desc:String! = ""
-    var hint:String! = ""
-    var imageURL:String! = ""
-    var clientId:String?
-    var siteId:String?
-    var questId:String?
-    var missionOrder:Bool?
-    var sortOrder:Int?
-    var dateAdded:NSDate?
-    var dateModified:NSDate?
-    var tags:String?
-    var rewards:[PBReward] = []
-    var mission:[PBMission] = []
-    var status:Bool = false
-    var feedbacks:String?
-    var organizeId:String?
-    var organizeRole:String?
-    var condition:[PBCondition] = []
-    var playerStatus:String! = ""
+    public var name:String! = ""
+    public var desc:String! = ""
+    public var hint:String! = ""
+    public var imageURL:String! = ""
+    public var clientId:String?
+    public var siteId:String?
+    public var questId:String?
+    public var missionOrder:Bool?
+    public var sortOrder:Int?
+    public var dateAdded:NSDate?
+    public var dateModified:NSDate?
+    public var tags:String?
+    public var rewards:[PBReward] = []
+    public var mission:[PBMission] = []
+    public var status:Bool = false
+    public var feedbacks:String?
+    public var organizeId:String?
+    public var organizeRole:String?
+    public var condition:[PBCondition] = []
+    public var playerStatus:String! = ""
     
     override init() {
         super.init()

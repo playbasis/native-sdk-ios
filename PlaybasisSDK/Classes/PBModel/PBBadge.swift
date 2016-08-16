@@ -11,13 +11,13 @@ import ObjectMapper
 
 public class PBBadge: NSObject,Mappable {
 
-    var imageURL:String! = ""
-    var name:String! = ""
-    var desc:String! = ""
-    var badgeId:String! = ""
-    var hint:String! = ""
-    var sponsor:Bool! = false
-    var amount:Int! = 0
+    public var imageURL:String! = ""
+    public var name:String! = ""
+    public var desc:String! = ""
+    public var badgeId:String! = ""
+    public var hint:String! = ""
+    public var sponsor:Bool! = false
+    public var amount:Int! = 0
     
     override init() {
         super.init()

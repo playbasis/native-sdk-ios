@@ -14,7 +14,7 @@ public class PBContentApi: PBBaseApi {
         return PBEndPoint.CONTENT_END_POINT + path
     }
     
-    class func getContentListWithForm(contentForm:PBContentForm, completionBlock:PBContentCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func getContentListWithForm(contentForm:PBContentForm, completionBlock:PBContentCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.GET, endPoint: self.contentEndPointWithPath(""), parameters:contentForm.params(), completionBlock: { (response) in
             let contents:[PBContent] = PBContent.pbContentFromApiResponse(response)
             completionBlock(contents)

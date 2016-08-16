@@ -11,13 +11,13 @@ import ObjectMapper
 
 public class PBLeaderBoard: PBModel {
     
-    var dateCompleted:NSDate?
-    var dateJoined:NSDate?
-    var status:String! = ""
-    var current:Int! = 0
-    var goal:Int! = 0
-    var player:PBPlayerBasic?
-    var rank:Int! = 0
+    public var dateCompleted:NSDate?
+    public var dateJoined:NSDate?
+    public var status:String! = ""
+    public var current:Int! = 0
+    public var goal:Int! = 0
+    public var player:PBPlayerBasic?
+    public var rank:Int! = 0
     
     
     override public func mapping(map: Map) {

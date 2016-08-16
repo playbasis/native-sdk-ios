@@ -17,10 +17,10 @@ public enum RewardType:String {
 
 public class PBReward: PBModel {
     
-    var value:String?
-    var type:RewardType = .Goods
-    var rewardId:String?
-    var rewardData:PBRewardData?
+    public var value:String?
+    public var type:RewardType = .Goods
+    public var rewardId:String?
+    public var rewardData:PBRewardData?
     
     override public func mapping(map: Map) {
         super.mapping(map)

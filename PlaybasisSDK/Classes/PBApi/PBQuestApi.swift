@@ -15,7 +15,7 @@ public class PBQuestApi: PBBaseApi {
     
   
     
-    class func  getQuestList(completionBlock:PBQuestsCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func getQuestList(completionBlock:PBQuestsCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.GET, endPoint: questEndPointWithPath(""), parameters: nil, completionBlock: { (response) in
             let quests:[PBQuest] = PBQuest.pbQuestFromApiResponse(response)
             completionBlock(quests)
@@ -23,7 +23,7 @@ public class PBQuestApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    class func  getQuestListAvailableForPlayerWithPlayerId(playerId:String, completionBlock:PBQuestsCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func getQuestListAvailableForPlayerWithPlayerId(playerId:String, completionBlock:PBQuestsCompletionBlock, failureBlock:PBFailureErrorBlock){
         let params:[String:String] = ["player_id" : playerId]
         PBRestController.request(.GET, endPoint: questEndPointWithPath("available"), parameters: params, completionBlock: { (response) in
             let quests:[PBQuest] = PBQuest.pbQuestFromApiResponse(response)
@@ -32,7 +32,7 @@ public class PBQuestApi: PBBaseApi {
         }, failureBlock:failureBlock)
     }
     
-    class func  getQuestInfoWithQuestId(questId:String, completionBlock:PBQuestCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func getQuestInfoWithQuestId(questId:String, completionBlock:PBQuestCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.GET, endPoint: questEndPointWithPath(questId), parameters: nil, completionBlock: { (response) in
             let quest:PBQuest = PBQuest(apiResponse:response)
             completionBlock(quest)
@@ -40,14 +40,14 @@ public class PBQuestApi: PBBaseApi {
     }
     
     
-    class func  joinQuestInfoWithQuestIdAndPlayerId(questId:String,playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func joinQuestInfoWithQuestIdAndPlayerId(questId:String,playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock){
         let params:[String:String] = ["player_id":playerId]
         PBRestController.request(.POST, endPoint: questEndPointWithPath("\(questId)/join"), parameters: params, completionBlock: { (response) in
             completionBlock()
         }, failureBlock:failureBlock)
     }
     
-    class func  cancelQuestInfoWithQuestIdAndPlayerId(questId:String,playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func cancelQuestInfoWithQuestIdAndPlayerId(questId:String,playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock){
         let params:[String:String] = ["player_id":playerId]
         PBRestController.request(.POST, endPoint: questEndPointWithPath("\(questId)/cancel"), parameters: params, completionBlock: { (response) in
             completionBlock()
@@ -55,7 +55,7 @@ public class PBQuestApi: PBBaseApi {
     }
     
     
-    class func getQuestLeaderBoardWithForm(leaderBoardForm:PBLeaderBoardForm, completionBlock:PBLeaderBoardCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func getQuestLeaderBoardWithForm(leaderBoardForm:PBLeaderBoardForm, completionBlock:PBLeaderBoardCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.GET, endPoint: questEndPointWithPath("leader"), parameters: leaderBoardForm.params(), completionBlock: { (response) in
             let parsedLeaderboard = PBLeaderBoard.pbLeaderBoardDataFromApiResponse(response)
             completionBlock(leadearBoard: parsedLeaderboard.leaderBoardList, playerData: parsedLeaderboard.playerData)

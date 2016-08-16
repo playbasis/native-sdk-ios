@@ -11,10 +11,10 @@ import ObjectMapper
 
 public class PBCondition: PBModel {
 
-    var conditionId:String?
-    var type:String?
-    var value:String?
-    var conditionData:[PBConditionData] = []
+    public var conditionId:String?
+    public var type:String?
+    public var value:String?
+    public var conditionData:[PBConditionData] = []
     
     required public init?(_ map: Map) {
         super.init(map)

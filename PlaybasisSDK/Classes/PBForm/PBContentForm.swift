@@ -22,24 +22,24 @@ public enum PBSortContent:String {
 public final class PBContentForm: PBForm {
     
     //Required
-    var dateCheck:Bool! = true
-    var sort:PBSortContent! = .Title
-    var order:String! = "asc"
-    var fullHtml:Bool! = false
+    public var dateCheck:Bool! = true
+    public var sort:PBSortContent! = .Title
+    public var order:String! = "asc"
+    public var fullHtml:Bool! = false
     
     
     // Optional
-    var nodeId:String?
-    var title:String?
-    var category:String?
-    var offset:Int? = 0
-    var limit:Int? = 100
-    var pin:String?
-    var tags:String?
-    var status:String?
-    var playerId:String?
-    var onlyNewContent:Bool?
-    var onlyNewFeedback:Bool?
+    public var nodeId:String?
+    public var title:String?
+    public var category:String?
+    public var offset:Int? = 0
+    public var limit:Int? = 100
+    public var pin:String?
+    public var tags:String?
+    public var status:String?
+    public var playerId:String?
+    public var onlyNewContent:Bool?
+    public var onlyNewFeedback:Bool?
     
     
     override public func params() -> [String:String] {

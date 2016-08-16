@@ -16,14 +16,14 @@ public enum PBLeaderBoardStatus:String {
 public final class PBLeaderBoardForm: PBForm {
     
     //Required
-    var questId:String!
+    public var questId:String!
     
     // Optional
-    var completionElementId:String?
-    var playerId:String?
-    var offset:Int? = 0
-    var limit:Int? = 20
-    var status:PBLeaderBoardStatus?
+    public var completionElementId:String?
+    public var playerId:String?
+    public var offset:Int? = 0
+    public var limit:Int? = 20
+    public var status:PBLeaderBoardStatus?
     
     override public func params() -> [String:String] {
         var params:[String:String] = [:]

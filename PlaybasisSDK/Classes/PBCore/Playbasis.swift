@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Playbasis: NSObject {
+public class Playbasis: NSObject {
     
     static let sharedInstance = Playbasis()
     
@@ -16,18 +16,18 @@ class Playbasis: NSObject {
     var apiSecret:String!
     var apiUrl:String!
     
-    class func initWithApiKey(apiKey:String, apiSecret:String, apiUrl:String) {
+    public class func initWithApiKey(apiKey:String, apiSecret:String, apiUrl:String) {
         let playbasis = Playbasis.sharedInstance
         playbasis.apiKey = apiKey
         playbasis.apiSecret = apiSecret
         playbasis.apiUrl = apiUrl
     }
     
-    func logout() {
+    public func logout() {
         PBDataManager.sharedInstance.clearToken()
     }
     
-    func cancelAllRequests() {
+    public func cancelAllRequests() {
         PBBaseRestController.sharedInstance.cancelAll()
     }
 }

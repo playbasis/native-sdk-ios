@@ -11,7 +11,7 @@ import ObjectMapper
 
 public class PBModel: NSObject, Mappable{
 
-    var uid:String?
+    public var uid:String?
     
     override init() {
         super.init()

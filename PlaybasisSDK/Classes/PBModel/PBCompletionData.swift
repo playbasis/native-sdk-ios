@@ -10,11 +10,11 @@ import UIKit
 import ObjectMapper
 
 public class PBCompletionData: PBModel {
-    var actionId:String?
-    var name:String?
-    var desc:String?
-    var icon:String?
-    var color:String?
+    public var actionId:String?
+    public var name:String?
+    public var desc:String?
+    public var icon:String?
+    public var color:String?
     
     
     override public func mapping(map: Map) {

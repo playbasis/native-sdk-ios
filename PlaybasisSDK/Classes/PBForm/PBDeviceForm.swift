@@ -11,10 +11,10 @@ import UIKit
 public final class PBDeviceForm: PBForm {
 
     //Required
-    var playerId:String!
-    var deviceToken:String!
-    var deviceDescription:String!
-    var deviceName:String!
+    public var playerId:String!
+    public var deviceToken:String!
+    public var deviceDescription:String!
+    public var deviceName:String!
     
     override public func params() -> [String:String] {
         var params:[String:String] = [:]

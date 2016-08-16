@@ -14,7 +14,7 @@ public class PBCommunicationApi: PBBaseApi {
         return PBEndPoint.PUSH_END_POINT + path
     }
     
-    class func registerDeviceWithDeviceForm(deviceForm:PBDeviceForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    public class func registerDeviceWithDeviceForm(deviceForm:PBDeviceForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         PBRestController.request(.POST, endPoint: pushEndPointWithPath("deviceRegistration"), parameters: deviceForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)

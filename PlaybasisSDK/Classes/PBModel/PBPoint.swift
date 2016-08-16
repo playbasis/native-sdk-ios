@@ -11,9 +11,9 @@ import ObjectMapper
 
 public class PBPoint: PBModel {
 
-    var value:Int! = 0
-    var rewardName:String! = ""
-    var rewardId:String! = ""
+    public var value:Int! = 0
+    public var rewardName:String! = ""
+    public var rewardId:String! = ""
     
     override public func mapping(map: Map) {
         super.mapping(map)

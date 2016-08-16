@@ -10,8 +10,8 @@ import UIKit
 import ObjectMapper
 
 public class PBRedeem: PBModel {
-    var point:PBRedeemPoint!
-    var custom:[PBRedeemCustom]! = []
+    public var point:PBRedeemPoint!
+    public var custom:[PBRedeemCustom]! = []
     
     override public func mapping(map: Map) {
         super.mapping(map)
@@ -21,7 +21,7 @@ public class PBRedeem: PBModel {
 }
 
 public class PBRedeemPoint:PBModel {
-    var pointValue:Int! = 0
+    public var pointValue:Int! = 0
     
     override public func mapping(map: Map) {
         super.mapping(map)
@@ -30,9 +30,9 @@ public class PBRedeemPoint:PBModel {
 }
 
 public class PBRedeemCustom:PBModel {
-    var customId:String?
-    var customName:String?
-    var customValue:Int! = 0
+    public var customId:String?
+    public var customName:String?
+    public var customValue:Int! = 0
     
     override public func mapping(map: Map) {
         super.mapping(map)
@@ -44,29 +44,29 @@ public class PBRedeemCustom:PBModel {
 
 public class PBRewardData: PBModel {
     
-    var rewardDataId:String?
-    var desc:String! = ""
-    var quantity:Int?
-    var perUser:Int?
-    var imageURL:String! = ""
-    var status:Bool = false
-    var deleted:Bool = false
-    var sponsor:Bool = false
-    var sortOrder:Int?
-    var languageId:Int?
-    var tags:[String]?
-    var dateStart:NSDate?
-    var dateExpire:NSDate?
-    var dateAdded:NSDate?
-    var dateModified:NSDate?
-    var name:String! = ""
-    var code:String! = ""
-    var clientId:String?
-    var siteId:String?
-    var goodsId:String?
-    var group:String?
-    var amount:Int! = 0
-    var redeem:PBRedeem!
+    public var rewardDataId:String?
+    public var desc:String! = ""
+    public var quantity:Int?
+    public var perUser:Int?
+    public var imageURL:String! = ""
+    public var status:Bool = false
+    public var deleted:Bool = false
+    public var sponsor:Bool = false
+    public var sortOrder:Int?
+    public var languageId:Int?
+    public var tags:[String]?
+    public var dateStart:NSDate?
+    public var dateExpire:NSDate?
+    public var dateAdded:NSDate?
+    public var dateModified:NSDate?
+    public var name:String! = ""
+    public var code:String! = ""
+    public var clientId:String?
+    public var siteId:String?
+    public var goodsId:String?
+    public var group:String?
+    public var amount:Int! = 0
+    public var redeem:PBRedeem!
   
     
     

@@ -9,36 +9,36 @@
 import Alamofire
 import ObjectMapper
 
-typealias PBFailureErrorBlock = (error:PBError) -> Void
+public typealias PBFailureErrorBlock = (error:PBError) -> Void
 
-typealias PBEmptyCompletionBlock = () -> Void
+public typealias PBEmptyCompletionBlock = () -> Void
 
 typealias PBAuthenticationCompletionBlock = (authenticationToken:PBAuthenticationToken) -> Void
 
-typealias PBPlayerCompletionBlock = (player:PBPlayer) -> Void
+public typealias PBPlayerCompletionBlock = (player:PBPlayer) -> Void
 
-typealias PBPlayerCustomFieldsCompletionBlock = (customFields:[String:String]) -> Void
+public typealias PBPlayerCustomFieldsCompletionBlock = (customFields:[String:String]) -> Void
 
-typealias PBPlayerAuthCompletionBlock = (playerId:String) -> Void
+public typealias PBPlayerAuthCompletionBlock = (playerId:String) -> Void
 
-typealias PBPlayerBadgesCompletionBlock = ([PBBadge]) -> Void
+public typealias PBPlayerBadgesCompletionBlock = ([PBBadge]) -> Void
 
-typealias PBQuestCompletionBlock = (PBQuest) -> Void
+public typealias PBQuestCompletionBlock = (PBQuest) -> Void
 
-typealias PBQuestsCompletionBlock = ([PBQuest]) -> Void
+public typealias PBQuestsCompletionBlock = ([PBQuest]) -> Void
 
-typealias PBGoodsCompletionBlock = ([PBRewardData]) -> Void
+public typealias PBGoodsCompletionBlock = ([PBRewardData]) -> Void
 
-typealias PBRewardsCompletionBlock = ([PBReward]) -> Void
+public typealias PBRewardsCompletionBlock = ([PBReward]) -> Void
 
-typealias PBPointsCompletionBlock = ([PBPoint]) -> Void
+public typealias PBPointsCompletionBlock = ([PBPoint]) -> Void
 
 
-typealias PBLeaderBoardCompletionBlock = (leadearBoard:[PBLeaderBoard], playerData:PBLeaderBoard?) -> Void
+public typealias PBLeaderBoardCompletionBlock = (leadearBoard:[PBLeaderBoard], playerData:PBLeaderBoard?) -> Void
 
-typealias PBContentCompletionBlock = ([PBContent]) -> Void
+public typealias PBContentCompletionBlock = ([PBContent]) -> Void
 
-typealias PBRanksCompletionBlock = ([PBRank]) -> Void
+public typealias PBRanksCompletionBlock = ([PBRank]) -> Void
 
 
 /**

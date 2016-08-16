@@ -11,9 +11,9 @@ import ObjectMapper
 
 public class PBPending: PBModel {
     
-    var eventType:String! = ""
-    var message:String! = ""
-    var incomplete:PBIncomplete?
+    public var eventType:String! = ""
+    public var message:String! = ""
+    public var incomplete:PBIncomplete?
  
     override public func mapping(map: Map) {
         super.mapping(map)

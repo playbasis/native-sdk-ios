@@ -11,10 +11,10 @@ import ObjectMapper
 
 public class PBConditionData: PBModel {
 
-    var questName:String?
-    var desc:String?
-    var hint:String?
-    var imageURL:String?
+    public var questName:String?
+    public var desc:String?
+    public var hint:String?
+    public var imageURL:String?
   
     
     override public func mapping(map: Map) {

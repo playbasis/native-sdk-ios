@@ -20,7 +20,7 @@ public protocol Parametrable {
 
 public class PBForm:NSObject, Validatable, Parametrable {
     
-    var validationError:PBError?
+    public var validationError:PBError?
 
     public func validate() {
         // Default implementation does nothing

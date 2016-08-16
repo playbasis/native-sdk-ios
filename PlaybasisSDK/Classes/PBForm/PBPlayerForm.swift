@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ApproveStatus:String {
+public enum ApproveStatus:String {
     case Approved = "approved"
     case Rejected = "rejected"
     case Pending = "pending"
@@ -17,17 +17,17 @@ enum ApproveStatus:String {
 public class PBPlayerForm: PBForm {
 
     //Required
-    var playerId:String!
-    var email:String?
-    var username:String?
+    public var playerId:String!
+    public var email:String?
+    public var username:String?
     
     // Optional
-    var password:String?
-    var profilePictureUrl:String?
-    var profilePicture:UIImage?
-    var phoneNumber:String?
-    var customFields:[String:String]?
-    var approveStatus:ApproveStatus = .Approved
+    public var password:String?
+    public var profilePictureUrl:String?
+    public var profilePicture:UIImage?
+    public var phoneNumber:String?
+    public var customFields:[String:String]?
+    public var approveStatus:ApproveStatus = .Approved
     
     override public func validate()  {
         super.validate()

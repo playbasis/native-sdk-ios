@@ -11,13 +11,13 @@ import ObjectMapper
 
 public class PBRank: PBModel{
     
-    var playerId:String! = ""
-    var imageURL:String! = ""
-    var firstName:String! = ""
-    var lastName:String! = ""
-    var point:Int = 0
-    var gold:Int = 0
-    var token:Int = 0
+    public var playerId:String! = ""
+    public var imageURL:String! = ""
+    public var firstName:String! = ""
+    public var lastName:String! = ""
+    public var point:Int = 0
+    public var gold:Int = 0
+    public var token:Int = 0
     
     override init() {
         super.init()

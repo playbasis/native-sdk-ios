@@ -11,12 +11,12 @@ import ObjectMapper
 
 public class PBContent: PBModel {
     
-    var title:String! = ""
-    var detail:String! = ""
-    var imageURL:String! = ""
-    var category:String! = ""
-    var summary:String! = ""
-    var date:NSDate?
+    public var title:String! = ""
+    public var detail:String! = ""
+    public var imageURL:String! = ""
+    public var category:String! = ""
+    public var summary:String! = ""
+    public var date:NSDate?
     
     override init() {
         super.init()

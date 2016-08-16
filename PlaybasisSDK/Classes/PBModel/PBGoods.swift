@@ -11,8 +11,8 @@ import ObjectMapper
 
 public class PBGoods: PBModel {
     
-    var good:PBRewardData?
-    var amount:Int! = 0
+    public var good:PBRewardData?
+    public var amount:Int! = 0
     
     override public func mapping(map: Map) {
         super.mapping(map)

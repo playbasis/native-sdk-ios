@@ -11,15 +11,15 @@ import ObjectMapper
 
 public class PBCompletion: PBModel {
 
-    var title:String! = ""
-    var type:String! = ""
-    var value:String! = ""
-    var filter:String?
-    var elementId:String?
-    var missionId:String?
-    var completionOp:String?
-    var completionId:String?
-    var completionData:PBCompletionData?
+    public var title:String! = ""
+    public var type:String! = ""
+    public var value:String! = ""
+    public var filter:String?
+    public var elementId:String?
+    public var missionId:String?
+    public var completionOp:String?
+    public var completionId:String?
+    public var completionData:PBCompletionData?
     
     
     override public func mapping(map: Map) {

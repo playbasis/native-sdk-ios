@@ -10,18 +10,18 @@ import ObjectMapper
 
 public class PBPlayer:PBModel {
     
-    var playerId:String!
-    var email:String?
-    var firstName:String?
-    var lastName:String?
-    var username:String?
-    var profilePictureUrl:String?
-    var profilePicture:UIImage?
-    var phoneNumber:String?
-    var customFields:[String:String]?
-    var goods:[PBReward] = []
-    var badges:[PBBadge] = []
-    var points:[PBPoint] = []
+    public var playerId:String!
+    public var email:String?
+    public var firstName:String?
+    public var lastName:String?
+    public var username:String?
+    public var profilePictureUrl:String?
+    public var profilePicture:UIImage?
+    public var phoneNumber:String?
+    public var customFields:[String:String]?
+    public var goods:[PBReward] = []
+    public var badges:[PBBadge] = []
+    public var points:[PBPoint] = []
     
     init(apiResponse:PBApiResponse) {
         super.init()

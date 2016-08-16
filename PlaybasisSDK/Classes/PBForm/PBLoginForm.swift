@@ -9,14 +9,14 @@
 import UIKit
 
 //struct ValidationError {
-//    var message:String = ""
+//    public var message:String = ""
 //}
 
 public final class PBLoginForm:PBForm {
 
-    var email:String?
-    var username:String?
-    var password:String?
+    public var email:String?
+    public var username:String?
+    public var password:String?
     
     
     override public func validate()  {

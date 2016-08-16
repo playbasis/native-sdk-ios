@@ -12,11 +12,11 @@ import ObjectMapper
 public class PBIncomplete: PBModel {
 
 
-    var incompletionId:String?
-    var type:String?
-    var value:Int?
-    var elementId:String?
-    var filter:String?
+    public var incompletionId:String?
+    public var type:String?
+    public var value:Int?
+    public var elementId:String?
+    public var filter:String?
     
     override public func mapping(map: Map) {
         super.mapping(map)

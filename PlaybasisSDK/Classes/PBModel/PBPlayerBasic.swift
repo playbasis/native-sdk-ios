@@ -10,11 +10,11 @@ import UIKit
 import ObjectMapper
 
 public class PBPlayerBasic: PBModel {
-    var playerId:String! = ""
-    var imageURL:String! = ""
-    var username:String! = ""
-    var firstName:String! = ""
-    var lastName:String! = ""
+    public var playerId:String! = ""
+    public var imageURL:String! = ""
+    public var username:String! = ""
+    public var firstName:String! = ""
+    public var lastName:String! = ""
     
     
     override public func mapping(map: Map) {

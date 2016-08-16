@@ -11,15 +11,15 @@ import ObjectMapper
 
 public class PBMission: PBModel {
 
-    var name:String?
-    var number:String?
-    var desc:String?
-    var hint:String?
-    var imageURL:String?
-    var missionId:String?
-    var status:String?
-    var completion:[PBCompletion] = []
-    var pending:[PBPending] = []
+    public var name:String?
+    public var number:String?
+    public var desc:String?
+    public var hint:String?
+    public var imageURL:String?
+    public var missionId:String?
+    public var status:String?
+    public var completion:[PBCompletion] = []
+    public var pending:[PBPending] = []
 
     override public func mapping(map: Map) {
         super.mapping(map)
