@@ -63,7 +63,7 @@ class PBRestController {
             })
         }
         else {
-            authenticationData["api_key"] = Playbasis.sharedInstance.apiKey
+            authenticationData["api_key"] = PlaybasisSDK.sharedInstance.apiKey
             let request = PBBaseRestController.sharedInstance.createRequest(endPoint, method: method, authenticationData:authenticationData, encoding: encoding, headers: headers, parameters: parameters)
             PBBaseRestController.sharedInstance.performRequest(request, asynchronous: asynchronous, completionBlock: completionBlock, failureBlock: { (error) in
                 if handleBadToken(error) == false {

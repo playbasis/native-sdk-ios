@@ -43,6 +43,7 @@ public typealias PBRanksCompletionBlock = ([PBRank]) -> Void
 public typealias PBActionReportsCompletionBlock = ([PBActionReport]) -> Void
 
 public typealias PBRuleCompletionBlock = (PBRule) -> Void
+
 public typealias PBRulesCompletionBlock = ([PBRule]) -> Void
 
 /**

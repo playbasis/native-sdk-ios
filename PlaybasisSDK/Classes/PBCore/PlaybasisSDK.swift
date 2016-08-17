@@ -8,16 +8,16 @@
 
 import UIKit
 
-public class Playbasis: NSObject {
+public class PlaybasisSDK: NSObject {
     
-    public static let sharedInstance = Playbasis()
+    public static let sharedInstance = PlaybasisSDK()
     
     var apiKey:String!
     var apiSecret:String!
     var apiUrl:String!
     
     public class func initWithApiKey(apiKey:String, apiSecret:String, apiUrl:String) {
-        let playbasis = Playbasis.sharedInstance
+        let playbasis = PlaybasisSDK.sharedInstance
         playbasis.apiKey = apiKey
         playbasis.apiSecret = apiSecret
         playbasis.apiUrl = apiUrl

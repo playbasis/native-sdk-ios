@@ -9,7 +9,11 @@
 import UIKit
 
 func PBLocalizedFormatString(key:String) -> String {
-    return NSLocalizedString(key, tableName: "PlaybasisSDK", bundle: NSBundle.mainBundle(), value: "", comment: "")
+    let podBundle:NSBundle = NSBundle(forClass: PlaybasisSDK.classForCoder())
+    guard let bundleURL = podBundle.URLForResource("PlaybasisSDK", withExtension: "bundle"), let bundle = NSBundle(URL: bundleURL) else {
+        return key
+    }
+    return NSLocalizedString(key, tableName: "PlaybasisSDK", bundle: bundle, value: "", comment: "")
 }
 
 extension String{

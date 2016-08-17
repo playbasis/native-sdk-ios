@@ -30,7 +30,7 @@ class PBBaseRestController {
     
     func createRequest(endPoint:String, method:Alamofire.Method, authenticationData:[String:String]?, encoding:ParameterEncoding, headers: [String: String]? = nil, parameters:[String:AnyObject]?) -> NSURLRequest {
         
-        let URLString:URLStringConvertible = Playbasis.sharedInstance.apiUrl + "/" + endPoint
+        let URLString:URLStringConvertible = PlaybasisSDK.sharedInstance.apiUrl + "/" + endPoint
         
         let mutableRequest = NSMutableURLRequest(URL: NSURL(string: URLString.URLString)!)
         mutableRequest.HTTPMethod = method.rawValue

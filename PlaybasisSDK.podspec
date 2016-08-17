@@ -48,7 +48,7 @@ Documentation is also available
   s.resources = 'PlaybasisSDK/Resources/PlaybasisSDK.bundle'
 
   # s.resource_bundles = {
-  #   'PlaybasisSDK' => ['PlaybasisSDK/Assets/*.png']
+  #   'PlaybasisSDK' => ['PlaybasisSDK/Recources/*']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
