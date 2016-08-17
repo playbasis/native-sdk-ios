@@ -8,12 +8,6 @@
 
 import UIKit
 
-public enum EngineAction:String {
-    case Click = "click"
-    case Like = "like"
-    case OnClick = "onclick"
-}
-
 public class PBEngineForm: PBForm {
     
     public var playerId:String! = ""
@@ -23,12 +17,11 @@ public class PBEngineForm: PBForm {
     public var ruleId:String! =  ""
     public var nodeId:String! = ""
     public var sessionId:String! = ""
-    public var action:EngineAction! = .Click
+    public var engineActionName:String! = ""
     
     
-    init(playerId:String,action:EngineAction) {
-        self.playerId = playerId
-        self.action = action
+    public override init() {
+        super.init()
     }
     
     override public func params() -> [String:String] {
@@ -40,7 +33,7 @@ public class PBEngineForm: PBForm {
         params["rule_id"] = ruleId
         params["node_id"] = nodeId
         params["session_id"] = sessionId
-        params["action"] = action.rawValue
+        params["action"] = engineActionName
         
         return params
     }

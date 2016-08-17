@@ -16,7 +16,7 @@ public class PBRuleEvent: PBModel {
     public var index:Int = 0
     public var rewardRuleEventGoodsRewardData:PBRuleEventGoodsRewardData?
     public var rewardRuleEventBadgeRewardData:PBRuleEventBadgeRewardData?
-    public var rewardType:RewardType?
+    public var rewardType:String! = ""
     
     public override init() {
         super.init()
@@ -29,12 +29,12 @@ public class PBRuleEvent: PBModel {
     override public func mapping(map: Map) {
         super.mapping(map)
         eventType <- map["event_type"]
-        rewardType <- (map["reward_type"], EnumTransform<RewardType>())
+        rewardType <- (map["reward_type"])
         value <- map["value"]
         index <- map["index"]
-        if rewardType != nil && rewardType == .Goods {
+        if rewardType != nil && rewardType == "goods" {
             rewardRuleEventGoodsRewardData <- map["reward_data"]
-        }else if rewardType != nil && rewardType == .Badge {
+        }else if rewardType != nil && rewardType == "badge" {
             rewardRuleEventBadgeRewardData <- map["reward_data"]
         }
     }
@@ -50,5 +50,5 @@ public class PBRuleEvent: PBModel {
         ruleEventList = Mapper<PBRuleEvent>().mapArray(apiResponse.parsedJson!)!
         return ruleEventList
     }
-
+    
 }
