@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlaybasisSDK'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'PlaybasisSDK '
 
 # This description is used to generate tags and improve search results.
@@ -45,7 +45,7 @@ Documentation is also available
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'PlaybasisSDK/Classes/**/*'
-  
+
   # s.resource_bundles = {
   #   'PlaybasisSDK' => ['PlaybasisSDK/Assets/*.png']
   # }
