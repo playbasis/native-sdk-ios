@@ -9,7 +9,7 @@
 import UIKit
 
 func PBLocalizedFormatString(key:String) -> String {
-    return NSLocalizedString(key, tableName: "PBLocalizable", bundle: NSBundle.mainBundle(), value: "", comment: "")
+    return NSLocalizedString(key, tableName: "PlaybasisSDK", bundle: NSBundle.mainBundle(), value: "", comment: "")
 }
 
 extension String{
