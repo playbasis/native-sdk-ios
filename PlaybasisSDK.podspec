@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlaybasisSDK'
-  s.version          = '0.1.5'
+  s.version          = '0.1.6'
   s.summary          = 'PlaybasisSDK '
 
 # This description is used to generate tags and improve search results.
@@ -35,11 +35,11 @@ Download the SDK
 Documentation is also available
                        DESC
 
-  s.homepage         = 'https://bitbucket.org/smartsoftasia/playbasis-sdk-ios/overview'
+  s.homepage         = 'https://github.com/playbasis/playbook-travel-ios'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Med' => 'med@smartsoftasia.com' }
-  s.source           = { :git => 'https://medericpetit@bitbucket.org/smartsoftasia/playbasis-sdk-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/playbasis/playbook-travel-ios.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'

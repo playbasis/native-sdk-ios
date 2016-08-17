@@ -8,6 +8,6 @@
 
 import UIKit
 
-public class PBBaseApi {
+public class PBBaseApi: NSObject {
 
 }
