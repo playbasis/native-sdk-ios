@@ -9,7 +9,6 @@
 import UIKit
 import ObjectMapper
 
-
 public class PBRuleEventBadgeRewardData: PBModel {
    
     public var badgeId:String! = ""

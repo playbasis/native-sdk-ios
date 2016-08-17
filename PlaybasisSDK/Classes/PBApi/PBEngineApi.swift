@@ -11,15 +11,22 @@ import UIKit
 enum RoleAction {
 }
 
-class PBEngineApi: PBBaseApi {
+public class PBEngineApi: PBBaseApi {
     private class func engineEndPointWithPath(path:String) -> String {
         return PBEndPoint.REDEEM_END_POINT + path
     }
 
-    class func processAction(engineForm:PBEngineForm,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
+    public class func processAction(engineForm:PBEngineForm,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.POST, endPoint: engineEndPointWithPath("/rule"), parameters: engineForm.params(), completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
         }, failureBlock:failureBlock)
+    }
+    
+    public class func ruleDetailsForPlayer(playerId:String,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
+        PBRestController.request(.GET, endPoint: engineEndPointWithPath("/rule/\(playerId)"), parameters: nil, completionBlock: { (response) in
+            let rule:PBRule = PBRule(apiResponse:response)
+            completionBlock(rule)
+            }, failureBlock:failureBlock)
     }
 }
