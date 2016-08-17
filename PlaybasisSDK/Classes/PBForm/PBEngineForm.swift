@@ -8,22 +8,22 @@
 
 import UIKit
 
-enum EngineAction:String {
+public enum EngineAction:String {
     case Click = "click"
     case Like = "like"
     case OnClick = "onclick"
 }
 
-class PBEngineForm: PBForm {
+public class PBEngineForm: PBForm {
     
-    var playerId:String! = ""
-    var url:String! = ""
-    var reward:String! = ""
-    var quantity:String! = ""
-    var ruleId:String! =  ""
-    var nodeId:String! = ""
-    var sessionId:String! = ""
-    var action:EngineAction! = .Click
+    public var playerId:String! = ""
+    public var url:String! = ""
+    public var reward:String! = ""
+    public var quantity:String! = ""
+    public var ruleId:String! =  ""
+    public var nodeId:String! = ""
+    public var sessionId:String! = ""
+    public var action:EngineAction! = .Click
     
     
     init(playerId:String,action:EngineAction) {
