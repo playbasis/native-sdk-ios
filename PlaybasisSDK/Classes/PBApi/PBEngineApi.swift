@@ -23,8 +23,10 @@ public class PBEngineApi: PBBaseApi {
         }, failureBlock:failureBlock)
     }
     
-    public class func ruleDetailsForPlayer(playerId:String,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rule/\(playerId)"), parameters: nil, completionBlock: { (response) in
+    public class func ruleDetailsForPlayer(ruleId:String ,playerId:String,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
+        var params:[String:String] = [:]
+        params["player_id"] = playerId
+        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rule/\(ruleId)"), parameters: nil, completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
             }, failureBlock:failureBlock)
