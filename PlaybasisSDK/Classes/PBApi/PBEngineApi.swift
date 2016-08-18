@@ -17,14 +17,14 @@ public class PBEngineApi: PBBaseApi {
     }
 
     public class func processAction(engineForm:PBEngineForm,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.POST, endPoint: engineEndPointWithPath("/rule"), parameters: engineForm.params(), completionBlock: { (response) in
+        PBRestController.request(.POST, endPoint: engineEndPointWithPath("rule"), parameters: engineForm.params(), completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
         }, failureBlock:failureBlock)
     }
     
     public class func ruleDetailsForPlayer(playerId:String,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: engineEndPointWithPath("/rule/\(playerId)"), parameters: nil, completionBlock: { (response) in
+        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rule/\(playerId)"), parameters: nil, completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
             }, failureBlock:failureBlock)
