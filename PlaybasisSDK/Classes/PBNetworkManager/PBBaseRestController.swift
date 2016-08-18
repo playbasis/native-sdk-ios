@@ -16,14 +16,14 @@ protocol PBRestProtocol {
     func uploadData(data:NSData, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock)
 }
 
-class PBBaseRestController {
+public class PBBaseRestController {
     
-    static let sharedInstance = PBBaseRestController()
+    public static let sharedInstance = PBBaseRestController()
     private let manager: Alamofire.Manager = Alamofire.Manager.sharedInstance
     
     private let synchronousQueue:NSOperationQueue = NSOperationQueue()
     
-    init() {
+    public init() {
         synchronousQueue.maxConcurrentOperationCount = 1
     }
 

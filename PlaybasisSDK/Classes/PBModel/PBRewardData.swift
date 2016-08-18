@@ -46,14 +46,10 @@ public class PBRewardData: PBModel {
     
     public var rewardDataId:String?
     public var desc:String! = ""
-    public var quantity:Int?
-    public var perUser:Int?
     public var imageURL:String! = ""
     public var status:Bool = false
     public var deleted:Bool = false
     public var sponsor:Bool = false
-    public var sortOrder:Int?
-    public var languageId:Int?
     public var tags:[String]?
     public var dateStart:NSDate?
     public var dateExpire:NSDate?
@@ -65,7 +61,12 @@ public class PBRewardData: PBModel {
     public var siteId:String?
     public var goodsId:String?
     public var group:String?
-    public var amount:Int! = 0
+    public var amount:Int = 0
+    public var quantity:Int = 0
+    public var perUser:Int = 0
+    public var sortOrder:Int = 0
+    public var languageId:Int = 0
+    
     public var redeem:PBRedeem!
   
     
