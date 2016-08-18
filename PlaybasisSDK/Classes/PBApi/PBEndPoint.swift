@@ -17,5 +17,5 @@ public struct PBEndPoint {
     static let CONTENT_END_POINT = "Content/"
     static let REDEEM_END_POINT = "Redeem/"
     static let PUSH_END_POINT = "Push/"
-    
+    static let ENGINE_END_POINT = "Engine/"
 }
