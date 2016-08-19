@@ -16,6 +16,7 @@ func PBLocalizedFormatString(key:String) -> String {
     return NSLocalizedString(key, tableName: "PlaybasisSDK", bundle: bundle, value: "", comment: "")
 }
 
+
 extension String{
 
     func PBisValidEmail() -> Bool {

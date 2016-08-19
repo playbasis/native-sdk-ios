@@ -16,6 +16,7 @@ public class PBRuleEventGoodsRewardData: PBModel {
     public var name:String! = ""
     public var desc:String! = ""
     public var perUser:Int = 0
+    public var code:String?
     public var quantity:Int = 0
     
     public override init() {
@@ -34,6 +35,8 @@ public class PBRuleEventGoodsRewardData: PBModel {
         desc <- map["description"]
         perUser <- map["per_user"]
         quantity <- map["quantity"]
+        code <- map["code"]
+
     }
     
     public init(apiResponse:PBApiResponse) {
