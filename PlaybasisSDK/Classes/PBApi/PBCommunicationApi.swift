@@ -14,8 +14,18 @@ public class PBCommunicationApi: PBBaseApi {
         return PBEndPoint.PUSH_END_POINT + path
     }
     
+    private class func emailEndPointWithPath(path:String) -> String {
+        return PBEndPoint.EMAIL_END_POINT + path
+    }
+    
     public class func registerDeviceWithDeviceForm(deviceForm:PBDeviceForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         PBRestController.request(.POST, endPoint: pushEndPointWithPath("deviceRegistration"), parameters: deviceForm.params(), completionBlock: { (apiResponse) in
+            completionBlock()
+            }, failureBlock:failureBlock)
+    }
+    
+    public class func sendEmailWithEmailForm(emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        PBRestController.request(.POST, endPoint: emailEndPointWithPath("send"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }

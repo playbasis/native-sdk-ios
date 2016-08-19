@@ -10,15 +10,17 @@ import UIKit
 
 public class PBEngineForm: PBForm {
     
-    public var playerId:String! = ""
-    public var url:String! = ""
-    public var reward:String! = ""
-    public var quantity:String! = ""
-    public var ruleId:String! =  ""
-    public var nodeId:String! = ""
-    public var sessionId:String! = ""
-    public var engineActionName:String! = ""
+    // Required
+    public var playerId:String!
+    public var action:String!
     
+    // Optional
+    public var url:String?
+    public var reward:String?
+    public var quantity:String?
+    public var ruleId:String?
+    public var nodeId:String?
+    public var sessionId:String?
     
     public override init() {
         super.init()
@@ -26,14 +28,27 @@ public class PBEngineForm: PBForm {
     
     override public func params() -> [String:String] {
         var params:[String:String] = [:]
-        params["player_id"] = playerId!
-        params["url"] = url
-        params["reward"] = reward
-        params["quantity"] = quantity
-        params["rule_id"] = ruleId
-        params["node_id"] = nodeId
-        params["session_id"] = sessionId
-        params["action"] = engineActionName
+        params["player_id"] = playerId
+        params["action"] = action
+        
+        if let mUrl = url {
+            params["url"] = mUrl
+        }
+        if let mReward = reward {
+            params["reward"] = mReward
+        }
+        if let mQuantity = quantity {
+            params["quantity"] = mQuantity
+        }
+        if let mRuleId = ruleId {
+            params["rule_id"] = mRuleId
+        }
+        if let mNodeId = nodeId {
+            params["node_id"] = mNodeId
+        }
+        if let mSessionId = sessionId {
+            params["session_id"] = mSessionId
+        }
         
         return params
     }
