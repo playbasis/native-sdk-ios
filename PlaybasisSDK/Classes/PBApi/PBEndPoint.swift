@@ -18,4 +18,5 @@ public struct PBEndPoint {
     static let REDEEM_END_POINT = "Redeem/"
     static let PUSH_END_POINT = "Push/"
     static let ENGINE_END_POINT = "Engine/"
+    static let EMAIL_END_POINT = "Email/"
 }
