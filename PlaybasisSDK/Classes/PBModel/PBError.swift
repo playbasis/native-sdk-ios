@@ -48,20 +48,20 @@ public class PBError:NSObject {
     public var message:String = ""
     
 
-    init(code:String = "0000", message:String) {
+    public init(code:String = "0000", message:String) {
         super.init()
         self.message = message
         self.errorCode = code
         self.remoteError = remoteErrorFromCode(code)
     }
     
-    init(message:String,validationErrorType:PBValidationErrorType) {
+    public init(message:String,validationErrorType:PBValidationErrorType) {
         super.init()
         self.message = message
         self.validationError = validationErrorType
     }
     
-    convenience init(nsError:NSError) {
+    public convenience init(nsError:NSError) {
         self.init(code: String(nsError.code), message: nsError.localizedDescription)
     }
     
