@@ -1,6 +1,6 @@
 # PlaybasisSDK
 
-[![CI Status](http://img.shields.io/travis/Med/PlaybasisSDK.svg?style=flat)](https://travis-ci.org/Med/PlaybasisSDK)
+[![CI Status](http://img.shields.io/travis/medericP/PlaybasisSDK.svg?style=flat)](https://travis-ci.org/medericP/PlaybasisSDK)
 [![Version](https://img.shields.io/cocoapods/v/PlaybasisSDK.svg?style=flat)](http://cocoapods.org/pods/PlaybasisSDK)
 [![License](https://img.shields.io/cocoapods/l/PlaybasisSDK.svg?style=flat)](http://cocoapods.org/pods/PlaybasisSDK)
 [![Platform](https://img.shields.io/cocoapods/p/PlaybasisSDK.svg?style=flat)](http://cocoapods.org/pods/PlaybasisSDK)
