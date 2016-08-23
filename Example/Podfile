@@ -1,6 +1,8 @@
 use_frameworks!
 target 'PlaybasisSDK_Tests' do
   pod 'PlaybasisSDK', :path => '../'
-  
+  pod 'Alamofire'
+  pod 'ObjectMapper'
+  pod 'SAMKeychain'
   
 end
