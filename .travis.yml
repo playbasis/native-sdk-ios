@@ -7,6 +7,7 @@ before_install:
 before_script:
 - brew update
 - brew upgrade xctool || true
+- pod setup
 - pod install --project-directory=Example
 script:
 - xctool -workspace Example/PlaybasisSDK.xcworkspace -scheme PlaybasisSDK-Example -sdk iphonesimulator
