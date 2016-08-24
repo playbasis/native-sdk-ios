@@ -22,7 +22,7 @@ pod "PlaybasisSDK"
 
 ## Author
 
-Medederic Petit, med@smartsoftasia.com
+Playbasis Development Team, devteam@playbasis.com
 
 ## License
 
