@@ -17,6 +17,7 @@ public class PBEmailForm: PBForm {
     // Optional
     public var message:String?
     public var templateId:String?
+    public var refId:String?
     
     public override init() {
         super.init()
@@ -32,6 +33,9 @@ public class PBEmailForm: PBForm {
         }
         if let mTemplateId = templateId {
             params["template_id"] = mTemplateId
+        }
+        if let mRefId = refId {
+            params["ref_id"] = mRefId
         }
         
         return params

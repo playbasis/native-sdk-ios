@@ -30,4 +30,10 @@ public class PBCommunicationApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
+    public class func sendCouponEmailWithEmailForm(emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        PBRestController.request(.POST, endPoint: emailEndPointWithPath("goods"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
+            completionBlock()
+            }, failureBlock:failureBlock)
+    }
+    
 }
