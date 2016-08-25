@@ -92,11 +92,10 @@ public class PBRewardData: PBModel {
         languageId <- map["language_id"]
         sortOrder <- map["sort_order"]
         tags <- map["tags"]
-        dateStart <- map["date_start"]
-        dateExpire <- map["date_expire"]
-        dateAdded <- map["date_added"]
-        dateModified <- map["date_modified"]
-        
+        dateStart <- (map["date_start"], ISO8601DateTransform())
+        dateExpire <- (map["date_expire"], ISO8601DateTransform())
+        dateAdded <- (map["date_added"], ISO8601DateTransform())
+        dateModified <- (map["date_modified"], ISO8601DateTransform())
         name <- map["name"]
         code <- map["code"]
         clientId <- map["client_id"]
