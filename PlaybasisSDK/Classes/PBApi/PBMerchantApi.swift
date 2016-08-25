@@ -14,12 +14,11 @@ public class PBMerchantApi: PBBaseApi {
         return PBEndPoint.MERCHANT_END_POINT + path
     }
     
-    public class func availableBranchForGoodsGroup(goodsGroup:String, completionBlock:PBAvailableMerchantBranchCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    public class func availableBranchForGoodsGroup(goodsGroup:String, completionBlock:PBAvailableRedeemPlacesCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params = ["goods_group":goodsGroup]
-        PBRestController.request(.POST, endPoint: merchantEndPointWithPath("availableBranchGoodsGroup"), parameters: params, completionBlock: { (apiResponse) in
-            let branches = PBBranch.pbBranchesFromApiResponse(apiResponse)
-            let merchant = PBMerchant(apiResponse: apiResponse)
-            completionBlock(branches: branches, merchant: merchant)
+        PBRestController.request(.GET, endPoint: merchantEndPointWithPath("availableBranchGoodsGroup"), parameters: params, completionBlock: { (apiResponse) in
+            let redeemPlaces = PBRedeemPlace.pbRedeemPlacesFromApiResponse(apiResponse)
+            completionBlock(redeemPlaces: redeemPlaces)
             }, failureBlock:failureBlock)
     }
     

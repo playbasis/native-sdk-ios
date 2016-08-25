@@ -20,11 +20,6 @@ public class PBMerchant: PBModel {
         super.init(map)
     }
     
-    public init(apiResponse:PBApiResponse) {
-        super.init()
-        Mapper<PBMerchant>().map(apiResponse.parsedJson!["merchant"], toObject: self)
-    }
-    
     override public func mapping(map: Map) {
         super.mapping(map)
         uid <- map["id"]

@@ -46,7 +46,7 @@ public typealias PBRuleCompletionBlock = (PBRule) -> Void
 
 public typealias PBRulesCompletionBlock = ([PBRule]) -> Void
 
-public typealias PBAvailableMerchantBranchCompletionBlock = (branches:[PBBranch],merchant:PBMerchant?) -> Void
+public typealias PBAvailableRedeemPlacesCompletionBlock = (redeemPlaces:[PBRedeemPlace]) -> Void
 
 /**
  Represents a response from the server.

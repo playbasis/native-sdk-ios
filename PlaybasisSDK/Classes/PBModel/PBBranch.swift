@@ -1,4 +1,3 @@
-
 //
 //  PBBranch.swift
 //  Pods
@@ -25,12 +24,6 @@ public class PBBranch: PBModel {
         super.mapping(map)
         uid <- map["b_id"]
         name <- map["b_name"]
-    }
-    
-    class func pbBranchesFromApiResponse(apiResponse:PBApiResponse) -> [PBBranch] {
-        var branches:[PBBranch] = []
-        branches = Mapper<PBBranch>().mapArray(apiResponse.parsedJson!["branch"]) ?? []
-        return branches
     }
 
 }
