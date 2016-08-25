@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-class PBRedeemPlace: PBModel {
+public class PBRedeemPlace: PBModel {
 
     public var branches:[PBBranch]?
     public var merchant:PBMerchant?
