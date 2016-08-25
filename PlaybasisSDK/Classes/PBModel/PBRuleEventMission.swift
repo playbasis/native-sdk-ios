@@ -44,7 +44,7 @@ public class PBRuleEventMission: PBModel {
     }
     
     
-    public  init(apiResponse:PBApiResponse) {
+    public init(apiResponse:PBApiResponse) {
         super.init()
         Mapper<PBRuleEventMission>().map(apiResponse.parsedJson!, toObject: self)
     }

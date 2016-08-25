@@ -19,4 +19,5 @@ public struct PBEndPoint {
     static let PUSH_END_POINT = "Push/"
     static let ENGINE_END_POINT = "Engine/"
     static let EMAIL_END_POINT = "Email/"
+    static let MERCHANT_END_POINT = "Merchant/"
 }
