@@ -32,3 +32,9 @@ extension String{
     
     
 }
+
+func += <K, V> (inout left: [K:V], right: [K:V]) {
+    for (k, v) in right {
+        left.updateValue(v, forKey: k)
+    }
+}

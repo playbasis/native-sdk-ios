@@ -21,6 +21,7 @@ public class PBEngineForm: PBForm {
     public var ruleId:String?
     public var nodeId:String?
     public var sessionId:String?
+    public var customParams:[String:String]?
     
     public override init() {
         super.init()
@@ -48,6 +49,9 @@ public class PBEngineForm: PBForm {
         }
         if let mSessionId = sessionId {
             params["session_id"] = mSessionId
+        }
+        if let mCustomParams = customParams {
+            params += mCustomParams
         }
         
         return params
