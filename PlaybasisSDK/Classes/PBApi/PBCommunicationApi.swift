@@ -24,6 +24,13 @@ public class PBCommunicationApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
+    public class func deRegisterDeviceWithDeviceToken(deviceToken:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        let params:[String:String] = ["device_token":deviceToken, "player_id":playerId]
+        PBRestController.request(.POST, endPoint: pushEndPointWithPath("deviceDeRegistration"), parameters: params, completionBlock: { (apiResponse) in
+            completionBlock()
+            }, failureBlock:failureBlock)
+    }
+    
     public class func sendEmailWithEmailForm(emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         PBRestController.request(.POST, endPoint: emailEndPointWithPath("send"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
             completionBlock()

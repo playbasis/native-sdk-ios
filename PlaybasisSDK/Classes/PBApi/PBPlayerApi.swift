@@ -217,6 +217,14 @@ public class PBPlayerApi: PBBaseApi {
             }, failureBlock: failureBlock)
     }
     
+    public class func requestOTPForPhoneSetupWithDeviceForm(deviceForm:PBDeviceForm, phoneNumber:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        var params:[String:String] = deviceForm.params()
+        params["phone_number"] = phoneNumber
+        PBRestController.request(.POST, endPoint: playerEndPointWithPath("auth/\(deviceForm.playerId)/setupPhone"), parameters: params, completionBlock: { (response) in
+            completionBlock()
+            }, failureBlock: failureBlock)
+    }
+    
     public class func submitOTPWithPlayerId(playerId:String, OTP:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params:[String:String] = ["id":playerId, "code":OTP]
         PBRestController.request(.POST, endPoint: playerEndPointWithPath("auth/\(playerId)/verifyOTPCode"), parameters: params, completionBlock: { (response) in
