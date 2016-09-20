@@ -48,6 +48,10 @@ public typealias PBRulesCompletionBlock = ([PBRule]) -> Void
 
 public typealias PBAvailableRedeemPlacesCompletionBlock = (redeemPlaces:[PBRedeemPlace]) -> Void
 
+public typealias PBReferralCodeCompletionBlock = (code:String) -> Void
+
+public typealias PBLinkCompletionBlock = (link:String) -> Void
+
 /**
  Represents a response from the server.
  */

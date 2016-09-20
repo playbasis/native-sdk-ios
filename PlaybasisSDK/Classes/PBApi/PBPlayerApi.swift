@@ -246,6 +246,18 @@ public class PBPlayerApi: PBBaseApi {
             completionBlock(actionReports)
             }, failureBlock:failureBlock)
     }
+    
+    public class func getReferralCodeWithPlayerId(playerId:String, completionBlock:PBReferralCodeCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/code"), parameters: nil, completionBlock: { (response) in
+            if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], let code:String = json["code"] as? String {
+                completionBlock(code: code)
+            }
+            else {
+                failureBlock(error: PBError(message: "Unknown error"))
+            }
+            
+            }, failureBlock: failureBlock)
+    }
 
     // MARK: - Private
     

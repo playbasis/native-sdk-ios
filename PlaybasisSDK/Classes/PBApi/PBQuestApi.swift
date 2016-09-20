@@ -9,11 +9,10 @@
 import UIKit
 
 public class PBQuestApi: PBBaseApi {
+    
     private class func questEndPointWithPath(path:String) -> String {
         return PBEndPoint.QUEST_END_POINT + path
     }
-    
-  
     
     public class func getQuestList(completionBlock:PBQuestsCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.GET, endPoint: questEndPointWithPath(""), parameters: nil, completionBlock: { (response) in
