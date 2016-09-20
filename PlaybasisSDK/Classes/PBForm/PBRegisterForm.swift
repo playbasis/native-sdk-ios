@@ -10,6 +10,8 @@ import UIKit
 
 public final class PBRegisterForm: PBPlayerForm {
     
+    public var code:String?
+    
     override public func validate()  {
         super.validate()
         guard self.playerId != nil else {
@@ -26,6 +28,14 @@ public final class PBRegisterForm: PBPlayerForm {
         }
         self.validationError = nil
         return
+    }
+    
+    override public func params() -> [String:String] {
+        var params:[String:String] = super.params()
+        if let mCode = self.code {
+            params["code"] = mCode
+        }
+        return params
     }
     
 }
