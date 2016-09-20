@@ -33,7 +33,6 @@ public typealias PBRewardsCompletionBlock = ([PBReward]) -> Void
 
 public typealias PBPointsCompletionBlock = ([PBPoint]) -> Void
 
-
 public typealias PBLeaderBoardCompletionBlock = (leadearBoard:[PBLeaderBoard], playerData:PBLeaderBoard?) -> Void
 
 public typealias PBContentCompletionBlock = ([PBContent]) -> Void
@@ -51,6 +50,8 @@ public typealias PBAvailableRedeemPlacesCompletionBlock = (redeemPlaces:[PBRedee
 public typealias PBReferralCodeCompletionBlock = (code:String) -> Void
 
 public typealias PBLinkCompletionBlock = (link:String) -> Void
+
+public typealias PBRecentActivitiesCompletionBlock = (activities:[PBRecentActivity]) -> Void
 
 /**
  Represents a response from the server.

@@ -21,4 +21,5 @@ public struct PBEndPoint {
     static let EMAIL_END_POINT = "Email/"
     static let MERCHANT_END_POINT = "Merchant/"
     static let LINK_END_POINT = "link/"
+    static let LIVE_FEED_END_POINT = "Service/"
 }
