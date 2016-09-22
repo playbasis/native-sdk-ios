@@ -20,6 +20,7 @@ public class PBRecentActivityReward: PBRecentActivity {
     public var missionId:String?
     public var quizId:String?
     public var stringFilter:String?
+    public var badge:PBBadge?
     
     public override init() {
         super.init()
@@ -40,6 +41,7 @@ public class PBRecentActivityReward: PBRecentActivity {
         missionId <- map["mission_id"]
         quizId <- map["quiz_id"]
         stringFilter <- map["string_filter"]
+        badge <- map["badge"]
         
     }
 }
