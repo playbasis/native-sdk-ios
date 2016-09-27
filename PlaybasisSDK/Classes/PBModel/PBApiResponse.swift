@@ -53,7 +53,7 @@ public typealias PBLinkCompletionBlock = (link:String) -> Void
 
 public typealias PBRecentActivitiesCompletionBlock = (activities:[PBRecentActivity]) -> Void
 
-public typealias PBActionCountCompletionBlock = (actionId:String, count:Int) -> Void
+public typealias PBActionCountCompletionBlock = (actionId:String?, count:Int) -> Void
 
 /**
  Represents a response from the server.

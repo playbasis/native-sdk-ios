@@ -265,8 +265,8 @@ public class PBPlayerApi: PBBaseApi {
     
     public class func getActionCountWithPlayerId(playerId:String, actionName:String, completionBlock:PBActionCountCompletionBlock, failureBlock:PBFailureErrorBlock) {
         PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/action/\(actionName)/count"), parameters: nil, completionBlock: { (response) in
-            if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], actionJson:[String:AnyObject] = json["action"] as? [String:AnyObject], let count:Int = actionJson["count"] as? Int, let actionId:String = actionJson["action_id"] as? String {
-                completionBlock(actionId: actionId, count: count)
+            if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], actionJson:[String:AnyObject] = json["action"] as? [String:AnyObject], let count:Int = actionJson["count"] as? Int {
+                completionBlock(actionId: actionJson["action_id"] as? String, count: count)
             }
             else {
                 failureBlock(error: PBError(message: "Unknown error"))
