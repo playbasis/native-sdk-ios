@@ -175,8 +175,12 @@ public class PBPlayerApi: PBBaseApi {
     }
 
     
-    public class func getAllGoodsWithPlayerId(playerId:String,completionBlock:PBGoodsCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/goods"), parameters: nil, completionBlock: { (apiResponse) in
+    public class func getAllGoodsWithPlayerId(playerId:String, status:PBGoodStatus = .Active, tags:String? = nil,completionBlock:PBGoodsCompletionBlock, failureBlock:PBFailureErrorBlock){
+        var params:[String:String] = ["status":status.rawValue]
+        if let mTags:String = tags {
+            params["tags"] = mTags
+        }
+        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/goods"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock(PBRewardData.pbSmallGoodsFromApiResponse(apiResponse))
         }, failureBlock:failureBlock)
     }
@@ -256,6 +260,17 @@ public class PBPlayerApi: PBBaseApi {
                 failureBlock(error: PBError(message: "Unknown error"))
             }
             
+            }, failureBlock: failureBlock)
+    }
+    
+    public class func getActionCountWithPlayerId(playerId:String, actionName:String, completionBlock:PBActionCountCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/action/\(actionName)/count"), parameters: nil, completionBlock: { (response) in
+            if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], actionJson:[String:AnyObject] = json["action"] as? [String:AnyObject], let count:Int = actionJson["count"] as? Int, let actionId:String = actionJson["action_id"] as? String {
+                completionBlock(actionId: actionId, count: count)
+            }
+            else {
+                failureBlock(error: PBError(message: "Unknown error"))
+            }
             }, failureBlock: failureBlock)
     }
 

@@ -9,6 +9,13 @@
 import UIKit
 import ObjectMapper
 
+public enum PBGoodStatus:String {
+    case Active = "active"
+    case All = "all"
+    case Expired = "expired"
+    case Used = "used"
+}
+
 public class PBGoods: PBModel {
     
     public var good:PBRewardData?
