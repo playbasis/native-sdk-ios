@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlaybasisSDK'
-  s.version          = '0.3.4.1'
+  s.version          = '0.3.4.2'
   s.summary          = 'PlaybasisSDK'
 
 # This description is used to generate tags and improve search results.

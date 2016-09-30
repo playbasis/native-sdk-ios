@@ -27,4 +27,12 @@ public class PBRedeemApi: PBBaseApi {
             completionBlock()
             }, failureBlock:failureBlock)
     }
+    
+    public class func redeemVerificationWithGroup(group:String, code:String, pinCode:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        let params = ["pin_code":pinCode, "goods_group":group, "coupon_code":code]
+        PBRestController.request(.POST, endPoint: redeemEndPointWithPath("goodsGroup/verify"), parameters: params, completionBlock: { (apiResponse) in
+            completionBlock()
+            }, failureBlock:failureBlock)
+    }
+
 }
