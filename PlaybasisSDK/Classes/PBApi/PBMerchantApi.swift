@@ -22,4 +22,18 @@ public class PBMerchantApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
+    public class func redeemCouponWithGroup(group:String, code:String, pinCode:String?, playerId:String?, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        var params = ["goods_group":group, "coupon_code":code]
+        if let mPinCode = pinCode {
+            params["pin_code"] = mPinCode
+        }
+        if let mPlayerId = playerId {
+            params["player_id"] = mPlayerId
+        }
+        PBRestController.request(.POST, endPoint: merchantEndPointWithPath("goodsGroup/redeem"), parameters: params, completionBlock: { (apiResponse) in
+            completionBlock()
+            }, failureBlock:failureBlock)
+    }
+
+    
 }
