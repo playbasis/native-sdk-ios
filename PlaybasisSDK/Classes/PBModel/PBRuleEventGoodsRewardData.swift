@@ -18,6 +18,7 @@ public class PBRuleEventGoodsRewardData: PBModel {
     public var perUser:Int = 0
     public var code:String?
     public var quantity:Int = 0
+    public var tags:[String]?
     
     public override init() {
         super.init()
@@ -36,6 +37,7 @@ public class PBRuleEventGoodsRewardData: PBModel {
         perUser <- map["per_user"]
         quantity <- map["quantity"]
         code <- map["code"]
+        tags <- map["tags"]
 
     }
     
