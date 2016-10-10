@@ -23,6 +23,7 @@ public class PBRecentActivityForm: PBForm {
     public var lastReadActivityId:String?
     public var mode:PBRecentActivityMode = .All
     public var eventType:String?
+    public var actionName:String?
     
     override public func params() -> [String : String] {
         var params:[String:String] = [:]
@@ -42,6 +43,9 @@ public class PBRecentActivityForm: PBForm {
         }
         if let mEventType = self.eventType {
             params["event_type"] = mEventType
+        }
+        if let mActionName = self.actionName {
+            params["action_name"] = mActionName
         }
         return params
     }
