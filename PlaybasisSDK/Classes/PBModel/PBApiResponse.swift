@@ -55,6 +55,8 @@ public typealias PBRecentActivitiesCompletionBlock = (activities:[PBRecentActivi
 
 public typealias PBActionCountCompletionBlock = (actionId:String?, count:Int) -> Void
 
+public typealias PBAppStatusCompletionBlock = (appStatus:Bool, appPeriod:PBAppPeriod?) -> Void
+
 /**
  Represents a response from the server.
  */

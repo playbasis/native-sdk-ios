@@ -60,8 +60,8 @@ public class PBQuest: PBModel {
         questId <- map["quest_id"]
         missionOrder <- map["mission_order"]
         sortOrder <- map["sort_order"]
-        dateAdded <- map["date_added"]
-        dateModified <- map["date_modified"]
+        dateAdded <- (map["date_added"], ISO8601DateTransform())
+        dateModified <- (map["date_modified"], ISO8601DateTransform())
         rewards <- map["rewards"]
         mission <- map["missions"]
     

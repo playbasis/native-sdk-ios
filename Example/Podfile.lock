@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (3.5.0)
   - ObjectMapper (1.4.0)
-  - PlaybasisSDK (0.3.4.4):
+  - PlaybasisSDK (0.3.4.5):
     - Alamofire (= 3.5.0)
     - ObjectMapper (= 1.4.0)
     - SAMKeychain (= 1.5.1)
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
-  PlaybasisSDK: 3ad52957a8dce2aa811ab2d957b2bf56b6d49dad
+  PlaybasisSDK: 3d6c2ee44ad07796bea1dd022cc8be89b05be5a4
   SAMKeychain: 6b04852a20684167aea97bdf8ba12c95d3616376
 
 PODFILE CHECKSUM: b8c39de6f5807da2f3e7d4a9dc55d08f10ee6e31
