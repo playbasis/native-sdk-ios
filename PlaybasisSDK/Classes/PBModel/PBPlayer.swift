@@ -22,6 +22,8 @@ public class PBPlayer:PBModel {
     public var goods:[PBReward] = []
     public var badges:[PBBadge] = []
     public var points:[PBPoint] = []
+    public var birthDate:String?
+    public var gender:Int?
     
     init(apiResponse:PBApiResponse) {
         super.init()
@@ -50,6 +52,8 @@ public class PBPlayer:PBModel {
         badges <- map["badges"]
         points <- map["points"]
         phoneNumber <- map["phone_number"]
+        birthDate <- map["birth_date"]
+        gender <- map["gender"]
     }
 
     init(registerForm:PBRegisterForm) {

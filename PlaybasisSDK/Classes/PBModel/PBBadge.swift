@@ -18,6 +18,7 @@ public class PBBadge: PBModel {
     public var hint:String! = ""
     public var sponsor:Bool! = false
     public var amount:Int! = 0
+    public var tags:[String] = []
     
     public override init() {
         super.init()
@@ -35,6 +36,7 @@ public class PBBadge: PBModel {
         sponsor <- map["sponsor"]
         hint <- map["hint"]
         amount <- map["amount"]
+        tags <- map["tags"]
     }
     
     class func pbBadgeFromApiResponse(apiResponse:PBApiResponse) -> [PBBadge] {
