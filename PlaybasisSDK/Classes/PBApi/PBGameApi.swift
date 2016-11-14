@@ -20,7 +20,7 @@ public class PBGameApi: PBBaseApi {
             params = mGameForm.params()
         }
         PBRestController.request(.GET, endPoint: gameEndPointWithPath(""), parameters: params, completionBlock: { (apiResponse) in
-            if let json:[String:AnyObject] = apiResponse.parsedJson as? [String:AnyObject] {
+            if apiResponse.parsedJson != nil {
                 completionBlock(gameSettings: PBGameSetting.pbGameSettingsFromApiResponse(apiResponse))
             }
             else {

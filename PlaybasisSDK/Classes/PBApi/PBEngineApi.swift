@@ -44,7 +44,7 @@ public class PBEngineApi: PBBaseApi {
         }
         PBRestController.request(.GET, endPoint: engineEndPointWithPath("rules"), parameters: params, completionBlock: { (apiResponse) in
             
-            if let json:[String:AnyObject] = apiResponse.parsedJson as? [String:AnyObject] {
+            if apiResponse.parsedJson != nil {
                 let gameRules:[PBGameRule] = PBGameRule.pbGameRuleFromApiResponse(apiResponse)
             }
             else {
