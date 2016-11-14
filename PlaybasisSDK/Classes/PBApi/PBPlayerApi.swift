@@ -137,9 +137,13 @@ public class PBPlayerApi: PBBaseApi {
         }, failureBlock: failureBlock)
     }
     
-    public class func getBadgeCollectionWithPlayerId(playerId:String,completionBlock:
+    public class func getBadgeCollectionWithPlayerId(playerId:String, tags:String?, completionBlock:
         PBPlayerBadgesCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/badgeAll"), parameters: nil, completionBlock: { (response) in
+        var params:[String:String] = [:]
+        if let mTag:String = tags {
+            params["tags"] = mTag
+        }
+        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/badgeAll"), parameters: params, completionBlock: { (response) in
             completionBlock(PBBadge.pbBadgeFromApiResponse(response))
             }, failureBlock: failureBlock)
     }

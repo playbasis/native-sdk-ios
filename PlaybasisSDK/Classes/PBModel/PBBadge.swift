@@ -37,6 +37,10 @@ public class PBBadge: PBModel {
         amount <- map["amount"]
     }
     
+    class func pbBadgesFromDicArray(badgeArray:[AnyObject]) -> [PBBadge] {
+        return Mapper<PBBadge>().mapArray(badgeArray) ?? []
+    }
+    
     class func pbBadgeFromApiResponse(apiResponse:PBApiResponse) -> [PBBadge] {
         var badges:[PBBadge] = []
         badges = Mapper<PBBadge>().mapArray(apiResponse.parsedJson!)!

@@ -18,6 +18,7 @@ public class PBRuleEvent: PBModel {
     public var rewardRuleEventBadgeRewardData:PBRuleEventBadgeRewardData?
     public var rewardType:String! = ""
     public var logId:String! = ""
+    public var transactionId:String! = ""
     
     public override init() {
         super.init()
@@ -39,6 +40,7 @@ public class PBRuleEvent: PBModel {
             rewardRuleEventBadgeRewardData <- map["reward_data"]
         }
         logId <- map["log_id"]
+        transactionId <- map["transaction_id"]
     }
     
     

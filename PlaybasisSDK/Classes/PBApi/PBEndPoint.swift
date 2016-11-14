@@ -23,4 +23,7 @@ public struct PBEndPoint {
     static let LINK_END_POINT = "link/"
     static let LIVE_FEED_END_POINT = "Service/"
     static let SETTING_END_POINT = "Setting/"
+    static let POINT_END_POINT = "Point/"
+    static let GAME_END_POINT = "Game/"
+    static let BADGE_END_POINT = "Badges/"
 }

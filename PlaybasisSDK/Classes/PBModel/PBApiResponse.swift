@@ -57,6 +57,10 @@ public typealias PBActionCountCompletionBlock = (actionId:String?, count:Int) ->
 
 public typealias PBAppStatusCompletionBlock = (appStatus:Bool, appPeriod:PBAppPeriod?) -> Void
 
+public typealias PBRemainingPointsCompletionBlock = (remainingPoints:[PBRemainingPoint]) -> Void
+
+public typealias PBGameSettingCompletionBlock = (gameSettings:[PBGameSetting]) -> Void
+
 /**
  Represents a response from the server.
  */

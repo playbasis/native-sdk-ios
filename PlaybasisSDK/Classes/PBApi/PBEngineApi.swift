@@ -23,10 +23,35 @@ public class PBEngineApi: PBBaseApi {
         }, failureBlock:failureBlock)
     }
     
-    public class func ruleDetailsForPlayer(playerId:String,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rule/\(playerId)"), parameters: nil, completionBlock: { (response) in
+    public class func ruleDetailsWithId(ruleId:String, playerId:String?,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
+        var params:[String:String] = [:]
+        if let mPlayerId:String = playerId {
+            params["player_id"] = mPlayerId
+        }
+        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rule/\(ruleId)"), parameters: params, completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
             }, failureBlock:failureBlock)
+    }
+    
+    public class func listRulesWithAction(action:String?, playerId:String?, completionBlock:()->Void, failureBlock:PBFailureErrorBlock) {
+        var params:[String:String] = [:]
+        if let mPlayerId:String = playerId {
+            params["player_id"] = mPlayerId
+        }
+        if let mAction:String = action {
+            params["action"] = mAction
+        }
+        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rules"), parameters: params, completionBlock: { (apiResponse) in
+            
+            if let json:[String:AnyObject] = apiResponse.parsedJson as? [String:AnyObject] {
+                let gameRules:[PBGameRule] = PBGameRule.pbGameRuleFromApiResponse(apiResponse)
+            }
+            else {
+                failureBlock(error: PBError(message: "Unknown error"))
+            }
+            
+
+            }, failureBlock: failureBlock)
     }
 }
