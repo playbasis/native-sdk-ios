@@ -61,6 +61,8 @@ public typealias PBRemainingPointsCompletionBlock = (remainingPoints:[PBRemainin
 
 public typealias PBGameSettingCompletionBlock = (gameSettings:[PBGameSetting]) -> Void
 
+public typealias PBGameRulesCompletionBlock = (gameRules:[PBGameRule]) -> Void
+
 /**
  Represents a response from the server.
  */
