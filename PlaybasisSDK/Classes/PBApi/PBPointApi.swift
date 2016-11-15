@@ -11,7 +11,7 @@ import UIKit
 public class PBPointApi: PBBaseApi {
     
     private class func pointEndPointWithPath(path:String) -> String {
-        return PBEndPoint.SETTING_END_POINT + path
+        return PBEndPoint.POINT_END_POINT + path
     }
     
     public class func getRemainingPointWithName(name:String?,completionBlock:PBRemainingPointsCompletionBlock, failureBlock:PBFailureErrorBlock) {
