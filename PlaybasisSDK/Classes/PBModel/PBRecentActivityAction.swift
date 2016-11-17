@@ -14,6 +14,7 @@ public class PBRecentActivityAction: PBRecentActivity {
     public var playerId2:String?
     public var url:String?
     public var stringFilter:String?
+    public var parameters:[String:String]?
     
     public override init() {
         super.init()
@@ -28,6 +29,7 @@ public class PBRecentActivityAction: PBRecentActivity {
         playerId2 <- map["pb_player_id-2"]
         url <- map["message"]
         stringFilter <- map["string_filter"]
+        parameters <- map["parameters"]
     }
 
 
