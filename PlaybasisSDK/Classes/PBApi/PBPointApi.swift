@@ -29,8 +29,8 @@ public class PBPointApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    public class func approveTransactions(transactions:[String], completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        let params:[String:String] = ["transaction_list":transactions.joinWithSeparator(",")]
+    public class func approveTransactions(transactions:[String], approve:Bool, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        let params:[String:String] = ["transaction_list":transactions.joinWithSeparator(","), "approve":String(approve)]
         PBRestController.request(.POST, endPoint: pointEndPointWithPath("custom/approval"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
                 completionBlock()
