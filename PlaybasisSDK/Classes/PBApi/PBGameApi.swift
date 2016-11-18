@@ -28,5 +28,16 @@ public class PBGameApi: PBBaseApi {
             }
             }, failureBlock:failureBlock)
     }
+    
+    public class func getActiveGameCampaign(gameName:String, completionBlock:PBGameActiveCampaignCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        PBRestController.request(.GET, endPoint: gameEndPointWithPath("campaign/active"), parameters: nil, completionBlock: { (apiResponse) in
+            if apiResponse.parsedJson != nil {
+                completionBlock(gameActiveCampaign: PBGameActiveCampaign(apiResponse: apiResponse))
+            }
+            else {
+                failureBlock(error: PBError(message: "Unknown error"))
+            }
+            }, failureBlock:failureBlock)
+    }
 
 }
