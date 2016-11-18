@@ -95,7 +95,8 @@ public class PBGameRuleJigsawSet: PBModel {
     public var configAction:PBGameRuleConfigAction?
     public var configCondition:PBGameRuleConfigCondition?
     public var configGroup:PBGameRuleConfigGroup?
-
+    public var configReward:PBGameRuleConfigGroupContainer?
+    
     
     public override init() {
         super.init()
@@ -113,13 +114,16 @@ public class PBGameRuleJigsawSet: PBModel {
         category <- map["category"]
         sortOrder <- map["sort_order"]
         jigsawIndex <- map["jigsaw_index"]
+        dataSet <- map["dataSet"]
         switch category {
         case "ACTION":
-            configAction <- map["action"]
+            configAction <- map["config"]
         case "CONDITION":
-            configCondition <- map["action"]
+            configCondition <- map["config"]
         case "GROUP":
-            configGroup <- map["action"]
+            configGroup <- map["config"]
+        case "REWARD":
+            configReward <- map["config"]
         default:
             break
         }
@@ -144,7 +148,7 @@ public class PBGameRuleDataSet: PBModel {
     public var paramName:String! = ""
     public var label:String! = ""
     public var placeHolder:String! = ""
-    public var value:String! = ""
+    public var value:[PBGameRuleJigsawSet] = []
     
     public override init() {
         super.init()
@@ -163,7 +167,7 @@ public class PBGameRuleDataSet: PBModel {
         placeHolder <- map["placeholder"]
         value <- map["value"]
     }
-
+    
 }
 
 public class PBGameRuleConfigAction:PBModel {
@@ -193,6 +197,7 @@ public class PBGameRuleConfigCondition:PBModel {
     public var paramOperation:String! = ""
     public var paramValue:String! = ""
     public var conditionId:String! = ""
+    public var groupContainer:[PBGameRuleConfigGroupContainer] = []
     
     public override init() {
         super.init()
@@ -208,6 +213,7 @@ public class PBGameRuleConfigCondition:PBModel {
         paramOperation <- map["param_operation"]
         paramValue <- map["param_value"]
         conditionId <- map["condition_id"]
+        groupContainer <- map["group_container"]
     }
     
 }
@@ -241,6 +247,7 @@ public class PBGameRuleConfigGroupContainer:PBModel {
     public var customLog:String! = ""
     public var weight:String! = ""
     public var rewardId:String! = ""
+    public var data:PBRewardData?
     
     public override init() {
         super.init()
@@ -258,6 +265,7 @@ public class PBGameRuleConfigGroupContainer:PBModel {
         customLog <- map["custom_log"]
         weight <- map["weight"]
         rewardId <- map["reward_id"]
+        data <- map["data"]
     }
     
 }
