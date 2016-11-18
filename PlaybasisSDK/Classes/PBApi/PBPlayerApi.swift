@@ -268,7 +268,12 @@ public class PBPlayerApi: PBBaseApi {
     }
     
     public class func getActionCountWithPlayerId(playerId:String, actionName:String, customParams:[String:String]?, completionBlock:PBActionCountCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/action/\(actionName)/count"), parameters: customParams, completionBlock: { (response) in
+        var params:[String:String] = [:]
+        if customParams != nil {
+            params["key"] = customParams!.keys.joinWithSeparator(",")
+            params["value"] = customParams!.values.joinWithSeparator(",")
+        }
+        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/action/\(actionName)/count"), parameters: params, completionBlock: { (response) in
             if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], actionJson:[String:AnyObject] = json["action"] as? [String:AnyObject], let count:Int = actionJson["count"] as? Int {
                 completionBlock(actionId: actionJson["action_id"] as? String, count: count)
             }
