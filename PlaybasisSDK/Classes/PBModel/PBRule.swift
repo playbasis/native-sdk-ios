@@ -174,6 +174,7 @@ public class PBGameRuleConfigAction:PBModel {
     
     public var actionId:String? = ""
     public var actionName:String? = ""
+    public var customParam:[String:AnyObject]?
     
     public override init() {
         super.init()
@@ -187,6 +188,7 @@ public class PBGameRuleConfigAction:PBModel {
         super.mapping(map)
         actionId <- map["action_id"]
         actionName <- map["action_name"]
+        customParam = map.JSONDictionary
     }
     
 }
@@ -198,6 +200,7 @@ public class PBGameRuleConfigCondition:PBModel {
     public var paramValue:String! = ""
     public var conditionId:String! = ""
     public var groupContainer:[PBGameRuleConfigGroupContainer] = []
+    public var customParam:[String:AnyObject]?
     
     public override init() {
         super.init()
@@ -214,6 +217,7 @@ public class PBGameRuleConfigCondition:PBModel {
         paramValue <- map["param_value"]
         conditionId <- map["condition_id"]
         groupContainer <- map["group_container"]
+        customParam = map.JSONDictionary
     }
     
 }
@@ -222,6 +226,7 @@ public class PBGameRuleConfigGroup:PBModel {
     
     public var groupContainer:[PBGameRuleConfigGroupContainer]? = []
     public var groupId:String? = ""
+    public var customParam:[String:AnyObject]?
     
     public override init() {
         super.init()
@@ -235,6 +240,7 @@ public class PBGameRuleConfigGroup:PBModel {
         super.mapping(map)
         groupContainer <- map["group_container"]
         groupId <- map["group_id"]
+        customParam = map.JSONDictionary
     }
     
 }
