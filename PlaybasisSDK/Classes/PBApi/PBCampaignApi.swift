@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PBCampaignApi: PBBaseApi {
+public class PBCampaignApi: PBBaseApi {
 
     private class func campaignEndPointWithPath(path:String) -> String {
         return PBEndPoint.CAMPAIGN_END_POINT + path
