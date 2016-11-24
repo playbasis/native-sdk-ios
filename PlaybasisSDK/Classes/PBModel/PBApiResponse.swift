@@ -63,7 +63,9 @@ public typealias PBGameSettingCompletionBlock = (gameSettings:[PBGameSetting]) -
 
 public typealias PBGameRulesCompletionBlock = (gameRules:[PBGameRule]) -> Void
 
-public typealias PBGameActiveCampaignCompletionBlock = (gameActiveCampaign:PBGameActiveCampaign) -> Void
+public typealias PBCampaignCompletionBlock = (campaign:PBCampaign) -> Void
+
+public typealias PBCampaignsCompletionBlock = (campaigns:[PBCampaign]) -> Void
 
 /**
  Represents a response from the server.

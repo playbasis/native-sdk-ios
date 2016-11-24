@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-public class PBGameActiveCampaign: PBModel {
+public class PBCampaign: PBModel {
 
     public var name:String! = ""
     public var image:String! = ""
@@ -36,7 +36,11 @@ public class PBGameActiveCampaign: PBModel {
     
     init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBGameActiveCampaign>().map(apiResponse.parsedJson!["result"], toObject: self)
+        Mapper<PBCampaign>().map(apiResponse.parsedJson!["result"], toObject: self)
+    }
+    
+    class func pbCampaignsFromApiResponse(apiResponse:PBApiResponse) -> [PBCampaign] {
+        return Mapper<PBCampaign>().mapArray(apiResponse.parsedJson!) ?? []
     }
     
     
