@@ -13,7 +13,7 @@ enum RoleAction {
 
 public class PBEngineApi: PBBaseApi {
     private class func engineEndPointWithPath(path:String) -> String {
-        return PBEndPoint.ENGINE_END_POINT + path
+        return PBEndPoint.ENGINE_END_POINT + self.encodePath(path)
     }
 
     public class func processAction(engineForm:PBEngineForm,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){

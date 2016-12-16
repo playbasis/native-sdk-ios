@@ -11,7 +11,7 @@ import UIKit
 public class PBGameApi: PBBaseApi {
     
     private class func gameEndPointWithPath(path:String) -> String {
-        return PBEndPoint.GAME_END_POINT + path
+        return PBEndPoint.GAME_END_POINT + self.encodePath(path)
     }
     
     public class func getGameSettingsWithForm(gameForm:PBGameForm?,completionBlock:PBGameSettingCompletionBlock, failureBlock:PBFailureErrorBlock) {

@@ -11,7 +11,7 @@ import UIKit
 public class PBLinkApi: PBBaseApi {
 
     private class func linkEndPointWithPath(path:String) -> String {
-        return PBEndPoint.LINK_END_POINT + path
+        return PBEndPoint.LINK_END_POINT + self.encodePath(path)
     }
     
     public class func generateLinkWithParams(params:[String:String], completionBlock:PBLinkCompletionBlock, failureBlock:PBFailureErrorBlock){

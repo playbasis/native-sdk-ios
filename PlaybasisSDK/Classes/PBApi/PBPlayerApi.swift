@@ -17,7 +17,7 @@ public enum RankType:String{
 public class PBPlayerApi: PBBaseApi {
         
     private class func playerEndPointWithPath(path:String) -> String {
-        return PBEndPoint.PLAYER_END_POINT + path
+        return PBEndPoint.PLAYER_END_POINT + self.encodePath(path)
     }
     
     public class func getPublicInfoForPlayerId(playerId:String, completionBlock:PBPlayerCompletionBlock, failureBlock:PBFailureErrorBlock) {

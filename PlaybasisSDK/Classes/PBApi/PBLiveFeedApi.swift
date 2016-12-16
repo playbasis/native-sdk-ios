@@ -11,7 +11,7 @@ import UIKit
 public class PBLiveFeedApi: PBBaseApi {
 
     private class func liveFeedEndPointWithPath(path:String) -> String {
-        return PBEndPoint.LIVE_FEED_END_POINT + path
+        return PBEndPoint.LIVE_FEED_END_POINT + self.encodePath(path)
     }
     
     public class func getRecentActivitiesWithForm(recentActivityForm:PBRecentActivityForm, completionBlock:PBRecentActivitiesCompletionBlock, failureBlock:PBFailureErrorBlock){

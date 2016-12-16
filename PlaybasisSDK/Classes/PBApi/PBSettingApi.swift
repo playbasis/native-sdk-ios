@@ -11,7 +11,7 @@ import UIKit
 public class PBSettingApi: PBBaseApi {
     
     private class func settingEndPointWithPath(path:String) -> String {
-        return PBEndPoint.SETTING_END_POINT + path
+        return PBEndPoint.SETTING_END_POINT + self.encodePath(path)
     }
     
     public class func getAppStatusWithCompletionBlock(completionBlock:PBAppStatusCompletionBlock, failureBlock:PBFailureErrorBlock) {

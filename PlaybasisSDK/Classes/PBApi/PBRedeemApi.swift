@@ -11,7 +11,7 @@ import UIKit
 public class PBRedeemApi: PBBaseApi {
     
     private class func redeemEndPointWithPath(path:String) -> String {
-        return PBEndPoint.REDEEM_END_POINT + path
+        return PBEndPoint.REDEEM_END_POINT + self.encodePath(path)
     }
     
     public class func redeemGoodId(goodId:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {

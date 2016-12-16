@@ -11,7 +11,7 @@ import UIKit
 public class PBGoodsApi: PBBaseApi {
 
     private class func goodsEndPointWithPath(path:String) -> String {
-        return PBEndPoint.GOODS_END_POINT + path
+        return PBEndPoint.GOODS_END_POINT + self.encodePath(path)
     }
     
     

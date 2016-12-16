@@ -11,7 +11,7 @@ import UIKit
 public class PBQuestApi: PBBaseApi {
     
     private class func questEndPointWithPath(path:String) -> String {
-        return PBEndPoint.QUEST_END_POINT + path
+        return PBEndPoint.QUEST_END_POINT + self.encodePath(path)
     }
     
     public class func getQuestList(completionBlock:PBQuestsCompletionBlock, failureBlock:PBFailureErrorBlock){

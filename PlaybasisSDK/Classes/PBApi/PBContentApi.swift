@@ -11,7 +11,7 @@ import UIKit
 public class PBContentApi: PBBaseApi {
     
     private class func contentEndPointWithPath(path:String) -> String {
-        return PBEndPoint.CONTENT_END_POINT + path
+        return PBEndPoint.CONTENT_END_POINT + self.encodePath(path)
     }
     
     public class func getContentListWithForm(contentForm:PBContentForm, completionBlock:PBContentCompletionBlock, failureBlock:PBFailureErrorBlock){

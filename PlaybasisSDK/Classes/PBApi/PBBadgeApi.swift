@@ -11,7 +11,7 @@ import UIKit
 public class PBBadgeApi: PBBaseApi {
     
     private class func badgeEndPointWithPath(path:String) -> String {
-        return PBEndPoint.BADGE_END_POINT + path
+        return PBEndPoint.BADGE_END_POINT + self.encodePath(path)
     }
     
     public class func getAllBadgesWithTags(tags:String?, completionBlock:PBPlayerBadgesCompletionBlock, failureBlock:PBFailureErrorBlock) {

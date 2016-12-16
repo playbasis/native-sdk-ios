@@ -11,7 +11,7 @@ import UIKit
 public class PBMerchantApi: PBBaseApi {
 
     private class func merchantEndPointWithPath(path:String) -> String {
-        return PBEndPoint.MERCHANT_END_POINT + path
+        return PBEndPoint.MERCHANT_END_POINT + self.encodePath(path)
     }
     
     public class func availableBranchForGoodsGroup(goodsGroup:String, completionBlock:PBAvailableRedeemPlacesCompletionBlock, failureBlock:PBFailureErrorBlock) {

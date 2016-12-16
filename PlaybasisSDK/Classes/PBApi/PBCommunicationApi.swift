@@ -11,11 +11,11 @@ import UIKit
 public class PBCommunicationApi: PBBaseApi {
 
     private class func pushEndPointWithPath(path:String) -> String {
-        return PBEndPoint.PUSH_END_POINT + path
+        return PBEndPoint.PUSH_END_POINT + self.encodePath(path)
     }
     
     private class func emailEndPointWithPath(path:String) -> String {
-        return PBEndPoint.EMAIL_END_POINT + path
+        return PBEndPoint.EMAIL_END_POINT + self.encodePath(path)
     }
     
     public class func registerDeviceWithDeviceForm(deviceForm:PBDeviceForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {

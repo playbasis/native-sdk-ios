@@ -11,7 +11,7 @@ import UIKit
 public class PBCampaignApi: PBBaseApi {
 
     private class func campaignEndPointWithPath(path:String) -> String {
-        return PBEndPoint.CAMPAIGN_END_POINT + path
+        return PBEndPoint.CAMPAIGN_END_POINT + self.encodePath(path)
     }
     
     public class func getCampaignWithName(campaignName:String, completionBlock:PBCampaignsCompletionBlock, failureBlock:PBFailureErrorBlock) {

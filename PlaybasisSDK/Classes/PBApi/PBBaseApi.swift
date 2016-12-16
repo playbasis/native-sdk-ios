@@ -9,5 +9,9 @@
 import UIKit
 
 public class PBBaseApi: NSObject {
+    
+    class func encodePath(path:String) -> String {
+        return path.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet()) ?? ""
+    }
 
 }
