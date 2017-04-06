@@ -9,43 +9,43 @@
 import UIKit
 
 public enum PBApiErrorType {
-    case NetworkError
-    case NetworkTimeout
-    case InvalidToken
-    case ServerError
-    case NotFound
-    case InvalidLoginCredential
-    case UserNotFound
-    case NodeAlreadyExist
-    case PinNotMatch
-    case LocalError
-    case Unauthorized
-    case UserAlreadyExists
-    case EmailAlreadyExists
-    case Canceled
-    case InvalidCouponCode
+    case networkError
+    case networkTimeout
+    case invalidToken
+    case serverError
+    case notFound
+    case invalidLoginCredential
+    case userNotFound
+    case nodeAlreadyExist
+    case pinNotMatch
+    case localError
+    case unauthorized
+    case userAlreadyExists
+    case emailAlreadyExists
+    case canceled
+    case invalidCouponCode
 }
 
 
 
 public enum PBValidationErrorType {
-    case InvalidEmailFormat
-    case PasswordRequired
-    case PasswordNotMatch
-    case EmailOrUserNameRequired
-    case PlayerIdRequired
-    case UsernameRequired
+    case invalidEmailFormat
+    case passwordRequired
+    case passwordNotMatch
+    case emailOrUserNameRequired
+    case playerIdRequired
+    case usernameRequired
 }
 
 
-public class PBError:NSObject {
+open class PBError:NSObject {
     
     /// Type of error in the API call, or nil if success
-    private(set) public var remoteError: PBApiErrorType?
-    private(set) public var validationError:PBValidationErrorType?
+    fileprivate(set) open var remoteError: PBApiErrorType?
+    fileprivate(set) open var validationError:PBValidationErrorType?
     
-    private var errorCode:String! = "0000"
-    public var message:String = ""
+    fileprivate var errorCode:String! = "0000"
+    open var message:String = ""
     
 
     public init(code:String = "0000", message:String) {
@@ -67,38 +67,38 @@ public class PBError:NSObject {
     
     // MARK: - Private
     
-    private func remoteErrorFromCode(code:String) -> PBApiErrorType {
+    fileprivate func remoteErrorFromCode(_ code:String) -> PBApiErrorType {
         var error:PBApiErrorType
         switch code {
         // APPLICATION ERROR
         case "0900":
-            error = .InvalidToken
+            error = .invalidToken
         case "2406", "0903":
-            error = .InvalidLoginCredential
+            error = .invalidLoginCredential
         case "0200":
-            error = .UserNotFound
+            error = .userNotFound
         case "2402":
-            error = .NodeAlreadyExist
+            error = .nodeAlreadyExist
         case "2101":
-            error = .PinNotMatch
+            error = .pinNotMatch
         case "0201", "0215":
-            error = .UserAlreadyExists
+            error = .userAlreadyExists
         case "0216":
-            error = .EmailAlreadyExists
+            error = .emailAlreadyExists
         case "0602":
-            error = .InvalidCouponCode
+            error = .invalidCouponCode
         // HTTP ERROR
         case "401":
-            error = .Unauthorized
+            error = .unauthorized
         case "404":
-            error = .NotFound
+            error = .notFound
         // IOS ERROR
         case "-1009":
-            error = .NetworkError
+            error = .networkError
         case "-999":
-            error = .Canceled
+            error = .canceled
         default:
-            error = .LocalError
+            error = .localError
         }
         return error
     }

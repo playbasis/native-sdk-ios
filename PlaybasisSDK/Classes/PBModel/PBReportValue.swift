@@ -9,11 +9,11 @@
 import UIKit
 import ObjectMapper
 
-public class PBReportValue: PBModel {
+open class PBReportValue: PBModel {
     
-    public var quantity:Int = 0
-    public var previousQuantity:Int = 0
-    public var percentChanged:Int = 0
+    open var quantity:Int = 0
+    open var previousQuantity:Int = 0
+    open var percentChanged:Int = 0
     
     public override init() {
         super.init()
@@ -23,7 +23,7 @@ public class PBReportValue: PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         quantity <- map["quantity"]
         previousQuantity <- map["previous_quantity"]

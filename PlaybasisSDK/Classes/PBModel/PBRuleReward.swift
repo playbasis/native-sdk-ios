@@ -10,9 +10,9 @@ import UIKit
 import ObjectMapper
 
 
-public class PBRuleReward: PBModel {
+open class PBRuleReward: PBModel {
     
-    public var rewards:[PBReward] = []
+    open var rewards:[PBReward] = []
     
     public override init() {
         super.init()
@@ -22,7 +22,7 @@ public class PBRuleReward: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
     }
 

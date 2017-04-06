@@ -11,12 +11,12 @@ import Alamofire
 
 class PBRestController {
     
-    class func uploadData(data:NSData, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding = .URL, headers: [String: String]? = nil, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
+    class func uploadData(_ data:Data, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding = URLEncoding.httpBody, headers: [String: String]? = nil, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
         
-        Alamofire.Manager.sharedInstance.delegate.taskWillPerformHTTPRedirection = nil
+        Alamofire.SessionManager.sharedInstance.delegate.taskWillPerformHTTPRedirection = nil
         
-        func handleBadToken(error:PBError) -> Bool {
-            if error.remoteError == .InvalidToken {
+        func handleBadToken(_ error:PBError) -> Bool {
+            if error.remoteError == .invalidToken {
                 PBAuthenticationController.sharedInstance.invalidateToken()
                 self.uploadData(data, endPoint: endPoint, parameters: parameters, encoding: encoding, headers: headers, completionBlock: completionBlock, failureBlock: failureBlock)
                 return true
@@ -25,7 +25,7 @@ class PBRestController {
         }
         
         PBAuthenticationController.sharedInstance.renewAuthenticationTokenIfNeeded({
-            let request = PBBaseRestController.sharedInstance.createRequest(endPoint, method: .POST, authenticationData: [:], encoding: encoding, headers: headers, parameters: parameters)
+            let request = PBBaseRestController.sharedInstance.createRequest(endPoint, method: .post, authenticationData: [:], encoding: encoding, headers: headers, parameters: parameters)
             let authenticationData:[String:String] = ["token":PBAuthenticationController.sharedInstance.authenticationToken.token!]
             PBBaseRestController.sharedInstance.performUpload(request, data:data, authenticationData: authenticationData, completionBlock:completionBlock, failureBlock:{ (error) in
                 if handleBadToken(error) == false {
@@ -35,10 +35,10 @@ class PBRestController {
         })
     }
     
-    class func request(method:Alamofire.Method, endPoint: String, parameters: [String : AnyObject]?, asynchronous:Bool = true, encoding: ParameterEncoding = .URL, headers: [String: String]? = nil, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
+    class func request(_ method:Alamofire.HTTPMethod, endPoint: String, parameters: [String : AnyObject]?, asynchronous:Bool = true, encoding: ParameterEncoding = URLEncoding.httpBody, headers: [String: String]? = nil, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
         
-        func handleBadToken(error:PBError) -> Bool {
-            if error.remoteError == .InvalidToken {
+        func handleBadToken(_ error:PBError) -> Bool {
+            if error.remoteError == .invalidToken {
                 PBAuthenticationController.sharedInstance.invalidateToken()
                 self.request(method, endPoint: endPoint, parameters: parameters, encoding: encoding, headers: headers, completionBlock: completionBlock, failureBlock: failureBlock)
                 return true
@@ -47,9 +47,9 @@ class PBRestController {
         }
         var authenticationData:[String:String] = [:]
         
-        if endPoint != PBEndPoint.AUTHENTICATION_END_POINT && method != .GET {
+        if endPoint != PBEndPoint.AUTHENTICATION_END_POINT && method != .get {
             PBAuthenticationController.sharedInstance.renewAuthenticationTokenIfNeeded({
-                if method == .POST, let token = PBAuthenticationController.sharedInstance.authenticationToken.token {
+                if method == .post, let token = PBAuthenticationController.sharedInstance.authenticationToken.token {
                     authenticationData["token"] = token
                     print("Token: \(token)")
                 }

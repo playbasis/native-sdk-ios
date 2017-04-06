@@ -8,36 +8,36 @@
 
 import UIKit
 
-public class PBCommunicationApi: PBBaseApi {
+open class PBCommunicationApi: PBBaseApi {
 
-    private class func pushEndPointWithPath(path:String) -> String {
+    fileprivate class func pushEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.PUSH_END_POINT + self.encodePath(path)
     }
     
-    private class func emailEndPointWithPath(path:String) -> String {
+    fileprivate class func emailEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.EMAIL_END_POINT + self.encodePath(path)
     }
     
-    public class func registerDeviceWithDeviceForm(deviceForm:PBDeviceForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func registerDeviceWithDeviceForm(_ deviceForm:PBDeviceForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         PBRestController.request(.POST, endPoint: pushEndPointWithPath("deviceRegistration"), parameters: deviceForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
-    public class func deRegisterDeviceWithDeviceToken(deviceToken:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func deRegisterDeviceWithDeviceToken(_ deviceToken:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params:[String:String] = ["device_token":deviceToken, "player_id":playerId]
         PBRestController.request(.POST, endPoint: pushEndPointWithPath("deviceDeRegistration"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
-    public class func sendEmailWithEmailForm(emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func sendEmailWithEmailForm(_ emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         PBRestController.request(.POST, endPoint: emailEndPointWithPath("send"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
-    public class func sendCouponEmailWithEmailForm(emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func sendCouponEmailWithEmailForm(_ emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         PBRestController.request(.POST, endPoint: emailEndPointWithPath("goods"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)

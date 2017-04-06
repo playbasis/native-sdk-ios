@@ -9,18 +9,18 @@
 import UIKit
 import ObjectMapper
 
-public class PBModel: NSObject, Mappable{
+open class PBModel: NSObject, Mappable{
 
-    public var uid:String?
+    open var uid:String?
     
     public override init() {
         super.init()
     }
     
-    required public init?(_ map: Map){
+    required public init?(map: Map){
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         uid <- map["_id"]
     }
 

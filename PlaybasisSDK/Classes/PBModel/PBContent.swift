@@ -9,14 +9,14 @@
 import UIKit
 import ObjectMapper
 
-public class PBContent: PBModel {
+open class PBContent: PBModel {
     
-    public var title:String! = ""
-    public var detail:String! = ""
-    public var imageURL:String! = ""
-    public var category:String! = ""
-    public var summary:String! = ""
-    public var date:NSDate?
+    open var title:String! = ""
+    open var detail:String! = ""
+    open var imageURL:String! = ""
+    open var category:String! = ""
+    open var summary:String! = ""
+    open var date:Date?
     
     public override init() {
         super.init()
@@ -32,7 +32,7 @@ public class PBContent: PBModel {
     }
     
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         title <- map["title"]
         detail <- map["detail"]
@@ -42,7 +42,7 @@ public class PBContent: PBModel {
         summary <- map["summary"]
     }
     
-    class func pbContentFromApiResponse(apiResponse:PBApiResponse) -> [PBContent] {
+    class func pbContentFromApiResponse(_ apiResponse:PBApiResponse) -> [PBContent] {
         var contentList:[PBContent] = []
         contentList = Mapper<PBContent>().mapArray(apiResponse.parsedJson!["result"])!
         return contentList

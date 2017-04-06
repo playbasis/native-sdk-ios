@@ -9,15 +9,15 @@
 import UIKit
 import ObjectMapper
 
-public class PBRuleEventQuest: PBModel {
+open class PBRuleEventQuest: PBModel {
     
     
-    public var questName:String! = ""
-    public var desc:String! = ""
-    public var hint:String! = ""
-    public var imageURL:String! = ""
-    public var questId:String! = ""
-    public var events:[PBRuleEvent] = []
+    open var questName:String! = ""
+    open var desc:String! = ""
+    open var hint:String! = ""
+    open var imageURL:String! = ""
+    open var questId:String! = ""
+    open var events:[PBRuleEvent] = []
 
     public override init() {
         super.init()
@@ -27,7 +27,7 @@ public class PBRuleEventQuest: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
     }
     
@@ -37,7 +37,7 @@ public class PBRuleEventQuest: PBModel {
         Mapper<PBRuleEventQuest>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    public class func pbRuleEventQuestFromApiResponse(apiResponse:PBApiResponse) -> [PBRuleEventQuest] {
+    open class func pbRuleEventQuestFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRuleEventQuest] {
         var ruleEventQuestList:[PBRuleEventQuest] = []
         ruleEventQuestList = Mapper<PBRuleEventQuest>().mapArray(apiResponse.parsedJson!)!
         return ruleEventQuestList

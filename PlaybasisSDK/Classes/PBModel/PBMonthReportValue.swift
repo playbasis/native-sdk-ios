@@ -9,10 +9,10 @@
 import UIKit
 import ObjectMapper
 
-public class PBMonthReportValue: PBModel {
+open class PBMonthReportValue: PBModel {
     
-    public var month:String! = ""
-    public var reportValue:PBReportValue?
+    open var month:String! = ""
+    open var reportValue:PBReportValue?
     
     public override init() {
         super.init()
@@ -23,7 +23,7 @@ public class PBMonthReportValue: PBModel {
     }
     
     
-    public class func pbMonthReportValueReportFromDictionary(dictionnary:[String:AnyObject]) -> [PBMonthReportValue] {
+    open class func pbMonthReportValueReportFromDictionary(_ dictionnary:[String:AnyObject]) -> [PBMonthReportValue] {
         var monthReportValueList:[PBMonthReportValue] = []
         
         if let responseObject:[String:AnyObject] = dictionnary {

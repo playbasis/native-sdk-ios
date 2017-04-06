@@ -8,9 +8,9 @@
 
 import ObjectMapper
 
-public class PBMerchant: PBModel {
+open class PBMerchant: PBModel {
 
-    public var name:String!
+    open var name:String!
     
     public override init() {
         super.init()
@@ -20,7 +20,7 @@ public class PBMerchant: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         uid <- map["id"]
         name <- map["name"]

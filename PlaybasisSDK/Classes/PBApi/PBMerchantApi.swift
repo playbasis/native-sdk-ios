@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class PBMerchantApi: PBBaseApi {
+open class PBMerchantApi: PBBaseApi {
 
-    private class func merchantEndPointWithPath(path:String) -> String {
+    fileprivate class func merchantEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.MERCHANT_END_POINT + self.encodePath(path)
     }
     
-    public class func availableBranchForGoodsGroup(goodsGroup:String, completionBlock:PBAvailableRedeemPlacesCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func availableBranchForGoodsGroup(_ goodsGroup:String, completionBlock:PBAvailableRedeemPlacesCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params = ["goods_group":goodsGroup]
         PBRestController.request(.GET, endPoint: merchantEndPointWithPath("availableBranchGoodsGroup"), parameters: params, completionBlock: { (apiResponse) in
             let redeemPlaces = PBRedeemPlace.pbRedeemPlacesFromApiResponse(apiResponse)
@@ -22,7 +22,7 @@ public class PBMerchantApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    public class func redeemCouponWithGroup(group:String, code:String, pinCode:String?, playerId:String?, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func redeemCouponWithGroup(_ group:String, code:String, pinCode:String?, playerId:String?, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         var params = ["goods_group":group, "coupon_code":code]
         if let mPinCode = pinCode {
             params["pin_code"] = mPinCode

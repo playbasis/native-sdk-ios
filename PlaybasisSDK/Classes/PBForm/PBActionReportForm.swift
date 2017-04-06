@@ -18,14 +18,14 @@ public enum ParameterType:String {
     case Quantity = "quantity"
 }
 
-public class PBActionReportForm: PBForm {
+open class PBActionReportForm: PBForm {
     
-    public var playerId:String!
-    public var month:String! = ""
-    public var year:String! = ""
-    public var count:Int = 1
-    public var action:ActionType = .Sell
-    public var parameter:ParameterType = .Amount
+    open var playerId:String!
+    open var month:String! = ""
+    open var year:String! = ""
+    open var count:Int = 1
+    open var action:ActionType = .Sell
+    open var parameter:ParameterType = .Amount
  
     
     public init(playerId:String,count:Int,action:ActionType,parameter:ParameterType) {
@@ -36,7 +36,7 @@ public class PBActionReportForm: PBForm {
         self.parameter = parameter
     }
     
-    public override func params() -> [String:String] {
+    open override func params() -> [String:String] {
         var params:[String:String] = [:]
         params["player_id"] = self.playerId
         params["month"] = self.month

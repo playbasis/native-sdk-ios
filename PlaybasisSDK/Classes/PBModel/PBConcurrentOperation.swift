@@ -22,36 +22,36 @@ import Foundation
 ///   override `cancel` method, calling `super.cancel()` and then cleaning-up
 ///   and ensuring `completeOperation()` is called.
 
-class PBConcurrentOperation : NSOperation {
+class PBConcurrentOperation : Operation {
     
-    override var asynchronous: Bool {
+    override var isAsynchronous: Bool {
         return true
     }
     
-    private var _executing: Bool = false
-    override var executing: Bool {
+    fileprivate var _executing: Bool = false
+    override var isExecuting: Bool {
         get {
             return _executing
         }
         set {
             if (_executing != newValue) {
-                self.willChangeValueForKey("isExecuting")
+                self.willChangeValue(forKey: "isExecuting")
                 _executing = newValue
-                self.didChangeValueForKey("isExecuting")
+                self.didChangeValue(forKey: "isExecuting")
             }
         }
     }
     
-    private var _finished: Bool = false;
-    override var finished: Bool {
+    fileprivate var _finished: Bool = false;
+    override var isFinished: Bool {
         get {
             return _finished
         }
         set {
             if (_finished != newValue) {
-                self.willChangeValueForKey("isFinished")
+                self.willChangeValue(forKey: "isFinished")
                 _finished = newValue
-                self.didChangeValueForKey("isFinished")
+                self.didChangeValue(forKey: "isFinished")
             }
         }
     }
@@ -61,17 +61,17 @@ class PBConcurrentOperation : NSOperation {
     /// This will result in the appropriate KVN of isFinished and isExecuting
     
     func completeOperation() {
-        executing = false
-        finished  = true
+        isExecuting = false
+        isFinished  = true
     }
     
     override func start() {
-        if (cancelled) {
-            finished = true
+        if (isCancelled) {
+            isFinished = true
             return
         }
         
-        executing = true
+        isExecuting = true
         
         main()
     }

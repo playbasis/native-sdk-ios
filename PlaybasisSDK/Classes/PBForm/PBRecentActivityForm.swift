@@ -13,19 +13,19 @@ public enum PBRecentActivityMode:String {
     case Player = "player"
 }
 
-public class PBRecentActivityForm: PBForm {
+open class PBRecentActivityForm: PBForm {
     
     // Optional
     
-    public var playerId:String?
-    public var offset:Int? = 0
-    public var limit:Int? = 20
-    public var lastReadActivityId:String?
-    public var mode:PBRecentActivityMode = .All
-    public var eventType:String?
-    public var actionName:String?
+    open var playerId:String?
+    open var offset:Int? = 0
+    open var limit:Int? = 20
+    open var lastReadActivityId:String?
+    open var mode:PBRecentActivityMode = .All
+    open var eventType:String?
+    open var actionName:String?
     
-    override public func params() -> [String : String] {
+    override open func params() -> [String : String] {
         var params:[String:String] = [:]
         params["mode"] = self.mode.rawValue
         

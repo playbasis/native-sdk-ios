@@ -8,26 +8,26 @@
 
 import UIKit
 
-public class PBEngineForm: PBForm {
+open class PBEngineForm: PBForm {
     
     // Required
-    public var playerId:String!
-    public var action:String!
+    open var playerId:String!
+    open var action:String!
     
     // Optional
-    public var url:String?
-    public var reward:String?
-    public var quantity:String?
-    public var ruleId:String?
-    public var nodeId:String?
-    public var sessionId:String?
-    public var customParams:[String:String]?
+    open var url:String?
+    open var reward:String?
+    open var quantity:String?
+    open var ruleId:String?
+    open var nodeId:String?
+    open var sessionId:String?
+    open var customParams:[String:String]?
     
     public override init() {
         super.init()
     }
     
-    override public func params() -> [String:String] {
+    override open func params() -> [String:String] {
         var params:[String:String] = [:]
         params["player_id"] = playerId
         params["action"] = action

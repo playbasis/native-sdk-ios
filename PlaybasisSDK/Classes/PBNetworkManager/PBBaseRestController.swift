@@ -12,51 +12,59 @@ import Alamofire
 let API_ERROR_DOMAIN = "RemoteServiceErrorDomain"
 
 protocol PBRestProtocol {
-    func request(method:Alamofire.Method, endPoint: String, parameters: [String : AnyObject]?, asynchronous:Bool, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock)
-    func uploadData(data:NSData, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock)
+    func request(_ method:Alamofire.Method, endPoint: String, parameters: [String : AnyObject]?, asynchronous:Bool, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock)
+    func uploadData(_ data:Data, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock)
 }
 
-public class PBBaseRestController {
+open class PBBaseRestController {
     
-    public static let sharedInstance = PBBaseRestController()
-    private let manager: Alamofire.Manager = Alamofire.Manager.sharedInstance
+    open static let sharedInstance = PBBaseRestController()
+    fileprivate let manager: Alamofire.SessionManager = Alamofire.SessionManager.default
     
-    private let synchronousQueue:NSOperationQueue = NSOperationQueue()
+    fileprivate let synchronousQueue:OperationQueue = OperationQueue()
     
     public init() {
         synchronousQueue.maxConcurrentOperationCount = 1
     }
 
     
-    func createRequest(endPoint:String, method:Alamofire.Method, authenticationData:[String:String]?, encoding:ParameterEncoding, headers: [String: String]? = nil, parameters:[String:AnyObject]?) -> NSURLRequest {
+    func createRequest(_ endPoint:String, method:Alamofire.HTTPMethod, authenticationData:[String:String]?, encoding:ParameterEncoding, headers: [String: String]? = nil, parameters:[String:AnyObject]?) -> URLRequest {
         
-        let URLString:URLStringConvertible = PlaybasisSDK.sharedInstance.apiUrl + "/" + endPoint
+        let URLString:URLConvertible = PlaybasisSDK.sharedInstance.apiUrl + "/" + endPoint
         
-        let mutableRequest = NSMutableURLRequest(URL: NSURL(string: URLString.URLString)!)
-        mutableRequest.HTTPMethod = method.rawValue
+        var mutableRequest: NSMutableURLRequest
+        do {
+            try mutableRequest = NSMutableURLRequest(url: URL(string: URLString.asURL().absoluteString)!)
+        } catch {
+            print("failed to create a request \(error)")
+            assert(false)
+        }
+        mutableRequest.httpMethod = method.rawValue
         
         var params = parameters ?? [String:AnyObject]()
         if authenticationData != nil {
             for (key,value) in authenticationData! {
-                params.updateValue(value, forKey:key)
+                params.updateValue(value as AnyObject, forKey:key)
             }
         }
         
-        let (request, error) = encoding.encode(mutableRequest, parameters: params)
-        if let error = error {
-            print("Failed to encode request, error: \(error)")
+        do {
+            var request = try encoding.encode(mutableRequest as! URLRequestConvertible, with: params)
+            
+            if let headers = headers {
+                for (field, value) in headers {
+                    request.setValue(value, forHTTPHeaderField: field)
+                }
+            }
+            return request
+            
+        } catch {
+            print("failed to encode request \(error)")
             assert(false)
         }
-        
-        if let headers = headers {
-            for (field, value) in headers {
-                request.setValue(value, forHTTPHeaderField: field)
-            }
-        }
-        return request
     }
     
-    func performRequest(request:NSURLRequest, asynchronous:Bool = true, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
+    func performRequest(_ request:URLRequest, asynchronous:Bool = true, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
         
         if asynchronous {
             self.manager.request(request).responseJSON { (response) in
@@ -68,39 +76,36 @@ public class PBBaseRestController {
                 self.parseResponse(response, successBlock: completionBlock, failureBlock: failureBlock)
             })
             synchronousQueue.addOperation(synchronousOperation)
-            
-            
         }
     }
     
-    func performUpload(request:NSURLRequest, data:NSData, authenticationData:[String:String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
+    func performUpload(_ request:URLRequest, data:Data, authenticationData:[String:String]?, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
         
-        self.manager.upload(request, multipartFormData: { (multipartFormData) in
+        self.manager.upload(multipartFormData: { (multipartFormData) in
             if authenticationData != nil {
-                for (key,value) in authenticationData! {
-                    multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
+                for (key,value ) in authenticationData! {
+                    multipartFormData.append(value.data(using: .utf8, allowLossyConversion: false)!, withName: key)
                 }
             }
-            multipartFormData.appendBodyPart(data: data, name: "file", fileName: "file.jpg", mimeType: "image/jpeg")
-        }) { (multipartFormDataEncodingResult) in
-            switch multipartFormDataEncodingResult {
-            case .Success(let requestEncoded, _, _):
+        }, to: request.url!) { (multipartFormDtaEncodingResult) in
+            switch multipartFormDtaEncodingResult {
+            case .success(let requestEncoded, _, _):
                 print(requestEncoded.debugDescription)
-                requestEncoded.responseJSON { (response) in
+                requestEncoded.responseJSON(completionHandler: { (response) in
                     self.parseResponse(response, successBlock: completionBlock, failureBlock: failureBlock)
-                }
-            case .Failure(let encodingError):
+                })
+            case .failure(let encodingError):
                 let errorObject:PBError = PBError(nsError: encodingError as NSError)
-                failureBlock(error: errorObject)
+                failureBlock(errorObject)
             }
         }
     }
     
-    private func parseResponse(response:Response<AnyObject, NSError>, successBlock:((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
+    fileprivate func parseResponse(_ response:DataResponse<AnyObject>, successBlock:((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
        // print("Request completed, URL: \(response.request!.URL), response: \(response), status code = \(response.response?.statusCode)")
         let apiResponse:PBApiResponse = PBApiResponse(response:response)
         if let error = apiResponse.apiError {
-            failureBlock(error: error)
+            failureBlock(error)
         }
         else {
             successBlock(apiResponse)
@@ -109,7 +114,7 @@ public class PBBaseRestController {
     
     func cancelAll() {
         if #available(iOS 9.0, *) {
-            self.manager.session.getAllTasksWithCompletionHandler { tasks in
+            self.manager.session.getAllTasks { tasks in
                 tasks.forEach { $0.cancel() }
             }
         } else {

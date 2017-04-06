@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class PBPointApi: PBBaseApi {
+open class PBPointApi: PBBaseApi {
     
-    private class func pointEndPointWithPath(path:String) -> String {
+    fileprivate class func pointEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.POINT_END_POINT + self.encodePath(path)
     }
     
-    public class func getRemainingPointWithName(name:String?,completionBlock:PBRemainingPointsCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getRemainingPointWithName(_ name:String?,completionBlock:PBRemainingPointsCompletionBlock, failureBlock:PBFailureErrorBlock) {
         var params:[String:String] = [:]
         if let mName:String = name {
             params["name"] = mName
@@ -29,8 +29,8 @@ public class PBPointApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    public class func approveTransactions(transactions:[String], approve:Bool, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        let params:[String:String] = ["transaction_list":transactions.joinWithSeparator(","), "approve":String(approve)]
+    open class func approveTransactions(_ transactions:[String], approve:Bool, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+        let params:[String:String] = ["transaction_list":transactions.joined(separator: ","), "approve":String(approve)]
         PBRestController.request(.POST, endPoint: pointEndPointWithPath("custom/approval"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
                 completionBlock()

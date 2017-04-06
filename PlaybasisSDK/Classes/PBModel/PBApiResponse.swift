@@ -9,17 +9,17 @@
 import Alamofire
 import ObjectMapper
 
-public typealias PBFailureErrorBlock = (error:PBError) -> Void
+public typealias PBFailureErrorBlock = (_ error:PBError) -> Void
 
 public typealias PBEmptyCompletionBlock = () -> Void
 
-typealias PBAuthenticationCompletionBlock = (authenticationToken:PBAuthenticationToken) -> Void
+typealias PBAuthenticationCompletionBlock = (_ authenticationToken:PBAuthenticationToken) -> Void
 
-public typealias PBPlayerCompletionBlock = (player:PBPlayer) -> Void
+public typealias PBPlayerCompletionBlock = (_ player:PBPlayer) -> Void
 
-public typealias PBPlayerCustomFieldsCompletionBlock = (customFields:[String:String]) -> Void
+public typealias PBPlayerCustomFieldsCompletionBlock = (_ customFields:[String:String]) -> Void
 
-public typealias PBPlayerAuthCompletionBlock = (playerId:String) -> Void
+public typealias PBPlayerAuthCompletionBlock = (_ playerId:String) -> Void
 
 public typealias PBPlayerBadgesCompletionBlock = ([PBBadge]) -> Void
 
@@ -33,7 +33,7 @@ public typealias PBRewardsCompletionBlock = ([PBReward]) -> Void
 
 public typealias PBPointsCompletionBlock = ([PBPoint]) -> Void
 
-public typealias PBLeaderBoardCompletionBlock = (leadearBoard:[PBLeaderBoard], playerData:PBLeaderBoard?) -> Void
+public typealias PBLeaderBoardCompletionBlock = (_ leadearBoard:[PBLeaderBoard], _ playerData:PBLeaderBoard?) -> Void
 
 public typealias PBContentCompletionBlock = ([PBContent]) -> Void
 
@@ -45,44 +45,44 @@ public typealias PBRuleCompletionBlock = (PBRule) -> Void
 
 public typealias PBRulesCompletionBlock = ([PBRule]) -> Void
 
-public typealias PBAvailableRedeemPlacesCompletionBlock = (redeemPlaces:[PBRedeemPlace]) -> Void
+public typealias PBAvailableRedeemPlacesCompletionBlock = (_ redeemPlaces:[PBRedeemPlace]) -> Void
 
-public typealias PBReferralCodeCompletionBlock = (code:String) -> Void
+public typealias PBReferralCodeCompletionBlock = (_ code:String) -> Void
 
-public typealias PBLinkCompletionBlock = (link:String) -> Void
+public typealias PBLinkCompletionBlock = (_ link:String) -> Void
 
-public typealias PBRecentActivitiesCompletionBlock = (activities:[PBRecentActivity]) -> Void
+public typealias PBRecentActivitiesCompletionBlock = (_ activities:[PBRecentActivity]) -> Void
 
-public typealias PBActionCountCompletionBlock = (actionId:String?, count:Int) -> Void
+public typealias PBActionCountCompletionBlock = (_ actionId:String?, _ count:Int) -> Void
 
-public typealias PBAppStatusCompletionBlock = (appStatus:Bool, appPeriod:PBAppPeriod?) -> Void
+public typealias PBAppStatusCompletionBlock = (_ appStatus:Bool, _ appPeriod:PBAppPeriod?) -> Void
 
-public typealias PBRemainingPointsCompletionBlock = (remainingPoints:[PBRemainingPoint]) -> Void
+public typealias PBRemainingPointsCompletionBlock = (_ remainingPoints:[PBRemainingPoint]) -> Void
 
-public typealias PBGameSettingCompletionBlock = (gameSettings:[PBGameSetting]) -> Void
+public typealias PBGameSettingCompletionBlock = (_ gameSettings:[PBGameSetting]) -> Void
 
-public typealias PBGameRulesCompletionBlock = (gameRules:[PBGameRule]) -> Void
+public typealias PBGameRulesCompletionBlock = (_ gameRules:[PBGameRule]) -> Void
 
-public typealias PBCampaignCompletionBlock = (campaign:PBCampaign) -> Void
+public typealias PBCampaignCompletionBlock = (_ campaign:PBCampaign) -> Void
 
-public typealias PBCampaignsCompletionBlock = (campaigns:[PBCampaign]) -> Void
+public typealias PBCampaignsCompletionBlock = (_ campaigns:[PBCampaign]) -> Void
 
 /**
  Represents a response from the server.
  */
-public class PBApiResponse:Mappable {
+open class PBApiResponse:Mappable {
     
     
     /// Response JSON parsed into a dictionary, or nil if no JSON in response
-    private(set) public var parsedJson:AnyObject?
+    fileprivate(set) open var parsedJson:AnyObject?
     /// Whether the request was successful or not
-    public var success: Bool = false
+    open var success: Bool = false
     /// The raised error, if any
-    public var apiError:PBError?
+    open var apiError:PBError?
     /// The message returned
-    public var message:String = ""
+    open var message:String = ""
     /// The error code
-    public var errorCode:String = "0000"
+    open var errorCode:String = "0000"
     
     
     // MARK: - Initialisation
@@ -91,9 +91,9 @@ public class PBApiResponse:Mappable {
         
     }
     
-    required public init?(_ map: Map){}
+    required public init?(map: Map){}
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
         success <- map["success"]
         message <- map["message"]
@@ -103,7 +103,7 @@ public class PBApiResponse:Mappable {
         self.processError()
     }
     
-    public convenience init(response:Response<AnyObject, NSError>) {
+    public convenience init(response:DataResponse<AnyObject>) {
         let jsonResponse = response.result.value as? [String:AnyObject]
         
         if response.result.isFailure {
@@ -122,7 +122,7 @@ public class PBApiResponse:Mappable {
     
     // Private
     
-    private init(nsError: NSError, json: [String:AnyObject]?) {
+    fileprivate init(nsError: NSError, json: [String:AnyObject]?) {
         self.success = false
         self.message = nsError.localizedDescription
         self.errorCode = String(nsError.code)
@@ -130,7 +130,7 @@ public class PBApiResponse:Mappable {
         self.processError()
     }
     
-    private func processError() {
+    fileprivate func processError() {
         guard success == false else { return }
         self.apiError =  PBError(code: errorCode, message: message)
     }

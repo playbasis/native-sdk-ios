@@ -17,13 +17,13 @@ public enum PBRecentActivityEventType:String {
     case Other = "OTHER"
 }
 
-public class PBRecentActivity: PBModel {
+open class PBRecentActivity: PBModel {
     
-    public var eventType:PBRecentActivityEventType = .Other
-    public var actionName:String!
-    public var actionIcon:String?
-    public var player:PBPlayer?
-    public var dateAdded:NSDate?
+    open var eventType:PBRecentActivityEventType = .Other
+    open var actionName:String!
+    open var actionIcon:String?
+    open var player:PBPlayer?
+    open var dateAdded:Date?
     
     public override init() {
         super.init()
@@ -33,7 +33,7 @@ public class PBRecentActivity: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         eventType <- (map["event_type"], EnumTransform<PBRecentActivityEventType>())
         actionName <- map["action_name"]
@@ -43,7 +43,7 @@ public class PBRecentActivity: PBModel {
         uid <- map["id"]
     }
     
-    class func pbRecentActivitiesFromApiResponse(apiResponse:PBApiResponse) -> [PBRecentActivity] {
+    class func pbRecentActivitiesFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRecentActivity] {
         var recentActivities:[PBRecentActivity] = []
         if let activities:[[String:AnyObject]] = apiResponse.parsedJson!["activities"] as? [[String:AnyObject]] {
             activities.forEach({

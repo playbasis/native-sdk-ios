@@ -9,16 +9,16 @@
 import UIKit
 import ObjectMapper
 
-public class PBRuleEventMission: PBModel {
+open class PBRuleEventMission: PBModel {
     
-    public var missionId:String! = ""
-    public var missionNumber:String! = ""
-    public var name:String! = ""
-    public var desc:String! = ""
-    public var hint:String! = ""
-    public var imageURL:String! = ""
-    public var questId:String! = ""
-    public var events:[PBRuleEvent] = []
+    open var missionId:String! = ""
+    open var missionNumber:String! = ""
+    open var name:String! = ""
+    open var desc:String! = ""
+    open var hint:String! = ""
+    open var imageURL:String! = ""
+    open var questId:String! = ""
+    open var events:[PBRuleEvent] = []
     
     
     
@@ -30,7 +30,7 @@ public class PBRuleEventMission: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         missionId <- map["mission_id"]
         missionNumber <- map["mission_number"]
@@ -49,7 +49,7 @@ public class PBRuleEventMission: PBModel {
         Mapper<PBRuleEventMission>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    public class func pbRuleEventMissionFromApiResponse(apiResponse:PBApiResponse) -> [PBRuleEventMission] {
+    open class func pbRuleEventMissionFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRuleEventMission] {
         var ruleEventMissionList:[PBRuleEventMission] = []
         ruleEventMissionList = Mapper<PBRuleEventMission>().mapArray(apiResponse.parsedJson!)!
         return ruleEventMissionList

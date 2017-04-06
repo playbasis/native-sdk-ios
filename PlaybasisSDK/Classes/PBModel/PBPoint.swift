@@ -9,11 +9,11 @@
 import UIKit
 import ObjectMapper
 
-public class PBPoint: PBModel {
+open class PBPoint: PBModel {
 
-    public var value:Int! = 0
-    public var rewardName:String! = ""
-    public var rewardId:String! = ""
+    open var value:Int! = 0
+    open var rewardName:String! = ""
+    open var rewardId:String! = ""
     
     public override init() {
         super.init()
@@ -23,7 +23,7 @@ public class PBPoint: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         value <- map["value"]
         rewardName <- map["reward_name"]
@@ -31,7 +31,7 @@ public class PBPoint: PBModel {
     }
     
     
-    class func pbPointFromPointsApiResponse(apiResponse:PBApiResponse) -> [PBPoint] {
+    class func pbPointFromPointsApiResponse(_ apiResponse:PBApiResponse) -> [PBPoint] {
         var points:[PBPoint] = []
         points = Mapper<PBPoint>().mapArray(apiResponse.parsedJson!["points"])!
         return points

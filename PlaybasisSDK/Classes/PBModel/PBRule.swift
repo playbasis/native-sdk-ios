@@ -9,11 +9,11 @@
 import UIKit
 import ObjectMapper
 
-public class PBRule: PBModel {
+open class PBRule: PBModel {
     
-    public var events:[PBRuleEvent] = []
-    public var missions:[PBRuleEventMission] = []
-    public var quests:[PBRuleEventQuest] = []
+    open var events:[PBRuleEvent] = []
+    open var missions:[PBRuleEventMission] = []
+    open var quests:[PBRuleEventQuest] = []
     
     public override init() {
         super.init()
@@ -23,7 +23,7 @@ public class PBRule: PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         events <- map["events"]
         missions <- map["missions"]
@@ -36,7 +36,7 @@ public class PBRule: PBModel {
         Mapper<PBRule>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    public class func pbRuleFromApiResponse(apiResponse:PBApiResponse) -> [PBRule] {
+    open class func pbRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRule] {
         var ruleList:[PBRule] = []
         ruleList = Mapper<PBRule>().mapArray(apiResponse.parsedJson!)!
         return ruleList
@@ -45,14 +45,14 @@ public class PBRule: PBModel {
 
 
 
-public class PBGameRule: PBModel {
+open class PBGameRule: PBModel {
     
-    public var name:String! = ""
-    public var desc:String! = ""
-    public var tags:String! = ""
-    public var jigsawSet:[PBGameRuleJigsawSet] = []
-    public var activeStatus:Bool = true
-    public var action:Bool = false
+    open var name:String! = ""
+    open var desc:String! = ""
+    open var tags:String! = ""
+    open var jigsawSet:[PBGameRuleJigsawSet] = []
+    open var activeStatus:Bool = true
+    open var action:Bool = false
     
     public override init() {
         super.init()
@@ -62,7 +62,7 @@ public class PBGameRule: PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         name <- map["name"]
         desc <- map["description"]
@@ -78,24 +78,24 @@ public class PBGameRule: PBModel {
         Mapper<PBGameRule>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    public class func pbGameRuleFromApiResponse(apiResponse:PBApiResponse) -> [PBGameRule] {
+    open class func pbGameRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameRule] {
         return Mapper<PBGameRule>().mapArray(apiResponse.parsedJson!) ?? []
     }
 }
 
-public class PBGameRuleJigsawSet: PBModel {
+open class PBGameRuleJigsawSet: PBModel {
     
-    public var name:String! = ""
-    public var desc:String! = ""
-    public var specificId:String! = ""
-    public var category:String = ""
-    public var sortOrder:Int! = 1
-    public var jigsawIndex:String! = ""
-    public var dataSet:[PBGameRuleDataSet] = []
-    public var configAction:PBGameRuleConfigAction?
-    public var configCondition:PBGameRuleConfigCondition?
-    public var configGroup:PBGameRuleConfigGroup?
-    public var configReward:PBGameRuleConfigGroupContainer?
+    open var name:String! = ""
+    open var desc:String! = ""
+    open var specificId:String! = ""
+    open var category:String = ""
+    open var sortOrder:Int! = 1
+    open var jigsawIndex:String! = ""
+    open var dataSet:[PBGameRuleDataSet] = []
+    open var configAction:PBGameRuleConfigAction?
+    open var configCondition:PBGameRuleConfigCondition?
+    open var configGroup:PBGameRuleConfigGroup?
+    open var configReward:PBGameRuleConfigGroupContainer?
     
     
     public override init() {
@@ -106,7 +106,7 @@ public class PBGameRuleJigsawSet: PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         name <- map["name"]
         desc <- map["description"]
@@ -135,20 +135,20 @@ public class PBGameRuleJigsawSet: PBModel {
         Mapper<PBGameRuleJigsawSet>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    public class func pbGameRuleFromApiResponse(apiResponse:PBApiResponse) -> [PBGameRuleJigsawSet] {
+    open class func pbGameRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameRuleJigsawSet] {
         return Mapper<PBGameRuleJigsawSet>().mapArray(apiResponse.parsedJson!) ?? []
     }
 }
 
 
-public class PBGameRuleDataSet: PBModel {
+open class PBGameRuleDataSet: PBModel {
     
-    public var fieldType:String! = ""
-    public var sortOrder:String! = ""
-    public var paramName:String! = ""
-    public var label:String! = ""
-    public var placeHolder:String! = ""
-    public var value:[PBGameRuleJigsawSet] = []
+    open var fieldType:String! = ""
+    open var sortOrder:String! = ""
+    open var paramName:String! = ""
+    open var label:String! = ""
+    open var placeHolder:String! = ""
+    open var value:[PBGameRuleJigsawSet] = []
     
     public override init() {
         super.init()
@@ -158,7 +158,7 @@ public class PBGameRuleDataSet: PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         fieldType <- map["field_type"]
         sortOrder <- map["sort_order"]
@@ -170,11 +170,11 @@ public class PBGameRuleDataSet: PBModel {
     
 }
 
-public class PBGameRuleConfigAction:PBModel {
+open class PBGameRuleConfigAction:PBModel {
     
-    public var actionId:String? = ""
-    public var actionName:String? = ""
-    public var customParam:[String:AnyObject]?
+    open var actionId:String? = ""
+    open var actionName:String? = ""
+    open var customParam:[String:AnyObject]?
     
     public override init() {
         super.init()
@@ -184,7 +184,7 @@ public class PBGameRuleConfigAction:PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         actionId <- map["action_id"]
         actionName <- map["action_name"]
@@ -193,14 +193,14 @@ public class PBGameRuleConfigAction:PBModel {
     
 }
 
-public class PBGameRuleConfigCondition:PBModel {
+open class PBGameRuleConfigCondition:PBModel {
     
-    public var paramName:String! = ""
-    public var paramOperation:String! = ""
-    public var paramValue:String! = ""
-    public var conditionId:String! = ""
-    public var groupContainer:[PBGameRuleConfigGroupContainer] = []
-    public var customParam:[String:AnyObject]?
+    open var paramName:String! = ""
+    open var paramOperation:String! = ""
+    open var paramValue:String! = ""
+    open var conditionId:String! = ""
+    open var groupContainer:[PBGameRuleConfigGroupContainer] = []
+    open var customParam:[String:AnyObject]?
     
     public override init() {
         super.init()
@@ -210,7 +210,7 @@ public class PBGameRuleConfigCondition:PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         paramName <- map["param_name"]
         paramOperation <- map["param_operation"]
@@ -222,11 +222,11 @@ public class PBGameRuleConfigCondition:PBModel {
     
 }
 
-public class PBGameRuleConfigGroup:PBModel {
+open class PBGameRuleConfigGroup:PBModel {
     
-    public var groupContainer:[PBGameRuleConfigGroupContainer]? = []
-    public var groupId:String? = ""
-    public var customParam:[String:AnyObject]?
+    open var groupContainer:[PBGameRuleConfigGroupContainer]? = []
+    open var groupId:String? = ""
+    open var customParam:[String:AnyObject]?
     
     public override init() {
         super.init()
@@ -236,7 +236,7 @@ public class PBGameRuleConfigGroup:PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         groupContainer <- map["group_container"]
         groupId <- map["group_id"]
@@ -245,15 +245,15 @@ public class PBGameRuleConfigGroup:PBModel {
     
 }
 
-public class PBGameRuleConfigGroupContainer:PBModel {
+open class PBGameRuleConfigGroupContainer:PBModel {
     
-    public var rewardName:String! = ""
-    public var itemId:String! = ""
-    public var quantity:String! = ""
-    public var customLog:String! = ""
-    public var weight:String! = ""
-    public var rewardId:String! = ""
-    public var data:PBRewardData?
+    open var rewardName:String! = ""
+    open var itemId:String! = ""
+    open var quantity:String! = ""
+    open var customLog:String! = ""
+    open var weight:String! = ""
+    open var rewardId:String! = ""
+    open var data:PBRewardData?
     
     public override init() {
         super.init()
@@ -263,7 +263,7 @@ public class PBGameRuleConfigGroupContainer:PBModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         super.mapping(map)
         rewardName <- map["reward_name"]
         itemId <- map["item_id"]

@@ -9,25 +9,25 @@
 import UIKit
 import ObjectMapper
 
-public class PBBadge: PBModel {
+open class PBBadge: PBModel {
 
-    public var imageURL:String! = ""
-    public var name:String! = ""
-    public var desc:String! = ""
-    public var badgeId:String! = ""
-    public var hint:String! = ""
-    public var sponsor:Bool! = false
-    public var amount:Int! = 0
+    open var imageURL:String! = ""
+    open var name:String! = ""
+    open var desc:String! = ""
+    open var badgeId:String! = ""
+    open var hint:String! = ""
+    open var sponsor:Bool! = false
+    open var amount:Int! = 0
     
     public override init() {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(map: Map) {
         name <- map["name"]
         desc <- map["description"]
         badgeId <- map["badge_id"]
@@ -37,13 +37,13 @@ public class PBBadge: PBModel {
         amount <- map["amount"]
     }
     
-    class func pbBadgesFromDicArray(badgeArray:[AnyObject]) -> [PBBadge] {
-        return Mapper<PBBadge>().mapArray(badgeArray) ?? []
+    class func pbBadgesFromDicArray(_ badgeArray:[AnyObject]) -> [PBBadge] {
+        return Mapper<PBBadge>().mapArray(JSONObject: badgeArray) ?? []
     }
     
-    class func pbBadgeFromApiResponse(apiResponse:PBApiResponse) -> [PBBadge] {
+    class func pbBadgeFromApiResponse(_ apiResponse:PBApiResponse) -> [PBBadge] {
         var badges:[PBBadge] = []
-        badges = Mapper<PBBadge>().mapArray(apiResponse.parsedJson!)!
+        badges = Mapper<PBBadge>().mapArray(JSONObject: apiResponse.parsedJson!)!
         return badges
     }
     

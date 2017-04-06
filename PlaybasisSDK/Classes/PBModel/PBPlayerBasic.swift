@@ -9,12 +9,12 @@
 import UIKit
 import ObjectMapper
 
-public class PBPlayerBasic: PBModel {
-    public var playerId:String! = ""
-    public var imageURL:String! = ""
-    public var username:String! = ""
-    public var firstName:String! = ""
-    public var lastName:String! = ""
+open class PBPlayerBasic: PBModel {
+    open var playerId:String! = ""
+    open var imageURL:String! = ""
+    open var username:String! = ""
+    open var firstName:String! = ""
+    open var lastName:String! = ""
     
     public override init() {
         super.init()
@@ -24,7 +24,7 @@ public class PBPlayerBasic: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         self.playerId <- map["cl_player_id"]
         self.imageURL <- map["image"]

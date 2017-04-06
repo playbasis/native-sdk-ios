@@ -15,7 +15,7 @@ let expirationDateKey:String = "expirationDateKey"
 class PBAuthenticationToken: Mappable {
     
     var token:String? = nil
-    var expirationDate:NSDate? = nil
+    var expirationDate:Date? = nil
     
     init(apiResponse:PBApiResponse) {
         Mapper<PBAuthenticationToken>().map(apiResponse.parsedJson, toObject: self)
@@ -28,31 +28,31 @@ class PBAuthenticationToken: Mappable {
     required init?(_ map: Map){
     }
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         token <- map["token"]
         expirationDate <- (map["date_expire"], ISO8601DateTransform())
         self.saveInKeychain()
     }
     
     func isExpiredOrInvalid() -> Bool {
-        return expirationDate == nil || self.token == nil || (expirationDate!.compare(NSDate()) == .OrderedAscending || expirationDate!.compare(NSDate()) == .OrderedSame)
+        return expirationDate == nil || self.token == nil || (expirationDate!.compare(Date()) == .orderedAscending || expirationDate!.compare(Date()) == .orderedSame)
     }
     
-    private func saveInKeychain() {
+    fileprivate func saveInKeychain() {
         if let token = self.token {
             PBDataManager.sharedInstance.saveToken(token, withType: .AuthenticationToken)
             PBDataManager.sharedInstance.saveValue(expirationDate, forKey: expirationDateKey)
         }
     }
     
-    private func clearKeyChain() {
+    fileprivate func clearKeyChain() {
         PBDataManager.sharedInstance.clearToken()
         PBDataManager.sharedInstance.unsetValueFromKey(expirationDateKey)
     }
     
     func getFromKeychain() {
         self.token = PBDataManager.sharedInstance.getTokenWithType(.AuthenticationToken)
-        self.expirationDate = PBDataManager.sharedInstance.valueForKey(expirationDateKey) as? NSDate
+        self.expirationDate = PBDataManager.sharedInstance.value(forKey: expirationDateKey) as? Date
     }
     
     func invalidate() {

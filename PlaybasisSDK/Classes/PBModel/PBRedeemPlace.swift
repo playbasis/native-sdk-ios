@@ -8,10 +8,10 @@
 
 import ObjectMapper
 
-public class PBRedeemPlace: PBModel {
+open class PBRedeemPlace: PBModel {
 
-    public var branches:[PBBranch]?
-    public var merchant:PBMerchant?
+    open var branches:[PBBranch]?
+    open var merchant:PBMerchant?
     
     public override init() {
         super.init()
@@ -21,13 +21,13 @@ public class PBRedeemPlace: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         branches <- map["branch"]
         merchant <- map["merchant"]
     }
     
-    class func pbRedeemPlacesFromApiResponse(apiResponse:PBApiResponse) -> [PBRedeemPlace] {
+    class func pbRedeemPlacesFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRedeemPlace] {
         let redeemPlaces = Mapper<PBRedeemPlace>().mapArray(apiResponse.parsedJson!) ?? []
         return redeemPlaces
     }

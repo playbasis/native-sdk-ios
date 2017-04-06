@@ -9,10 +9,10 @@
 import UIKit
 import ObjectMapper
 
-public class PBRemainingPoint: PBModel {
+open class PBRemainingPoint: PBModel {
     
-    public var name:String! = ""
-    public var quantity:Int! = 0
+    open var name:String! = ""
+    open var quantity:Int! = 0
     
     public override init() {
         super.init()
@@ -22,14 +22,14 @@ public class PBRemainingPoint: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         name <- map["name"]
         quantity <- map["quantity"]
     }
     
     
-    class func pbRemainingPointFromPointsApiResponse(apiResponse:PBApiResponse) -> [PBRemainingPoint] {
+    class func pbRemainingPointFromPointsApiResponse(_ apiResponse:PBApiResponse) -> [PBRemainingPoint] {
         return Mapper<PBRemainingPoint>().mapArray(apiResponse.parsedJson!) ?? []
         }
 }

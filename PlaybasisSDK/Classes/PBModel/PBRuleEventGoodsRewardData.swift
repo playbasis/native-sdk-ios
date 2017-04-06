@@ -9,16 +9,16 @@
 import UIKit
 import ObjectMapper
 
-public class PBRuleEventGoodsRewardData: PBModel {
+open class PBRuleEventGoodsRewardData: PBModel {
 
-    public var goodsId:String! = ""
-    public var imageURL:String! = ""
-    public var name:String! = ""
-    public var desc:String! = ""
-    public var perUser:Int = 0
-    public var code:String?
-    public var quantity:Int = 0
-    public var tags:[String]?
+    open var goodsId:String! = ""
+    open var imageURL:String! = ""
+    open var name:String! = ""
+    open var desc:String! = ""
+    open var perUser:Int = 0
+    open var code:String?
+    open var quantity:Int = 0
+    open var tags:[String]?
     
     public override init() {
         super.init()
@@ -28,7 +28,7 @@ public class PBRuleEventGoodsRewardData: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         goodsId <- map["goods_id"]
         imageURL <- map["image"]
@@ -46,7 +46,7 @@ public class PBRuleEventGoodsRewardData: PBModel {
         Mapper<PBRuleEventGoodsRewardData>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    public class func pbRuleEventGoodsRewardDataFromApiResponse(apiResponse:PBApiResponse) -> [PBRuleEventGoodsRewardData] {
+    open class func pbRuleEventGoodsRewardDataFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRuleEventGoodsRewardData] {
         var ruleEventGoodsRewardDataList:[PBRuleEventGoodsRewardData] = []
         ruleEventGoodsRewardDataList = Mapper<PBRuleEventGoodsRewardData>().mapArray(apiResponse.parsedJson!)!
         return ruleEventGoodsRewardDataList

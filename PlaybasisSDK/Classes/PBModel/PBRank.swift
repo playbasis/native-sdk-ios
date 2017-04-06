@@ -9,15 +9,15 @@
 import UIKit
 import ObjectMapper
 
-public class PBRank: PBModel{
+open class PBRank: PBModel{
     
-    public var playerId:String! = ""
-    public var imageURL:String! = ""
-    public var firstName:String! = ""
-    public var lastName:String! = ""
-    public var point:Int = 0
-    public var gold:Int = 0
-    public var token:Int = 0
+    open var playerId:String! = ""
+    open var imageURL:String! = ""
+    open var firstName:String! = ""
+    open var lastName:String! = ""
+    open var point:Int = 0
+    open var gold:Int = 0
+    open var token:Int = 0
     
     public override init() {
         super.init()
@@ -27,7 +27,7 @@ public class PBRank: PBModel{
         super.init(map)
     }
 
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         firstName <- map["first_name"]
         lastName <- map["last_name"]
@@ -38,7 +38,7 @@ public class PBRank: PBModel{
         token <- map["token"]
     }
     
-    public func getFullName() -> String {
+    open func getFullName() -> String {
         if self.firstName != nil && self.lastName != nil {
             return "\(firstName)  \(lastName)"
         }else if self.firstName != nil {
@@ -47,7 +47,7 @@ public class PBRank: PBModel{
         return ""
     }
     
-    class func pbrankFromApiResponse(apiResponse:PBApiResponse) -> [PBRank] {
+    class func pbrankFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRank] {
         var rankList:[PBRank] = []
         rankList = Mapper<PBRank>().mapArray(apiResponse.parsedJson!)!
         return rankList

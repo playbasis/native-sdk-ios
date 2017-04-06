@@ -11,19 +11,19 @@ import UIKit
 enum RoleAction {
 }
 
-public class PBEngineApi: PBBaseApi {
-    private class func engineEndPointWithPath(path:String) -> String {
+open class PBEngineApi: PBBaseApi {
+    fileprivate class func engineEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.ENGINE_END_POINT + self.encodePath(path)
     }
 
-    public class func processAction(engineForm:PBEngineForm,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func processAction(_ engineForm:PBEngineForm,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.POST, endPoint: engineEndPointWithPath("rule"), parameters: engineForm.params(), completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
         }, failureBlock:failureBlock)
     }
     
-    public class func ruleDetailsWithId(ruleId:String, playerId:String?,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func ruleDetailsWithId(_ ruleId:String, playerId:String?,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
         var params:[String:String] = [:]
         if let mPlayerId:String = playerId {
             params["player_id"] = mPlayerId
@@ -34,7 +34,7 @@ public class PBEngineApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    public class func listRulesWithAction(action:String?, playerId:String?, completionBlock:PBGameRulesCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func listRulesWithAction(_ action:String?, playerId:String?, completionBlock:PBGameRulesCompletionBlock, failureBlock:PBFailureErrorBlock) {
         var params:[String:String] = [:]
         if let mPlayerId:String = playerId {
             params["player_id"] = mPlayerId

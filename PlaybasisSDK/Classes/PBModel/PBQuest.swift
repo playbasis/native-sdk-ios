@@ -10,28 +10,28 @@ import UIKit
 import ObjectMapper
 
 
-public class PBQuest: PBModel {
+open class PBQuest: PBModel {
     
-    public var name:String! = ""
-    public var desc:String! = ""
-    public var hint:String! = ""
-    public var imageURL:String! = ""
-    public var clientId:String?
-    public var siteId:String?
-    public var questId:String?
-    public var missionOrder:Bool?
-    public var sortOrder:Int?
-    public var dateAdded:NSDate?
-    public var dateModified:NSDate?
-    public var tags:String?
-    public var rewards:[PBReward] = []
-    public var mission:[PBMission] = []
-    public var status:Bool = false
-    public var feedbacks:String?
-    public var organizeId:String?
-    public var organizeRole:String?
-    public var condition:[PBCondition] = []
-    public var playerStatus:String! = ""
+    open var name:String! = ""
+    open var desc:String! = ""
+    open var hint:String! = ""
+    open var imageURL:String! = ""
+    open var clientId:String?
+    open var siteId:String?
+    open var questId:String?
+    open var missionOrder:Bool?
+    open var sortOrder:Int?
+    open var dateAdded:Date?
+    open var dateModified:Date?
+    open var tags:String?
+    open var rewards:[PBReward] = []
+    open var mission:[PBMission] = []
+    open var status:Bool = false
+    open var feedbacks:String?
+    open var organizeId:String?
+    open var organizeRole:String?
+    open var condition:[PBCondition] = []
+    open var playerStatus:String! = ""
     
     public override init() {
         super.init()
@@ -47,7 +47,7 @@ public class PBQuest: PBModel {
     }
     
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         name <- map["quest_name"]
         desc <- map["description"]
@@ -72,7 +72,7 @@ public class PBQuest: PBModel {
         playerStatus <- map["player_status"]
     }
     
-    class func pbQuestFromApiResponse(apiResponse:PBApiResponse) -> [PBQuest] {
+    class func pbQuestFromApiResponse(_ apiResponse:PBApiResponse) -> [PBQuest] {
         var qustList:[PBQuest] = []
         qustList = Mapper<PBQuest>().mapArray(apiResponse.parsedJson!["quests"])!
         return qustList

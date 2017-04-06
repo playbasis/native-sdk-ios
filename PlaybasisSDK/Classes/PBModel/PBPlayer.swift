@@ -8,20 +8,20 @@
 
 import ObjectMapper
 
-public class PBPlayer:PBModel {
+open class PBPlayer:PBModel {
     
-    public var playerId:String!
-    public var email:String?
-    public var firstName:String?
-    public var lastName:String?
-    public var username:String?
-    public var profilePictureUrl:String?
-    public var profilePicture:UIImage?
-    public var phoneNumber:String?
-    public var customFields:[String:String]?
-    public var goods:[PBReward] = []
-    public var badges:[PBBadge] = []
-    public var points:[PBPoint] = []
+    open var playerId:String!
+    open var email:String?
+    open var firstName:String?
+    open var lastName:String?
+    open var username:String?
+    open var profilePictureUrl:String?
+    open var profilePicture:UIImage?
+    open var phoneNumber:String?
+    open var customFields:[String:String]?
+    open var goods:[PBReward] = []
+    open var badges:[PBBadge] = []
+    open var points:[PBPoint] = []
     
     init(apiResponse:PBApiResponse) {
         super.init()
@@ -36,7 +36,7 @@ public class PBPlayer:PBModel {
         super.init(map)
     }
   
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         uid <- map["cl_player_id"]
         email <- map["email"]

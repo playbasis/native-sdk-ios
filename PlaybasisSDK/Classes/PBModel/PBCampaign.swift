@@ -9,13 +9,13 @@
 import UIKit
 import ObjectMapper
 
-public class PBCampaign: PBModel {
+open class PBCampaign: PBModel {
 
-    public var name:String! = ""
-    public var image:String! = ""
-    public var weight:Int! = 0
-    public var dateStart:NSDate?
-    public var dateEnd:NSDate?
+    open var name:String! = ""
+    open var image:String! = ""
+    open var weight:Int! = 0
+    open var dateStart:Date?
+    open var dateEnd:Date?
     
     public override init() {
         super.init()
@@ -25,7 +25,7 @@ public class PBCampaign: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         name <- map["name"]
         image <- map["image"]
@@ -39,7 +39,7 @@ public class PBCampaign: PBModel {
         Mapper<PBCampaign>().map(apiResponse.parsedJson!["result"], toObject: self)
     }
     
-    class func pbCampaignsFromApiResponse(apiResponse:PBApiResponse) -> [PBCampaign] {
+    class func pbCampaignsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBCampaign] {
         return Mapper<PBCampaign>().mapArray(apiResponse.parsedJson!) ?? []
     }
     

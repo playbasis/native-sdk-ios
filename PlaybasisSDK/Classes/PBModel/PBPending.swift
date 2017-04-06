@@ -9,11 +9,11 @@
 import UIKit
 import ObjectMapper
 
-public class PBPending: PBModel {
+open class PBPending: PBModel {
     
-    public var eventType:String! = ""
-    public var message:String! = ""
-    public var incomplete:PBIncomplete?
+    open var eventType:String! = ""
+    open var message:String! = ""
+    open var incomplete:PBIncomplete?
     
     public override init() {
         super.init()
@@ -23,7 +23,7 @@ public class PBPending: PBModel {
         super.init(map)
     }
  
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         self.eventType <- map["event_type"]
         self.message <- map["message"]

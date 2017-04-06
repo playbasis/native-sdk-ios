@@ -14,36 +14,36 @@ public enum ApproveStatus:String {
     case Pending = "pending"
 }
 
-public class PBPlayerForm: PBForm {
+open class PBPlayerForm: PBForm {
 
     //Required
-    public var playerId:String!
-    public var email:String?
-    public var username:String?
+    open var playerId:String!
+    open var email:String?
+    open var username:String?
     
     // Optional
-    public var password:String?
-    public var profilePictureUrl:String?
-    public var profilePicture:UIImage?
-    public var phoneNumber:String?
-    public var customFields:[String:String]?
-    public var approveStatus:ApproveStatus = .Approved
+    open var password:String?
+    open var profilePictureUrl:String?
+    open var profilePicture:UIImage?
+    open var phoneNumber:String?
+    open var customFields:[String:String]?
+    open var approveStatus:ApproveStatus = .Approved
     
-    override public func validate()  {
+    override open func validate()  {
         super.validate()
         guard self.playerId != nil else {
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_player_id_required"), validationErrorType: .PlayerIdRequired)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_player_id_required"), validationErrorType: .playerIdRequired)
             return
         }
         if self.email != nil && !self.email!.PBisValidEmail() {
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_format"), validationErrorType: .InvalidEmailFormat)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_format"), validationErrorType: .invalidEmailFormat)
             return
         }
         self.validationError = nil
         return
     }
     
-    override public func params() -> [String:String] {
+    override open func params() -> [String:String] {
         var params:[String:String] = [:]
         params["id"] = playerId!
         params["approve_status"] = approveStatus.rawValue

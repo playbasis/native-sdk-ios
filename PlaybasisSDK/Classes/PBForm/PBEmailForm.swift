@@ -8,22 +8,22 @@
 
 import UIKit
 
-public class PBEmailForm: PBForm {
+open class PBEmailForm: PBForm {
     
     // Required
-    public var playerId:String!
-    public var subject:String!
+    open var playerId:String!
+    open var subject:String!
     
     // Optional
-    public var message:String?
-    public var templateId:String?
-    public var refId:String?
+    open var message:String?
+    open var templateId:String?
+    open var refId:String?
     
     public override init() {
         super.init()
     }
     
-    override public func params() -> [String:String] {
+    override open func params() -> [String:String] {
         var params:[String:String] = [:]
         params["player_id"] = playerId
         params["subject"] = subject

@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-public class PBRuleRewardDetails: PBModel {
+open class PBRuleRewardDetails: PBModel {
     
     public override init() {
         super.init()
@@ -19,7 +19,7 @@ public class PBRuleRewardDetails: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
     }
 

@@ -13,15 +13,15 @@ public enum PBTokenType: String {
     case AuthenticationToken
 }
 
-public class PBDataManager: NSObject {
+open class PBDataManager: NSObject {
     
 
-    public static let sharedInstance = PBDataManager()
-    public let accountName:String = NSBundle.mainBundle().bundleIdentifier!
+    open static let sharedInstance = PBDataManager()
+    open let accountName:String = Bundle.main.bundleIdentifier!
 
-    private func getTokenString(tokenType:PBTokenType) -> String? {
+    fileprivate func getTokenString(_ tokenType:PBTokenType) -> String? {
         
-        if let token =  SAMKeychain.passwordForService(tokenType.rawValue, account: accountName){
+        if let token =  SAMKeychain.password(forService: tokenType.rawValue, account: accountName){
             return token
         }else{
             return nil
@@ -29,7 +29,7 @@ public class PBDataManager: NSObject {
         
     }
     
-    private func saveTokenString(token:String,tokenType:PBTokenType) -> Bool {
+    fileprivate func saveTokenString(_ token:String,tokenType:PBTokenType) -> Bool {
         if token.isEmpty{
             return false
         }else{
@@ -38,55 +38,55 @@ public class PBDataManager: NSObject {
     }
     
     
-    public func getTokenWithType(tokenType:PBTokenType)-> String?{
+    open func getTokenWithType(_ tokenType:PBTokenType)-> String?{
         return getTokenString(tokenType)
     }
     
-    public  func saveToken(token:String,withType type:PBTokenType)-> Bool{
+    open  func saveToken(_ token:String,withType type:PBTokenType)-> Bool{
         return self.saveTokenString(token, tokenType: type)
     }
     
-    public func clearToken() {
-        SAMKeychain.deletePasswordForService(PBTokenType.AuthenticationToken.rawValue, account: accountName)
+    open func clearToken() {
+        SAMKeychain.deletePassword(forService: PBTokenType.AuthenticationToken.rawValue, account: accountName)
     }
 
     
-    public func saveValue(value: AnyObject?, forKey key: String) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(value, forKey: key)
+    open func saveValue(_ value: AnyObject?, forKey key: String) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(value, forKey: key)
         userDefaults.synchronize()
     }
     
-    public func unsetValueFromKey(key:String) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.removeObjectForKey(key)
+    open func unsetValueFromKey(_ key:String) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: key)
         userDefaults.synchronize()
     }
     
-    public func saveBool(bool: Bool, forKey key: String) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setBool(bool, forKey: key)
+    open func saveBool(_ bool: Bool, forKey key: String) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(bool, forKey: key)
         userDefaults.synchronize()
     }
     
-    public func boolForKey(key:String) -> Bool {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        return userDefaults.boolForKey(key)
+    open func boolForKey(_ key:String) -> Bool {
+        let userDefaults = UserDefaults.standard
+        return userDefaults.bool(forKey: key)
     }
     
-    public func saveInt(int: Int, forKey key: String) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setInteger(int, forKey: key)
+    open func saveInt(_ int: Int, forKey key: String) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(int, forKey: key)
         userDefaults.synchronize()
     }
     
-    public func intForKey(key:String) -> Int {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        return userDefaults.integerForKey(key)
+    open func intForKey(_ key:String) -> Int {
+        let userDefaults = UserDefaults.standard
+        return userDefaults.integer(forKey: key)
     }
     
-    public override func valueForKey(key: String) -> AnyObject? {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        return userDefaults.objectForKey(key)
+    open override func value(forKey key: String) -> Any? {
+        let userDefaults = UserDefaults.standard
+        return userDefaults.object(forKey: key)
     }
 }

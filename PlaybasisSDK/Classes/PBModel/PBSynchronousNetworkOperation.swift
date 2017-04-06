@@ -7,7 +7,7 @@ class PBSynchronousNetworkOperation : PBConcurrentOperation {
     //
     // in this example, I'll keep track of (a) URL; and (b) closure to call when request is done
     
-    let request: NSURLRequest
+    let request: URLRequest
     let manager:Alamofire.Manager
     let networkOperationCompletionHandler:(Response<AnyObject, NSError>) -> Void
     
@@ -17,7 +17,7 @@ class PBSynchronousNetworkOperation : PBConcurrentOperation {
     
     // define init method that captures all of the properties to be used when issuing the request
     
-    init(request:NSURLRequest, manager:Alamofire.Manager, networkOperationCompletionHandler: (Response<AnyObject, NSError>) -> Void) {
+    init(request:URLRequest, manager:Alamofire.Manager, networkOperationCompletionHandler: (Response<AnyObject, NSError>) -> Void) {
         self.request = request
         self.manager = manager
         self.networkOperationCompletionHandler = networkOperationCompletionHandler

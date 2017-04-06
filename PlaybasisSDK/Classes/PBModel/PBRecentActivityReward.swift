@@ -9,18 +9,18 @@
 import UIKit
 import ObjectMapper
 
-public class PBRecentActivityReward: PBRecentActivity {
+open class PBRecentActivityReward: PBRecentActivity {
     
-    public var message:String?
-    public var rewardId:String?
-    public var rewardName:String?
-    public var value:Int?
-    public var goodsId:String?
-    public var questId:String?
-    public var missionId:String?
-    public var quizId:String?
-    public var stringFilter:String?
-    public var badge:PBBadge?
+    open var message:String?
+    open var rewardId:String?
+    open var rewardName:String?
+    open var value:Int?
+    open var goodsId:String?
+    open var questId:String?
+    open var missionId:String?
+    open var quizId:String?
+    open var stringFilter:String?
+    open var badge:PBBadge?
     
     public override init() {
         super.init()
@@ -30,7 +30,7 @@ public class PBRecentActivityReward: PBRecentActivity {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         message <- map["message"]
         rewardId <- map["reward_id"]

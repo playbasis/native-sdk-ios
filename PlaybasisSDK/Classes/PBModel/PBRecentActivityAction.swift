@@ -9,12 +9,12 @@
 import UIKit
 import ObjectMapper
 
-public class PBRecentActivityAction: PBRecentActivity {
+open class PBRecentActivityAction: PBRecentActivity {
     
-    public var playerId2:String?
-    public var url:String?
-    public var stringFilter:String?
-    public var parameters:[String:String]?
+    open var playerId2:String?
+    open var url:String?
+    open var stringFilter:String?
+    open var parameters:[String:String]?
     
     public override init() {
         super.init()
@@ -24,7 +24,7 @@ public class PBRecentActivityAction: PBRecentActivity {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         playerId2 <- map["pb_player_id-2"]
         url <- map["message"]

@@ -20,7 +20,7 @@ class Tests: XCTestCase {
     func testPlayerAPI_publicPlayerInfo() {
         XCTAssert(true, "Pass")
         
-        let expectation = expectationWithDescription("public info for player")
+        let expectation = self.expectation(withDescription: "public info for player")
         
         PBPlayerApi.getPublicInfoForPlayerId("jontestuser", completionBlock: { (player) in
             print("done: \(player.playerId)")
@@ -30,12 +30,12 @@ class Tests: XCTestCase {
             XCTFail()
         }
         
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

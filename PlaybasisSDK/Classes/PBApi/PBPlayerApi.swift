@@ -14,77 +14,77 @@ public enum RankType:String{
     case Gold = "gold"
 }
 
-public class PBPlayerApi: PBBaseApi {
+open class PBPlayerApi: PBBaseApi {
         
-    private class func playerEndPointWithPath(path:String) -> String {
+    fileprivate class func playerEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.PLAYER_END_POINT + self.encodePath(path)
     }
     
-    public class func getPublicInfoForPlayerId(playerId:String, completionBlock:PBPlayerCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath(playerId), parameters: nil, completionBlock: { (apiResponse) in
+    open class func getPublicInfoForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.get, endPoint: playerEndPointWithPath(playerId), parameters: nil, completionBlock: { (apiResponse) in
             let player:PBPlayer = PBPlayer(apiResponse: apiResponse)
             player.playerId = playerId
-            completionBlock(player: player)
+            completionBlock(player)
             }, failureBlock:failureBlock)
     }
     
-    public class func getPrivateInfoForPlayerId(playerId:String, completionBlock:PBPlayerCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath(playerId), parameters: nil, completionBlock: { (apiResponse) in
+    open class func getPrivateInfoForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.post, endPoint: playerEndPointWithPath(playerId), parameters: nil, completionBlock: { (apiResponse) in
             let player:PBPlayer = PBPlayer(apiResponse: apiResponse)
             player.playerId = playerId
-            completionBlock(player: player)
+            completionBlock(player)
             }, failureBlock:failureBlock)
     }
     
-    public class func getAllPrivateInfoForPlayerId(playerId:String, completionBlock:PBPlayerCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("\(playerId)/data/all"), parameters: nil, completionBlock: { (apiResponse) in
+    open class func getAllPrivateInfoForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("\(playerId)/data/all"), parameters: nil, completionBlock: { (apiResponse) in
             let player:PBPlayer = PBPlayer(apiResponse: apiResponse)
             player.playerId = playerId
-            completionBlock(player: player)
+            completionBlock(player)
         }, failureBlock:failureBlock)
     }
     
     
-    public class func getCustomFieldsForPlayerId(playerId:String, completionBlock:PBPlayerCustomFieldsCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/custom"), parameters: nil, completionBlock: { (apiResponse) in
+    open class func getCustomFieldsForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCustomFieldsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/custom"), parameters: nil, completionBlock: { (apiResponse) in
             if  let customFields:[String:String] = apiResponse.parsedJson?["player"]!!["custom"] as? [String:String]{
-                 completionBlock(customFields: customFields)
+                 completionBlock(customFields)
             }else{
-                completionBlock(customFields: [:])
+                completionBlock([:])
             }
         }, failureBlock:failureBlock)
     }
     
-    public class func getAllPlayerInfoForPlayerId(playerId:String, completionBlock:PBPlayerCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let downloadGroup = dispatch_group_create()
+    open class func getAllPlayerInfoForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            let downloadGroup = DispatchGroup()
             var player:PBPlayer? = nil
             var customFields:[String:String]? = nil
             var error:PBError? = nil
-            dispatch_group_enter(downloadGroup)
+            downloadGroup.enter()
             PBPlayerApi.getAllPrivateInfoForPlayerId(playerId, completionBlock: { (mPlayer) in
-                dispatch_group_leave(downloadGroup)
+                downloadGroup.leave()
                 player = mPlayer
                 }, failureBlock: { (mError) in
                     error = mError
-                    dispatch_group_leave(downloadGroup)
+                    downloadGroup.leave()
             })
-            dispatch_group_enter(downloadGroup)
+            downloadGroup.enter()
             PBPlayerApi.getCustomFieldsForPlayerId(playerId, completionBlock: { (mCustomFields) in
                 customFields = mCustomFields
-                dispatch_group_leave(downloadGroup)
+                downloadGroup.leave()
                 }, failureBlock: { (mError) in
                     error = mError
-                    dispatch_group_leave(downloadGroup)
+                    downloadGroup.leave()
             })
-            dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER) // 5
-            dispatch_async(dispatch_get_main_queue()) { // 6
+            _ = downloadGroup.wait(timeout: DispatchTime.distantFuture) // 5
+            DispatchQueue.main.async { // 6
                 if error == nil && player != nil {
                     player!.customFields = customFields
-                    completionBlock(player: player!)
+                    completionBlock(player!)
                 }
                 else {
-                    failureBlock(error: error!)
+                    failureBlock(error!)
                 }
             }
         }
@@ -93,77 +93,77 @@ public class PBPlayerApi: PBBaseApi {
 
     
     
-    public class func loginWithLoginForm(loginForm:PBLoginForm, completionBlock:PBPlayerAuthCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func loginWithLoginForm(_ loginForm:PBLoginForm, completionBlock:@escaping PBPlayerAuthCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         guard loginForm.isValid() else {
-            failureBlock(error:loginForm.validationError!)
+            failureBlock(loginForm.validationError!)
             return
         }
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("auth"), parameters: loginForm.params(), completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("auth"), parameters: loginForm.params() as [String : AnyObject], completionBlock: { (apiResponse) in
             let playerId:String = apiResponse.parsedJson!["cl_player_id"] as! String
-            completionBlock(playerId:playerId)
+            completionBlock(playerId)
             }, failureBlock:failureBlock)
     }
     
     
-    public class func registerPlayerWithPlayerForm(registerForm:PBRegisterForm, completionBlock:PBPlayerCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func registerPlayerWithPlayerForm(_ registerForm:PBRegisterForm, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         PBPlayerApi.postProfilePicture(registerForm.profilePicture, completionBlock: { (imageUrl) in
             registerForm.profilePictureUrl = imageUrl
             print(imageUrl)
             PBPlayerApi.updateMainData(registerForm, completionBlock: { (player) in
                 guard registerForm.customFields != nil else {
-                    completionBlock(player: player)
+                    completionBlock(player)
                     return
                 }
-                PBPlayerApi.updateCustomFieldsForPlayer(player, customFields: registerForm.customFields!, completionBlock: {
-                    completionBlock(player: player)
+                PBPlayerApi.updateCustomFieldsForPlayer(player, customFields: registerForm.customFields! as [String : AnyObject], completionBlock: {
+                    completionBlock(player)
                     }, failureBlock: failureBlock)
                 }, failureBlock: failureBlock)
             }, failureBlock: failureBlock)
     }
     
-    public class func resetPlayerPasswordWithEmail(email:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func resetPlayerPasswordWithEmail(_ email:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         let params = ["email" : email]
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("password/email"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("password/email"), parameters: params as [String : AnyObject], completionBlock: { (apiResponse) in
             completionBlock()
         }, failureBlock:failureBlock)
         
     }
     
     
-    public class func getBadgeWithPlayerId(playerId:String,completionBlock:
-        PBPlayerBadgesCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/badge"), parameters: nil, completionBlock: { (response) in
+    open class func getBadgeWithPlayerId(_ playerId:String,completionBlock:
+        @escaping PBPlayerBadgesCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/badge"), parameters: nil, completionBlock: { (response) in
             completionBlock(PBBadge.pbBadgeFromApiResponse(response))
         }, failureBlock: failureBlock)
     }
     
-    public class func getBadgeCollectionWithPlayerId(playerId:String, tags:String?, completionBlock:
-        PBPlayerBadgesCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func getBadgeCollectionWithPlayerId(_ playerId:String, tags:String?, completionBlock:
+        @escaping PBPlayerBadgesCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         var params:[String:String] = [:]
         if let mTag:String = tags {
             params["tags"] = mTag
         }
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/badgeAll"), parameters: params, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/badgeAll"), parameters: params as [String : AnyObject], completionBlock: { (response) in
             completionBlock(PBBadge.pbBadgeFromApiResponse(response))
             }, failureBlock: failureBlock)
     }
     
-    public class func updateCustomFieldsForPlayer(player:PBPlayer, customFields:[String:AnyObject], completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func updateCustomFieldsForPlayer(_ player:PBPlayer, customFields:[String:AnyObject], completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         var newCustomFields:[String:String] = player.customFields ?? [:]
         
         customFields.forEach { (key, value) in
             newCustomFields[key] = value as? String
         }
-        let keys = newCustomFields.keys.joinWithSeparator(",")
+        let keys = newCustomFields.keys.joined(separator: ",")
         var valueArray:[String] = []
         for value in newCustomFields.values {
             valueArray.append(value)
         }
-        let values = valueArray.joinWithSeparator(",")
+        let values = valueArray.joined(separator: ",")
         
-        let params:[String:AnyObject] = ["key":keys, "value":values]
+        let params:[String:AnyObject] = ["key":keys as AnyObject, "value":values as AnyObject]
         
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("\(player.playerId)/custom"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("\(player.playerId)/custom"), parameters: params, completionBlock: { (apiResponse) in
             player.customFields = customFields as? [String:String]
             completionBlock()
             }, failureBlock:failureBlock)
@@ -171,32 +171,32 @@ public class PBPlayerApi: PBBaseApi {
         
     }
     
-    public class func getAllQuestWithPlayerId(playerId:String,completionBlock:PBQuestsCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("questAll/\(playerId)"), parameters: nil, completionBlock: { (apiResponse) in
+    open class func getAllQuestWithPlayerId(_ playerId:String,completionBlock:@escaping PBQuestsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("questAll/\(playerId)"), parameters: nil, completionBlock: { (apiResponse) in
             let quests:[PBQuest] = PBQuest.pbQuestFromApiResponse(apiResponse)
             completionBlock(quests)
             }, failureBlock:failureBlock)
     }
 
     
-    public class func getAllGoodsWithPlayerId(playerId:String, status:PBGoodStatus = .Active, tags:String? = nil,completionBlock:PBGoodsCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func getAllGoodsWithPlayerId(_ playerId:String, status:PBGoodStatus = .Active, tags:String? = nil,completionBlock:@escaping PBGoodsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         var params:[String:String] = ["status":status.rawValue]
         if let mTags:String = tags {
             params["tags"] = mTags
         }
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/goods"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/goods"), parameters: params as [String : AnyObject], completionBlock: { (apiResponse) in
             completionBlock(PBRewardData.pbSmallGoodsFromApiResponse(apiResponse))
         }, failureBlock:failureBlock)
     }
     
-    public class func updateProfilePicture(playerId:String, picture:UIImage?, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func updateProfilePicture(_ playerId:String, picture:UIImage?, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
        
         PBPlayerApi.postProfilePicture(picture, completionBlock: { (imageUrl) in
             
             var params:[String:String] = [:]
             params["image"] = imageUrl
             
-            PBRestController.request(.POST, endPoint: playerEndPointWithPath("\(playerId)/update"), parameters: params, completionBlock: { (apiResponse) in
+            PBRestController.request(.post, endPoint: playerEndPointWithPath("\(playerId)/update"), parameters: params as [String : AnyObject], completionBlock: { (apiResponse) in
                 completionBlock()
                 }, failureBlock:failureBlock)
 
@@ -205,102 +205,102 @@ public class PBPlayerApi: PBBaseApi {
 
     }
     
-    public class func getPointsWithPlayerId(playerId:String, completionBlock:PBPointsCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/points"), parameters: nil, completionBlock: { (response) in
+    open class func getPointsWithPlayerId(_ playerId:String, completionBlock:@escaping PBPointsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/points"), parameters: nil, completionBlock: { (response) in
             let points:[PBPoint] = PBPoint.pbPointFromPointsApiResponse(response)
             completionBlock(points)
             }, failureBlock: failureBlock)
     }
     
-    public class func updatePlayerWithPlayerForm(playerForm:PBPlayerForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("\(playerForm.playerId)/update"), parameters: playerForm.params(), completionBlock: { (response) in
+    open class func updatePlayerWithPlayerForm(_ playerForm:PBPlayerForm, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("\(playerForm.playerId)/update"), parameters: playerForm.params() as [String : AnyObject], completionBlock: { (response) in
             completionBlock()
             }, failureBlock: failureBlock)
     }
 
-    public class func requestOTPWithPlayerId(playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func requestOTPWithPlayerId(_ playerId:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params:[String:String] = ["id":playerId]
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("auth/\(playerId)/requestOTPCode"), parameters: params, completionBlock: { (response) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("auth/\(playerId)/requestOTPCode"), parameters: params as [String : AnyObject], completionBlock: { (response) in
             completionBlock()
             }, failureBlock: failureBlock)
     }
     
-    public class func requestOTPForPhoneSetupWithPhoneNumber(phoneNumber:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func requestOTPForPhoneSetupWithPhoneNumber(_ phoneNumber:String, playerId:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params:[String:String] = ["phone_number":phoneNumber, "id":playerId]
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("auth/\(playerId)/setupPhone"), parameters: params, completionBlock: { (response) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("auth/\(playerId)/setupPhone"), parameters: params as [String : AnyObject], completionBlock: { (response) in
             completionBlock()
             }, failureBlock: failureBlock)
     }
     
-    public class func submitOTPWithPlayerId(playerId:String, OTP:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func submitOTPWithPlayerId(_ playerId:String, OTP:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params:[String:String] = ["id":playerId, "code":OTP]
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("auth/\(playerId)/verifyOTPCode"), parameters: params, completionBlock: { (response) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("auth/\(playerId)/verifyOTPCode"), parameters: params as [String : AnyObject], completionBlock: { (response) in
             completionBlock()
             }, failureBlock: failureBlock)
     }
 
-    public class func getRankWithRankTypeAndLimit(rankType:RankType,limit:Int, completionBlock:PBRanksCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func getRankWithRankTypeAndLimit(_ rankType:RankType,limit:Int, completionBlock:@escaping PBRanksCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("rank/\(rankType.rawValue)/\(limit)"), parameters: nil, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("rank/\(rankType.rawValue)/\(limit)"), parameters: nil, completionBlock: { (response) in
             let ranks:[PBRank] = PBRank.pbrankFromApiResponse(response)
             completionBlock(ranks)
         }, failureBlock:failureBlock)
         
     }
     
-    public class func getActionReportWithPlayerId(pbActionReportForm:PBActionReportForm,completionBlock:PBActionReportsCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(pbActionReportForm.playerId)/actionReport"), parameters: pbActionReportForm.params(), completionBlock: { (response) in
+    open class func getActionReportWithPlayerId(_ pbActionReportForm:PBActionReportForm,completionBlock:@escaping PBActionReportsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(pbActionReportForm.playerId)/actionReport"), parameters: pbActionReportForm.params() as [String : AnyObject], completionBlock: { (response) in
             let actionReports:[PBActionReport] = PBActionReport.pbActionReportFromApiResponse(response)
             completionBlock(actionReports)
             }, failureBlock:failureBlock)
     }
     
-    public class func getReferralCodeWithPlayerId(playerId:String, completionBlock:PBReferralCodeCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/code"), parameters: nil, completionBlock: { (response) in
+    open class func getReferralCodeWithPlayerId(_ playerId:String, completionBlock:@escaping PBReferralCodeCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/code"), parameters: nil, completionBlock: { (response) in
             if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], let code:String = json["code"] as? String {
-                completionBlock(code: code)
+                completionBlock(code)
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             
             }, failureBlock: failureBlock)
     }
     
-    public class func getActionCountWithPlayerId(playerId:String, actionName:String, customParams:[String:String]?, completionBlock:PBActionCountCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getActionCountWithPlayerId(_ playerId:String, actionName:String, customParams:[String:String]?, completionBlock:@escaping PBActionCountCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         var params:[String:String] = [:]
         if customParams != nil {
-            params["key"] = customParams!.keys.joinWithSeparator(",")
-            params["value"] = customParams!.values.joinWithSeparator(",")
+            params["key"] = customParams!.keys.joined(separator: ",")
+            params["value"] = customParams!.values.joined(separator: ",")
         }
-        PBRestController.request(.GET, endPoint: playerEndPointWithPath("\(playerId)/action/\(actionName)/count"), parameters: params, completionBlock: { (response) in
-            if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], actionJson:[String:AnyObject] = json["action"] as? [String:AnyObject], let count:Int = actionJson["count"] as? Int {
-                completionBlock(actionId: actionJson["action_id"] as? String, count: count)
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/action/\(actionName)/count"), parameters: params as [String : AnyObject], completionBlock: { (response) in
+            if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], let actionJson:[String:AnyObject] = json["action"] as? [String:AnyObject], let count:Int = actionJson["count"] as? Int {
+                completionBlock(actionJson["action_id"] as? String, count)
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             }, failureBlock: failureBlock)
     }
 
     // MARK: - Private
     
-    private class func updateMainData(registerForm:PBRegisterForm, completionBlock:PBPlayerCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.POST, endPoint: playerEndPointWithPath("\(registerForm.playerId!)/register"), parameters: registerForm.params(), completionBlock: { (apiResponse) in
+    fileprivate class func updateMainData(_ registerForm:PBRegisterForm, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("\(registerForm.playerId!)/register"), parameters: registerForm.params() as [String : AnyObject], completionBlock: { (apiResponse) in
             let player:PBPlayer = PBPlayer(registerForm:registerForm)
-            completionBlock(player: player)
+            completionBlock(player)
             }, failureBlock:failureBlock)
     }
     
-    private class func postProfilePicture(picture:UIImage?, completionBlock:(imageUrl:String?) -> Void, failureBlock:PBFailureErrorBlock) {
+    fileprivate class func postProfilePicture(_ picture:UIImage?, completionBlock:@escaping (_ imageUrl:String?) -> Void, failureBlock:@escaping PBFailureErrorBlock) {
         if picture == nil {
-            completionBlock(imageUrl: nil)
+            completionBlock(nil)
             return
         }
-        let profilePictureData:NSData = UIImageJPEGRepresentation(picture!, 0.7)!
+        let profilePictureData:Data = UIImageJPEGRepresentation(picture!, 0.7)!
         PBRestController.uploadData(profilePictureData, endPoint: "File/upload", parameters: nil, completionBlock: { (response) in
             if let json = response.parsedJson {
-                completionBlock(imageUrl: json["url"] as? String)
+                completionBlock(json["url"] as? String)
             }
             }, failureBlock: failureBlock)
     }

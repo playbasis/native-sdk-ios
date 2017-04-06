@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class PBCampaignApi: PBBaseApi {
+open class PBCampaignApi: PBBaseApi {
 
-    private class func campaignEndPointWithPath(path:String) -> String {
+    fileprivate class func campaignEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.CAMPAIGN_END_POINT + self.encodePath(path)
     }
     
-    public class func getCampaignWithName(campaignName:String, completionBlock:PBCampaignsCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getCampaignWithName(_ campaignName:String, completionBlock:PBCampaignsCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params:[String:String] = ["campaign_name":campaignName]
         PBRestController.request(.GET, endPoint: campaignEndPointWithPath(""), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {

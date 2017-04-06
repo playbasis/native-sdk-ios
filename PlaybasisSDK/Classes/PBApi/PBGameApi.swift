@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class PBGameApi: PBBaseApi {
+open class PBGameApi: PBBaseApi {
     
-    private class func gameEndPointWithPath(path:String) -> String {
+    fileprivate class func gameEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.GAME_END_POINT + self.encodePath(path)
     }
     
-    public class func getGameSettingsWithForm(gameForm:PBGameForm?,completionBlock:PBGameSettingCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getGameSettingsWithForm(_ gameForm:PBGameForm?,completionBlock:PBGameSettingCompletionBlock, failureBlock:PBFailureErrorBlock) {
         var params:[String:String] = [:]
         if let mGameForm:PBGameForm = gameForm {
             params = mGameForm.params()
@@ -29,7 +29,7 @@ public class PBGameApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    public class func getActiveGameCampaign(gameName:String, completionBlock:PBCampaignCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getActiveGameCampaign(_ gameName:String, completionBlock:PBCampaignCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params:[String:String] = ["game_name":gameName]
         PBRestController.request(.GET, endPoint: gameEndPointWithPath("campaign/active"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {

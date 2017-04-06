@@ -9,32 +9,32 @@
 import UIKit
 import ObjectMapper
 
-public class PBRedeem: PBModel {
-    public var point:PBRedeemPoint!
-    public var custom:[PBRedeemCustom]! = []
+open class PBRedeem: PBModel {
+    open var point:PBRedeemPoint!
+    open var custom:[PBRedeemCustom]! = []
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         point <- map["point"]
         custom <- map["custom"]
     }
 }
 
-public class PBRedeemPoint:PBModel {
-    public var pointValue:Int! = 0
+open class PBRedeemPoint:PBModel {
+    open var pointValue:Int! = 0
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         pointValue <- map["point_value"]
     }
 }
 
-public class PBRedeemCustom:PBModel {
-    public var customId:String?
-    public var customName:String?
-    public var customValue:Int! = 0
+open class PBRedeemCustom:PBModel {
+    open var customId:String?
+    open var customName:String?
+    open var customValue:Int! = 0
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         customId <- map["custom_id"]
         customName <- map["custom_name"]
@@ -42,32 +42,32 @@ public class PBRedeemCustom:PBModel {
     }
 }
 
-public class PBRewardData: PBModel {
+open class PBRewardData: PBModel {
     
-    public var rewardDataId:String?
-    public var desc:String! = ""
-    public var imageURL:String! = ""
-    public var status:Bool = false
-    public var deleted:Bool = false
-    public var sponsor:Bool = false
-    public var tags:[String]?
-    public var dateStart:NSDate?
-    public var dateExpire:NSDate?
-    public var dateAdded:NSDate?
-    public var dateModified:NSDate?
-    public var name:String! = ""
-    public var code:String! = ""
-    public var clientId:String?
-    public var siteId:String?
-    public var goodsId:String?
-    public var group:String?
-    public var amount:Int = 0
-    public var quantity:Int = 0
-    public var perUser:Int = 0
-    public var sortOrder:Int = 0
-    public var languageId:Int = 0
+    open var rewardDataId:String?
+    open var desc:String! = ""
+    open var imageURL:String! = ""
+    open var status:Bool = false
+    open var deleted:Bool = false
+    open var sponsor:Bool = false
+    open var tags:[String]?
+    open var dateStart:Date?
+    open var dateExpire:Date?
+    open var dateAdded:Date?
+    open var dateModified:Date?
+    open var name:String! = ""
+    open var code:String! = ""
+    open var clientId:String?
+    open var siteId:String?
+    open var goodsId:String?
+    open var group:String?
+    open var amount:Int = 0
+    open var quantity:Int = 0
+    open var perUser:Int = 0
+    open var sortOrder:Int = 0
+    open var languageId:Int = 0
     
-    public var redeem:PBRedeem!
+    open var redeem:PBRedeem!
   
     
     public override init() {
@@ -78,7 +78,7 @@ public class PBRewardData: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         rewardDataId <- map["_id"]
         desc <- map["description"]
@@ -107,13 +107,13 @@ public class PBRewardData: PBModel {
         redeem <- map["redeem"]
     }
     
-    class func pbGoodsFromApiResponse(apiResponse:PBApiResponse) -> [PBRewardData] {
+    class func pbGoodsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRewardData] {
         var goods:[PBRewardData] = []
         goods = Mapper<PBRewardData>().mapArray(apiResponse.parsedJson!["goods_list"])!
         return goods
     }
     
-    class func pbSmallGoodsFromApiResponse(apiResponse:PBApiResponse) -> [PBRewardData] {
+    class func pbSmallGoodsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRewardData] {
         var goods:[PBRewardData] = []
         goods = Mapper<PBRewardData>().mapArray(apiResponse.parsedJson!["goods"])!
         return goods

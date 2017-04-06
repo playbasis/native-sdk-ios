@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class PBBadgeApi: PBBaseApi {
+open class PBBadgeApi: PBBaseApi {
     
-    private class func badgeEndPointWithPath(path:String) -> String {
+    fileprivate class func badgeEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.BADGE_END_POINT + self.encodePath(path)
     }
     
-    public class func getAllBadgesWithTags(tags:String?, completionBlock:PBPlayerBadgesCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getAllBadgesWithTags(_ tags:String?, completionBlock:PBPlayerBadgesCompletionBlock, failureBlock:PBFailureErrorBlock) {
             var params:[String:String] = [:]
             if let mTag:String = tags {
                 params["tags"] = mTag

@@ -15,15 +15,15 @@ public final class PBRegisterForm: PBPlayerForm {
     override public func validate()  {
         super.validate()
         guard self.playerId != nil else {
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_player_id_required"), validationErrorType: .PlayerIdRequired)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_player_id_required"), validationErrorType: .playerIdRequired)
             return
         }
         guard !(self.email != nil && !self.email!.PBisValidEmail()) else {
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_format"), validationErrorType: .InvalidEmailFormat)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_format"), validationErrorType: .invalidEmailFormat)
             return
         }
         guard self.username != nil else {
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_username_required"), validationErrorType: .UsernameRequired)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_username_required"), validationErrorType: .usernameRequired)
             return
         }
         self.validationError = nil

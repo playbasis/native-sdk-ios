@@ -9,17 +9,17 @@
 import UIKit
 import ObjectMapper
 
-public class PBMission: PBModel {
+open class PBMission: PBModel {
 
-    public var name:String?
-    public var number:String?
-    public var desc:String?
-    public var hint:String?
-    public var imageURL:String?
-    public var missionId:String?
-    public var status:String?
-    public var completion:[PBCompletion] = []
-    public var pending:[PBPending] = []
+    open var name:String?
+    open var number:String?
+    open var desc:String?
+    open var hint:String?
+    open var imageURL:String?
+    open var missionId:String?
+    open var status:String?
+    open var completion:[PBCompletion] = []
+    open var pending:[PBPending] = []
     
     public override init() {
         super.init()
@@ -29,7 +29,7 @@ public class PBMission: PBModel {
         super.init(map)
     }
 
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         name   <- map["mission_name"]
         number <- map["mission_number"]

@@ -8,20 +8,20 @@
 
 import UIKit
 
-public class PBRedeemApi: PBBaseApi {
+open class PBRedeemApi: PBBaseApi {
     
-    private class func redeemEndPointWithPath(path:String) -> String {
+    fileprivate class func redeemEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.REDEEM_END_POINT + self.encodePath(path)
     }
     
-    public class func redeemGoodId(goodId:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func redeemGoodId(_ goodId:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params = ["goods_id":goodId, "player_id":playerId]
         PBRestController.request(.POST, endPoint: redeemEndPointWithPath("goods"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
-    public class func redeemGoodGroupWithGroup(group:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func redeemGoodGroupWithGroup(_ group:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params = ["player_id":playerId, "group":group]
         PBRestController.request(.POST, endPoint: redeemEndPointWithPath("goodsGroup"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()

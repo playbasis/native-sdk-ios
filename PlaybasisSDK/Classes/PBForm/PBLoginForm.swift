@@ -22,15 +22,15 @@ public final class PBLoginForm:PBForm {
     override public func validate()  {
         guard self.email != nil || self.username != nil else {
             
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_or_username_required"), validationErrorType: .EmailOrUserNameRequired)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_or_username_required"), validationErrorType: .emailOrUserNameRequired)
             return
         }
         guard !(self.username == nil && self.email != nil && !self.email!.PBisValidEmail()) else {
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_format"), validationErrorType: .InvalidEmailFormat)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_email_format"), validationErrorType: .invalidEmailFormat)
             return
         }
         guard self.password != nil && self.password!.PBisValidPassword()  else {
-            self.validationError =  PBError(message: PBLocalizedFormatString("validation_password_invalid"), validationErrorType: .PasswordRequired)
+            self.validationError =  PBError(message: PBLocalizedFormatString("validation_password_invalid"), validationErrorType: .passwordRequired)
             return
         }
         self.validationError = nil

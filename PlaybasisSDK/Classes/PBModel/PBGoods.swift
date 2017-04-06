@@ -16,12 +16,12 @@ public enum PBGoodStatus:String {
     case Used = "used"
 }
 
-public class PBGoods: PBModel {
+open class PBGoods: PBModel {
     
-    public var good:PBRewardData?
-    public var amount:Int! = 0
+    open var good:PBRewardData?
+    open var amount:Int! = 0
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         self.good <- map["goods"]
         self.amount <- map["amount"]

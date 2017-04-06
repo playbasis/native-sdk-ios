@@ -8,9 +8,9 @@
 
 import ObjectMapper
 
-public class PBBranch: PBModel {
+open class PBBranch: PBModel {
     
-    public var name:String!
+    open var name:String!
     
     public override init() {
         super.init()
@@ -20,7 +20,7 @@ public class PBBranch: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         uid <- map["b_id"]
         name <- map["b_name"]

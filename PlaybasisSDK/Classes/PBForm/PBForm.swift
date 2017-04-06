@@ -18,21 +18,21 @@ public protocol Parametrable {
 }
 
 
-public class PBForm:NSObject, Validatable, Parametrable {
+open class PBForm:NSObject, Validatable, Parametrable {
     
-    public var validationError:PBError?
+    open var validationError:PBError?
 
-    public func validate() {
+    open func validate() {
         // Default implementation does nothing
         // Override in subclass
     }
     
-    public func isValid() -> Bool {
+    open func isValid() -> Bool {
         self.validate()
         return self.validationError == nil
     }
     
-    public func params() -> [String:String] {
+    open func params() -> [String:String] {
         // Default implementation does nothing
         // Override in subclass
         return [:]

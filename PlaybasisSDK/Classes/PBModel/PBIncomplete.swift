@@ -9,14 +9,14 @@
 import UIKit
 import ObjectMapper
 
-public class PBIncomplete: PBModel {
+open class PBIncomplete: PBModel {
 
 
-    public var incompletionId:String?
-    public var type:String?
-    public var value:Int?
-    public var elementId:String?
-    public var filter:String?
+    open var incompletionId:String?
+    open var type:String?
+    open var value:Int?
+    open var elementId:String?
+    open var filter:String?
     
     public override init() {
         super.init()
@@ -26,7 +26,7 @@ public class PBIncomplete: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         incompletionId <- map["incompletion_id"]
         type <- map["incompletion_type"]

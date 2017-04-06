@@ -10,19 +10,19 @@ import UIKit
 
 class PBAuthenticationApi: PBBaseApi {
         
-    class func authenticate(successBlock:PBAuthenticationCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    class func authenticate(_ successBlock:@escaping PBAuthenticationCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params = ["api_key":PlaybasisSDK.sharedInstance.apiKey, "api_secret":PlaybasisSDK.sharedInstance.apiSecret]
-        PBRestController.request(.POST, endPoint: PBEndPoint.AUTHENTICATION_END_POINT, parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: PBEndPoint.AUTHENTICATION_END_POINT, parameters: params as [String : AnyObject], completionBlock: { (apiResponse) in
             let authenticationToken:PBAuthenticationToken = PBAuthenticationToken(apiResponse: apiResponse)
-            successBlock(authenticationToken: authenticationToken)
+            successBlock(authenticationToken)
             }, failureBlock:failureBlock)
     }
     
-    class func renew(successBlock:PBAuthenticationCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    class func renew(_ successBlock:@escaping PBAuthenticationCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params = ["api_key":PlaybasisSDK.sharedInstance.apiKey, "api_secret":PlaybasisSDK.sharedInstance.apiSecret]
-        PBRestController.request(.POST, endPoint: PBEndPoint.AUTHENTICATION_END_POINT, parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: PBEndPoint.AUTHENTICATION_END_POINT, parameters: params as [String : AnyObject], completionBlock: { (apiResponse) in
             let authenticationToken:PBAuthenticationToken = PBAuthenticationToken(apiResponse: apiResponse)
-            successBlock(authenticationToken: authenticationToken)
+            successBlock(authenticationToken)
             }, failureBlock:failureBlock)
     }
 }

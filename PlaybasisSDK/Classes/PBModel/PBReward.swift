@@ -15,12 +15,12 @@ public enum RewardType:String {
 }
 
 
-public class PBReward: PBModel {
+open class PBReward: PBModel {
     
-    public var value:String?
-    public var type:RewardType = .Goods
-    public var rewardId:String?
-    public var rewardData:PBRewardData?
+    open var value:String?
+    open var type:RewardType = .Goods
+    open var rewardId:String?
+    open var rewardData:PBRewardData?
     
     public override init() {
         super.init()
@@ -30,7 +30,7 @@ public class PBReward: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         value <- map["reward_value"]
         type <- (map["reward_type"], EnumTransform<RewardType>())
@@ -39,7 +39,7 @@ public class PBReward: PBModel {
     }
     
     
-    class func pbRewardFromGoodsApiResponse(apiResponse:PBApiResponse) -> [PBReward] {
+    class func pbRewardFromGoodsApiResponse(_ apiResponse:PBApiResponse) -> [PBReward] {
         var goods:[PBReward] = []
         goods = Mapper<PBReward>().mapArray(apiResponse.parsedJson!["goods"])!
         return goods

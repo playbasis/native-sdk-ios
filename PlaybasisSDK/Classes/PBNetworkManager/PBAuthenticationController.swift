@@ -23,7 +23,7 @@ class PBAuthenticationController {
 
 extension PBAuthenticationController { // API
     
-    func renewAuthenticationTokenIfNeeded(completionBlock:PBEmptyCompletionBlock) {
+    func renewAuthenticationTokenIfNeeded(_ completionBlock:@escaping PBEmptyCompletionBlock) {
         if self.authenticationToken.isExpiredOrInvalid() {
             PBAuthenticationApi.renew({ (authenticationToken) in
                 self.authenticationToken = authenticationToken

@@ -9,13 +9,13 @@
 import UIKit
 import ObjectMapper
 
-public class PBGameStageSetting: PBModel {
+open class PBGameStageSetting: PBModel {
     
-    public var stageName:String! = ""
-    public var stageLevel:Int! = 1
-    public var image:String! = ""
-    public var rangeLow:Int! = 0
-    public var rangeHigh:Int! = 0
+    open var stageName:String! = ""
+    open var stageLevel:Int! = 1
+    open var image:String! = ""
+    open var rangeLow:Int! = 0
+    open var rangeHigh:Int! = 0
     
     public override init() {
         super.init()
@@ -25,7 +25,7 @@ public class PBGameStageSetting: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         stageName <- map["stage_name"]
         stageLevel <- map["stage_level"]
@@ -35,7 +35,7 @@ public class PBGameStageSetting: PBModel {
     }
     
     
-    class func pbGameStageSettingsFromApiResponse(apiResponse:PBApiResponse) -> [PBGameStageSetting] {
+    class func pbGameStageSettingsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameStageSetting] {
         return Mapper<PBGameStageSetting>().mapArray(apiResponse.parsedJson!) ?? []
     }
     

@@ -9,12 +9,12 @@
 import UIKit
 import ObjectMapper
 
-public class PBCompletionData: PBModel {
-    public var actionId:String?
-    public var name:String?
-    public var desc:String?
-    public var icon:String?
-    public var color:String?
+open class PBCompletionData: PBModel {
+    open var actionId:String?
+    open var name:String?
+    open var desc:String?
+    open var icon:String?
+    open var color:String?
     
     public override init() {
         super.init()
@@ -24,7 +24,7 @@ public class PBCompletionData: PBModel {
         super.init(map)
     }
     
-    override public func mapping(map: Map) {
+    override open func mapping(_ map: Map) {
         super.mapping(map)
         name <- map["name"]
         desc <- map["description"]

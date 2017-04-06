@@ -10,21 +10,21 @@ import UIKit
 import ObjectMapper
 
 
-public class PBActionReport: PBModel {
+open class PBActionReport: PBModel {
     
-    public var year:String! = ""
-    public var value:[PBMonthReportValue] = []
+    open var year:String! = ""
+    open var value:[PBMonthReportValue] = []
 
     public override init() {
         super.init()
     }
     
-    public required init?(_ map: Map) {
-        super.init(map)
+    public required init?(map: Map) {
+        super.init(map: map)
     }
 
     
-    public class func pbActionReportFromApiResponse(apiResponse:PBApiResponse) -> [PBActionReport] {
+    open class func pbActionReportFromApiResponse(_ apiResponse:PBApiResponse) -> [PBActionReport] {
         var actionReportList:[PBActionReport] = []
         if let responseObject:[String:AnyObject] = (apiResponse.parsedJson as? [String:AnyObject]){
             

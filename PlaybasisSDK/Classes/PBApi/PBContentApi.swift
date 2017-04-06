@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class PBContentApi: PBBaseApi {
+open class PBContentApi: PBBaseApi {
     
-    private class func contentEndPointWithPath(path:String) -> String {
+    fileprivate class func contentEndPointWithPath(_ path:String) -> String {
         return PBEndPoint.CONTENT_END_POINT + self.encodePath(path)
     }
     
-    public class func getContentListWithForm(contentForm:PBContentForm, completionBlock:PBContentCompletionBlock, failureBlock:PBFailureErrorBlock){
+    open class func getContentListWithForm(_ contentForm:PBContentForm, completionBlock:PBContentCompletionBlock, failureBlock:PBFailureErrorBlock){
         PBRestController.request(.GET, endPoint: self.contentEndPointWithPath(""), parameters:contentForm.params(), completionBlock: { (response) in
             let contents:[PBContent] = PBContent.pbContentFromApiResponse(response)
             completionBlock(contents)

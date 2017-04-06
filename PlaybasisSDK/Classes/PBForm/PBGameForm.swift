@@ -8,22 +8,22 @@
 
 import UIKit
 
-public class PBGameForm: PBForm {
+open class PBGameForm: PBForm {
     
-    public var gameName:String?
-    public var stageLevel:String?
-    public var stageName:String?
-    
-    
-    public var sort:String?
-    public var order:String?
-    public var offset:Int? = 0
-    public var limit:Int? = 100
-    public var tags:String?
-    public var status:Bool = true
+    open var gameName:String?
+    open var stageLevel:String?
+    open var stageName:String?
     
     
-    override public func params() -> [String:String] {
+    open var sort:String?
+    open var order:String?
+    open var offset:Int? = 0
+    open var limit:Int? = 100
+    open var tags:String?
+    open var status:Bool = true
+    
+    
+    override open func params() -> [String:String] {
         //  guard isValid() else { return  nil }
         var params:[String:String] = [:]
         params["status"] = String(status)
