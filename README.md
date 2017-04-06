@@ -20,6 +20,15 @@ it, simply add the following line to your Podfile:
 pod "PlaybasisSDK"
 ```
 
+## Development
+
+There are 2 branches for support of different version of swift.
+
+* `swift2.3` branch - for swift 2.3 support
+* `swift3` branch - for swift 3 support (still in working progress)
+
+`master` branch has the latest development from `swift3`.
+
 ## Author
 
 Playbasis Development Team, devteam@playbasis.com
