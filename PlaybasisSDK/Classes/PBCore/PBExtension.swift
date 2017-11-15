@@ -26,7 +26,7 @@ extension String{
     }
     
     func PBisValidPassword() -> Bool {
-        return self.characters.count >= 6
+        return self.count >= 6
     }
     
     
