@@ -37,7 +37,7 @@ open class PBBaseRestController {
             assert(false)
         }
 
-        let mutableRequest = NSMutableURLRequest(url: unwrappedUrl)
+        var mutableRequest = URLRequest(url: unwrappedUrl)
         mutableRequest.httpMethod = method.rawValue
         
         var params = parameters ?? [String:AnyObject]()
@@ -48,7 +48,7 @@ open class PBBaseRestController {
         }
         
         do {
-            var request = try encoding.encode(mutableRequest as! URLRequestConvertible, with: params)
+            var request = try encoding.encode(mutableRequest as URLRequestConvertible, with: params)
             
             if let headers = headers {
                 for (field, value) in headers {

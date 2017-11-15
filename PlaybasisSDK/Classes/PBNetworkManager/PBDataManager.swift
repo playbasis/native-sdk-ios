@@ -17,7 +17,7 @@ open class PBDataManager: NSObject {
     
 
     open static let sharedInstance = PBDataManager()
-    open let accountName:String = Bundle.main.bundleIdentifier!
+    open let accountName:String = Bundle.main.bundleIdentifier ?? "com.playbasis.ios.sdk"
 
     fileprivate func getTokenString(_ tokenType:PBTokenType) -> String? {
         

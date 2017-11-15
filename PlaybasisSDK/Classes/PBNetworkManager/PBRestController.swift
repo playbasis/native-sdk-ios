@@ -35,7 +35,7 @@ class PBRestController {
         })
     }
 
-    class func request(_ method:Alamofire.HTTPMethod, endPoint: String, parameters: [String : String]? = nil, asynchronous:Bool = true, encoding: ParameterEncoding = URLEncoding.httpBody, headers: [String: String]? = nil, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
+    class func request(_ method:Alamofire.HTTPMethod, endPoint: String, parameters: [String : String]? = nil, asynchronous:Bool = true, encoding: ParameterEncoding = URLEncoding.methodDependent, headers: [String: String]? = nil, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
         request(method, endPoint: endPoint, parameters: parameters as [String: AnyObject]?, asynchronous: asynchronous, encoding: encoding, headers: headers, completionBlock: completionBlock, failureBlock: failureBlock)
     }
 
