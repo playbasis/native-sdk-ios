@@ -14,7 +14,7 @@ open class PBMerchantApi: PBBaseApi {
         return PBEndPoint.MERCHANT_END_POINT + self.encodePath(path)
     }
     
-    open class func availableBranchForGoodsGroup(_ goodsGroup:String, completionBlock:PBAvailableRedeemPlacesCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func availableBranchForGoodsGroup(_ goodsGroup:String, completionBlock:@escaping PBAvailableRedeemPlacesCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params = ["goods_group":goodsGroup]
         PBRestController.request(.get, endPoint: merchantEndPointWithPath("availableBranchGoodsGroup"), parameters: params, completionBlock: { (apiResponse) in
             let redeemPlaces = PBRedeemPlace.pbRedeemPlacesFromApiResponse(apiResponse)
@@ -22,7 +22,7 @@ open class PBMerchantApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    open class func redeemCouponWithGroup(_ group:String, code:String, pinCode:String?, playerId:String?, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func redeemCouponWithGroup(_ group:String, code:String, pinCode:String?, playerId:String?, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         var params = ["goods_group":group, "coupon_code":code]
         if let mPinCode = pinCode {
             params["pin_code"] = mPinCode

@@ -14,7 +14,7 @@ open class PBGameApi: PBBaseApi {
         return PBEndPoint.GAME_END_POINT + self.encodePath(path)
     }
     
-    open class func getGameSettingsWithForm(_ gameForm:PBGameForm?,completionBlock:PBGameSettingCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getGameSettingsWithForm(_ gameForm:PBGameForm?,completionBlock:@escaping PBGameSettingCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         var params:[String:String] = [:]
         if let mGameForm:PBGameForm = gameForm {
             params = mGameForm.params()
@@ -29,7 +29,7 @@ open class PBGameApi: PBBaseApi {
             }, failureBlock:failureBlock)
     }
     
-    open class func getActiveGameCampaign(_ gameName:String, completionBlock:PBCampaignCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getActiveGameCampaign(_ gameName:String, completionBlock:@escaping PBCampaignCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params:[String:String] = ["game_name":gameName]
         PBRestController.request(.get, endPoint: gameEndPointWithPath("campaign/active"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {

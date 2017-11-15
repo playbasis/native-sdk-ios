@@ -14,7 +14,7 @@ open class PBSettingApi: PBBaseApi {
         return PBEndPoint.SETTING_END_POINT + self.encodePath(path)
     }
     
-    open class func getAppStatusWithCompletionBlock(_ completionBlock:PBAppStatusCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getAppStatusWithCompletionBlock(_ completionBlock:@escaping PBAppStatusCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         PBRestController.request(.get, endPoint: settingEndPointWithPath("appStatus"), parameters: nil, completionBlock: { (apiResponse) in
             if let json:[String:AnyObject] = apiResponse.parsedJson as? [String:AnyObject] {
                 var appPeriod:PBAppPeriod?

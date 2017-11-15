@@ -12,8 +12,8 @@ import Alamofire
 let API_ERROR_DOMAIN = "RemoteServiceErrorDomain"
 
 protocol PBRestProtocol {
-    func request(_ method:Alamofire.Method, endPoint: String, parameters: [String : AnyObject]?, asynchronous:Bool, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock)
-    func uploadData(_ data:Data, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock)
+    func request(_ method:Alamofire.Method, endPoint: String, parameters: [String : AnyObject]?, asynchronous:Bool, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock)
+    func uploadData(_ data:Data, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding, headers: [String: String]?, completionBlock: ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock)
 }
 
 open class PBBaseRestController {
@@ -100,7 +100,7 @@ open class PBBaseRestController {
         }
     }
     
-    fileprivate func parseResponse(_ response:DataResponse<Any>, successBlock:((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
+    fileprivate func parseResponse(_ response:DataResponse<Any>, successBlock:((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
        // print("Request completed, URL: \(response.request!.URL), response: \(response), status code = \(response.response?.statusCode)")
         let apiResponse:PBApiResponse = PBApiResponse(response:response)
         if let error = apiResponse.apiError {

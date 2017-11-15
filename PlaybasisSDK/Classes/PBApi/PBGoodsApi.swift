@@ -15,7 +15,7 @@ open class PBGoodsApi: PBBaseApi {
     }
     
     
-    open class func goodListWithPlayerId(_ playerId:String? = nil, tags:String, completionBlock:@escaping PBGoodsCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func goodListWithPlayerId(_ playerId:String? = nil, tags:String, completionBlock:@escaping PBGoodsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         var params = ["tags":tags]
         if playerId != nil {
             params["player_id"] = playerId!
@@ -26,21 +26,21 @@ open class PBGoodsApi: PBBaseApi {
     }
 
     
-    open class func verifyCouponWithGoodId(_ goodId:String, couponCode:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func verifyCouponWithGoodId(_ goodId:String, couponCode:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params = ["goods_id":goodId, "coupon_code":couponCode]
         PBRestController.request(.get, endPoint: goodsEndPointWithPath("couponVerify"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
-    open class func redeemCouponWithGoodId(_ goodId:String, couponCode:String, playerId:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func redeemCouponWithGoodId(_ goodId:String, couponCode:String, playerId:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
         let params = ["goods_id":goodId, "coupon_code":couponCode, "player_id":playerId]
         PBRestController.request(.post, endPoint: goodsEndPointWithPath("couponVerify"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
-    open class func getGoodsWithGoodIdAndPlayerId(_ goodId:String,playerId:String, completionBlock:@escaping (_ goods:PBGoods) -> Void, failureBlock:PBFailureErrorBlock) {
+    open class func getGoodsWithGoodIdAndPlayerId(_ goodId:String,playerId:String, completionBlock:@escaping (_ goods:PBGoods) -> Void, failureBlock:@escaping PBFailureErrorBlock) {
         let params = ["player_id":playerId]
         PBRestController.request(.get, endPoint: goodsEndPointWithPath("\(goodId)"), parameters: params, completionBlock: { (response) in
             let goods = PBGoods.init(apiResponse: response)
