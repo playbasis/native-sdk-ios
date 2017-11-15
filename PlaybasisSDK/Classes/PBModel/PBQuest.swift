@@ -37,8 +37,8 @@ open class PBQuest: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
     init(apiResponse:PBApiResponse) {
@@ -47,8 +47,8 @@ open class PBQuest: PBModel {
     }
     
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         name <- map["quest_name"]
         desc <- map["description"]
         hint <- map["hint"]

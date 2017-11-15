@@ -29,12 +29,12 @@ open class PBRecentActivity: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         eventType <- (map["event_type"], EnumTransform<PBRecentActivityEventType>())
         actionName <- map["action_name"]
         actionIcon <- map["action_icon"]

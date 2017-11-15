@@ -19,12 +19,12 @@ open class PBReportValue: PBModel {
         super.init()
     }
     
-    public required init?(_ map: Map) {
-        super.init(map)
+    public required init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         quantity <- map["quantity"]
         previousQuantity <- map["previous_quantity"]
         percentChanged <- map["percent_changed"]

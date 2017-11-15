@@ -23,12 +23,12 @@ open class PBRank: PBModel{
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
 
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         firstName <- map["first_name"]
         lastName <- map["last_name"]
         imageURL <- map["image"]

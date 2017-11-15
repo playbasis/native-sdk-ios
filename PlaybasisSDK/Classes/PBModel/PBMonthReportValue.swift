@@ -18,8 +18,8 @@ open class PBMonthReportValue: PBModel {
         super.init()
     }
     
-    public required init?(_ map: Map) {
-        super.init(map)
+    public required init?(map: Map) {
+        super.init(map: map)
     }
     
     

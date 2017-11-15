@@ -20,12 +20,12 @@ open class PBPlayerBasic: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         self.playerId <- map["cl_player_id"]
         self.imageURL <- map["image"]
         self.username <- map["username"]

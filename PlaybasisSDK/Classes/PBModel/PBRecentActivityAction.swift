@@ -20,12 +20,12 @@ open class PBRecentActivityAction: PBRecentActivity {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         playerId2 <- map["pb_player_id-2"]
         url <- map["message"]
         stringFilter <- map["string_filter"]

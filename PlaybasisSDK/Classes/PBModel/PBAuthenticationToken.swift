@@ -25,10 +25,10 @@ class PBAuthenticationToken: Mappable {
         self.getFromKeychain()
     }
     
-    required init?(_ map: Map){
+    required init?(map: Map){
     }
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         token <- map["token"]
         expirationDate <- (map["date_expire"], ISO8601DateTransform())
         self.saveInKeychain()

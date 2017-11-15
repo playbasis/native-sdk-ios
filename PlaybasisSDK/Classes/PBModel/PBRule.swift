@@ -19,12 +19,12 @@ open class PBRule: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         events <- map["events"]
         missions <- map["missions"]
         quests <- map["quests"]
@@ -58,12 +58,12 @@ open class PBGameRule: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         name <- map["name"]
         desc <- map["description"]
         tags <- map["tags"]
@@ -102,12 +102,12 @@ open class PBGameRuleJigsawSet: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         name <- map["name"]
         desc <- map["description"]
         specificId <- map["specific_id"]
@@ -154,12 +154,12 @@ open class PBGameRuleDataSet: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         fieldType <- map["field_type"]
         sortOrder <- map["sort_order"]
         paramName <- map["param_name"]
@@ -180,12 +180,12 @@ open class PBGameRuleConfigAction:PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         actionId <- map["action_id"]
         actionName <- map["action_name"]
         customParam = map.JSONDictionary
@@ -206,12 +206,12 @@ open class PBGameRuleConfigCondition:PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         paramName <- map["param_name"]
         paramOperation <- map["param_operation"]
         paramValue <- map["param_value"]
@@ -232,12 +232,12 @@ open class PBGameRuleConfigGroup:PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         groupContainer <- map["group_container"]
         groupId <- map["group_id"]
         customParam = map.JSONDictionary
@@ -259,12 +259,12 @@ open class PBGameRuleConfigGroupContainer:PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         rewardName <- map["reward_name"]
         itemId <- map["item_id"]
         quantity <- map["quantity"]

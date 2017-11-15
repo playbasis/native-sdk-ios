@@ -26,12 +26,12 @@ open class PBRuleEventMission: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         missionId <- map["mission_id"]
         missionNumber <- map["mission_number"]
         name <- map["mission_name"]

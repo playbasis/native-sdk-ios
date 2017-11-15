@@ -21,12 +21,12 @@ open class PBGameStageSetting: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         stageName <- map["stage_name"]
         stageLevel <- map["stage_level"]
         image <- map["image"]

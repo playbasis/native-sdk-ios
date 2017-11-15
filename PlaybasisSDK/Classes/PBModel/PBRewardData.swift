@@ -13,8 +13,8 @@ open class PBRedeem: PBModel {
     open var point:PBRedeemPoint!
     open var custom:[PBRedeemCustom]! = []
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         point <- map["point"]
         custom <- map["custom"]
     }
@@ -23,8 +23,8 @@ open class PBRedeem: PBModel {
 open class PBRedeemPoint:PBModel {
     open var pointValue:Int! = 0
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         pointValue <- map["point_value"]
     }
 }
@@ -34,8 +34,8 @@ open class PBRedeemCustom:PBModel {
     open var customName:String?
     open var customValue:Int! = 0
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         customId <- map["custom_id"]
         customName <- map["custom_name"]
         customValue <- map["custom_value"]
@@ -74,12 +74,12 @@ open class PBRewardData: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         rewardDataId <- map["_id"]
         desc <- map["description"]
         quantity <- map["quantity"]

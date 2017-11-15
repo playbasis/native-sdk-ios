@@ -16,16 +16,16 @@ open class PBCondition: PBModel {
     open var value:String?
     open var conditionData:[PBConditionData] = []
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
     public override init() {
         super.init()
     }
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         conditionId <- map["condition_id"]
         type <- map["condition_type"]
         value <- map["condition_value"]

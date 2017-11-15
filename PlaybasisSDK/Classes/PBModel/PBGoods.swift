@@ -21,8 +21,8 @@ open class PBGoods: PBModel {
     open var good:PBRewardData?
     open var amount:Int! = 0
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         self.good <- map["goods"]
         self.amount <- map["amount"]
     }
@@ -33,8 +33,8 @@ open class PBGoods: PBModel {
         Mapper<PBGoods>().map(apiResponse.parsedJson!, toObject: self)
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
     public override init() {

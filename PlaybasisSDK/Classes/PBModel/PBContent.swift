@@ -27,13 +27,13 @@ open class PBContent: PBModel {
         Mapper<PBContent>().map(apiResponse.parsedJson!["result"], toObject: self)
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         title <- map["title"]
         detail <- map["detail"]
         imageURL <- map["image"]

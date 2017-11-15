@@ -20,8 +20,8 @@ open class PBLeaderBoard: PBModel {
     open var rank:Int! = 0
     
     
-    override open func mapping(_ map: Map) {
-        super.mapping(map)
+    override open func mapping(map: Map) {
+        super.mapping(map: map)
         self.dateCompleted <- (map["date_completed"],ISO8601DateTransform())
         self.dateJoined <- (map["date_join"], ISO8601DateTransform())
         self.status <- map["status"]
@@ -36,8 +36,8 @@ open class PBLeaderBoard: PBModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
     init(apiResponse:PBApiResponse) {
