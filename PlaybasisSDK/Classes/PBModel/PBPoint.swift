@@ -33,7 +33,7 @@ open class PBPoint: PBModel {
     
     class func pbPointFromPointsApiResponse(_ apiResponse:PBApiResponse) -> [PBPoint] {
         var points:[PBPoint] = []
-        points = Mapper<PBPoint>().mapArray(apiResponse.parsedJson!["points"])!
+        points = Mapper<PBPoint>().mapArray(JSONObject: apiResponse.parsedJson!["points"])!
         return points
     }
     

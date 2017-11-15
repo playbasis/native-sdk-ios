@@ -41,7 +41,7 @@ open class PBReward: PBModel {
     
     class func pbRewardFromGoodsApiResponse(_ apiResponse:PBApiResponse) -> [PBReward] {
         var goods:[PBReward] = []
-        goods = Mapper<PBReward>().mapArray(apiResponse.parsedJson!["goods"])!
+        goods = Mapper<PBReward>().mapArray(JSONObject: apiResponse.parsedJson!["goods"])!
         return goods
     }
 

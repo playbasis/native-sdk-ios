@@ -43,7 +43,7 @@ open class PBQuest: PBModel {
     
     init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBQuest>().map(apiResponse.parsedJson!["quests"], toObject: self)
+        Mapper<PBQuest>().map(JSONObject: apiResponse.parsedJson!["quests"], toObject: self)
     }
     
     
@@ -74,7 +74,7 @@ open class PBQuest: PBModel {
     
     class func pbQuestFromApiResponse(_ apiResponse:PBApiResponse) -> [PBQuest] {
         var qustList:[PBQuest] = []
-        qustList = Mapper<PBQuest>().mapArray(apiResponse.parsedJson!["quests"])!
+        qustList = Mapper<PBQuest>().mapArray(JSONObject: apiResponse.parsedJson!["quests"])!
         return qustList
     }
 

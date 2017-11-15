@@ -28,7 +28,7 @@ open class PBRedeemPlace: PBModel {
     }
     
     class func pbRedeemPlacesFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRedeemPlace] {
-        let redeemPlaces = Mapper<PBRedeemPlace>().mapArray(apiResponse.parsedJson!) ?? []
+        let redeemPlaces = Mapper<PBRedeemPlace>().mapArray(JSONObject: apiResponse.parsedJson!) ?? []
         return redeemPlaces
     }
 }

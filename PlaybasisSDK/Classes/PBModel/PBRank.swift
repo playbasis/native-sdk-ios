@@ -49,7 +49,7 @@ open class PBRank: PBModel{
     
     class func pbrankFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRank] {
         var rankList:[PBRank] = []
-        rankList = Mapper<PBRank>().mapArray(apiResponse.parsedJson!)!
+        rankList = Mapper<PBRank>().mapArray(JSONObject: apiResponse.parsedJson!)!
         return rankList
     }
 }

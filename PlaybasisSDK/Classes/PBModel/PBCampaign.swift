@@ -36,11 +36,11 @@ open class PBCampaign: PBModel {
     
     init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBCampaign>().map(apiResponse.parsedJson!["result"], toObject: self)
+        Mapper<PBCampaign>().map(JSONObject: apiResponse.parsedJson!["result"], toObject: self)
     }
     
     class func pbCampaignsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBCampaign] {
-        return Mapper<PBCampaign>().mapArray(apiResponse.parsedJson!) ?? []
+        return Mapper<PBCampaign>().mapArray(JSONObject: apiResponse.parsedJson!) ?? []
     }
     
     

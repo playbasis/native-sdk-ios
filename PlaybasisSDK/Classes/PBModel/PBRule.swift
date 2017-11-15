@@ -33,12 +33,12 @@ open class PBRule: PBModel {
     
     public  init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBRule>().map(apiResponse.parsedJson!, toObject: self)
+        Mapper<PBRule>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRule] {
         var ruleList:[PBRule] = []
-        ruleList = Mapper<PBRule>().mapArray(apiResponse.parsedJson!)!
+        ruleList = Mapper<PBRule>().mapArray(JSONObject: apiResponse.parsedJson!)!
         return ruleList
     }
 }
@@ -75,11 +75,11 @@ open class PBGameRule: PBModel {
     
     public init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBGameRule>().map(apiResponse.parsedJson!, toObject: self)
+        Mapper<PBGameRule>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbGameRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameRule] {
-        return Mapper<PBGameRule>().mapArray(apiResponse.parsedJson!) ?? []
+        return Mapper<PBGameRule>().mapArray(JSONObject: apiResponse.parsedJson!) ?? []
     }
 }
 
@@ -132,11 +132,11 @@ open class PBGameRuleJigsawSet: PBModel {
     
     public init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBGameRuleJigsawSet>().map(apiResponse.parsedJson!, toObject: self)
+        Mapper<PBGameRuleJigsawSet>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbGameRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameRuleJigsawSet] {
-        return Mapper<PBGameRuleJigsawSet>().mapArray(apiResponse.parsedJson!) ?? []
+        return Mapper<PBGameRuleJigsawSet>().mapArray(JSONObject: apiResponse.parsedJson!) ?? []
     }
 }
 
@@ -188,7 +188,7 @@ open class PBGameRuleConfigAction:PBModel {
         super.mapping(map: map)
         actionId <- map["action_id"]
         actionName <- map["action_name"]
-        customParam = map.JSONDictionary
+        customParam = map.JSON as [String : AnyObject]
     }
     
 }
@@ -217,7 +217,7 @@ open class PBGameRuleConfigCondition:PBModel {
         paramValue <- map["param_value"]
         conditionId <- map["condition_id"]
         groupContainer <- map["group_container"]
-        customParam = map.JSONDictionary
+        customParam = map.JSON as [String : AnyObject]
     }
     
 }
@@ -240,7 +240,7 @@ open class PBGameRuleConfigGroup:PBModel {
         super.mapping(map: map)
         groupContainer <- map["group_container"]
         groupId <- map["group_id"]
-        customParam = map.JSONDictionary
+        customParam = map.JSON as [String : AnyObject]
     }
     
 }

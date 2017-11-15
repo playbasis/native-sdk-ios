@@ -36,7 +36,7 @@ open class PBGameStageSetting: PBModel {
     
     
     class func pbGameStageSettingsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameStageSetting] {
-        return Mapper<PBGameStageSetting>().mapArray(apiResponse.parsedJson!) ?? []
+        return Mapper<PBGameStageSetting>().mapArray(JSONObject: apiResponse.parsedJson!) ?? []
     }
     
 

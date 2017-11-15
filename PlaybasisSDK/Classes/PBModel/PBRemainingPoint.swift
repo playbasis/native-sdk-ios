@@ -30,6 +30,6 @@ open class PBRemainingPoint: PBModel {
     
     
     class func pbRemainingPointFromPointsApiResponse(_ apiResponse:PBApiResponse) -> [PBRemainingPoint] {
-        return Mapper<PBRemainingPoint>().mapArray(apiResponse.parsedJson!) ?? []
+        return Mapper<PBRemainingPoint>().mapArray(JSONObject: apiResponse.parsedJson!) ?? []
         }
 }

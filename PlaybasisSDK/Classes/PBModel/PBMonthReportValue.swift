@@ -37,7 +37,7 @@ open class PBMonthReportValue: PBModel {
                         report.month = key
                         //print("month: \(key)    quantity: \(String(reportValue["quantity"]!))")
                         
-                        report.reportValue = Mapper<PBReportValue>().map(reportValue)
+                        report.reportValue = Mapper<PBReportValue>().map(JSONObject: reportValue)
                         
                         monthReportValueList.append(report)
                     }

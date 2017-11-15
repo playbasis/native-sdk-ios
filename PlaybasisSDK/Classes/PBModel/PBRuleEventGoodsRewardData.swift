@@ -43,12 +43,12 @@ open class PBRuleEventGoodsRewardData: PBModel {
     
     public init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBRuleEventGoodsRewardData>().map(apiResponse.parsedJson!, toObject: self)
+        Mapper<PBRuleEventGoodsRewardData>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbRuleEventGoodsRewardDataFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRuleEventGoodsRewardData] {
         var ruleEventGoodsRewardDataList:[PBRuleEventGoodsRewardData] = []
-        ruleEventGoodsRewardDataList = Mapper<PBRuleEventGoodsRewardData>().mapArray(apiResponse.parsedJson!)!
+        ruleEventGoodsRewardDataList = Mapper<PBRuleEventGoodsRewardData>().mapArray(JSONObject: apiResponse.parsedJson!)!
         return ruleEventGoodsRewardDataList
     }
     

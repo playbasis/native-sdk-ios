@@ -24,7 +24,7 @@ open class PBContent: PBModel {
     
     init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBContent>().map(apiResponse.parsedJson!["result"], toObject: self)
+        Mapper<PBContent>().map(JSONObject: apiResponse.parsedJson!["result"], toObject: self)
     }
     
     required public init?(map: Map) {
@@ -44,7 +44,7 @@ open class PBContent: PBModel {
     
     class func pbContentFromApiResponse(_ apiResponse:PBApiResponse) -> [PBContent] {
         var contentList:[PBContent] = []
-        contentList = Mapper<PBContent>().mapArray(apiResponse.parsedJson!["result"])!
+        contentList = Mapper<PBContent>().mapArray(JSONObject: apiResponse.parsedJson!["result"])!
         return contentList
     }
     

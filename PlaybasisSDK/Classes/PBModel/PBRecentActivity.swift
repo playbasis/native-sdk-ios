@@ -49,11 +49,11 @@ open class PBRecentActivity: PBModel {
             activities.forEach({
                 switch PBRecentActivityEventType(rawValue:($0["event_type"] as! String))! {
                 case .Redeem:
-                    recentActivities.append(Mapper<PBRecentActivityRedeem>().map($0)!)
+                    recentActivities.append(Mapper<PBRecentActivityRedeem>().map(JSONObject: $0)!)
                 case .Action:
-                    recentActivities.append(Mapper<PBRecentActivityAction>().map($0)!)
+                    recentActivities.append(Mapper<PBRecentActivityAction>().map(JSONObject: $0)!)
                 case .Reward:
-                    recentActivities.append(Mapper<PBRecentActivityReward>().map($0)!)
+                    recentActivities.append(Mapper<PBRecentActivityReward>().map(JSONObject: $0)!)
                 case .Level:
                     break
                 case .Other:

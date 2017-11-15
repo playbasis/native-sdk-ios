@@ -109,13 +109,13 @@ open class PBRewardData: PBModel {
     
     class func pbGoodsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRewardData] {
         var goods:[PBRewardData] = []
-        goods = Mapper<PBRewardData>().mapArray(apiResponse.parsedJson!["goods_list"])!
+        goods = Mapper<PBRewardData>().mapArray(JSONObject: apiResponse.parsedJson!["goods_list"])!
         return goods
     }
     
     class func pbSmallGoodsFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRewardData] {
         var goods:[PBRewardData] = []
-        goods = Mapper<PBRewardData>().mapArray(apiResponse.parsedJson!["goods"])!
+        goods = Mapper<PBRewardData>().mapArray(JSONObject: apiResponse.parsedJson!["goods"])!
         return goods
     }
 }
