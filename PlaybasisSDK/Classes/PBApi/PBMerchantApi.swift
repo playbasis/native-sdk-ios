@@ -18,7 +18,7 @@ open class PBMerchantApi: PBBaseApi {
         let params = ["goods_group":goodsGroup]
         PBRestController.request(.get, endPoint: merchantEndPointWithPath("availableBranchGoodsGroup"), parameters: params, completionBlock: { (apiResponse) in
             let redeemPlaces = PBRedeemPlace.pbRedeemPlacesFromApiResponse(apiResponse)
-            completionBlock(redeemPlaces: redeemPlaces)
+            completionBlock(redeemPlaces)
             }, failureBlock:failureBlock)
     }
     

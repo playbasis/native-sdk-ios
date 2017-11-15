@@ -21,10 +21,10 @@ open class PBGameApi: PBBaseApi {
         }
         PBRestController.request(.get, endPoint: gameEndPointWithPath(""), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
-                completionBlock(gameSettings: PBGameSetting.pbGameSettingsFromApiResponse(apiResponse))
+                completionBlock(PBGameSetting.pbGameSettingsFromApiResponse(apiResponse))
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             }, failureBlock:failureBlock)
     }
@@ -33,10 +33,10 @@ open class PBGameApi: PBBaseApi {
         let params:[String:String] = ["game_name":gameName]
         PBRestController.request(.get, endPoint: gameEndPointWithPath("campaign/active"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
-                completionBlock(campaign: PBCampaign(apiResponse: apiResponse))
+                completionBlock(PBCampaign(apiResponse: apiResponse))
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             }, failureBlock:failureBlock)
     }

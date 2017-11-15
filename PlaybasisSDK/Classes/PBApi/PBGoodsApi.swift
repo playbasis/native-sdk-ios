@@ -44,7 +44,7 @@ open class PBGoodsApi: PBBaseApi {
         let params = ["player_id":playerId]
         PBRestController.request(.get, endPoint: goodsEndPointWithPath("\(goodId)"), parameters: params, completionBlock: { (response) in
             let goods = PBGoods.init(apiResponse: response)
-            completionBlock(goods: goods)
+            completionBlock(goods)
         }, failureBlock:failureBlock)
     }
 

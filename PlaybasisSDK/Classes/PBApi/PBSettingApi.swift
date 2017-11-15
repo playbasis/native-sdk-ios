@@ -15,16 +15,16 @@ open class PBSettingApi: PBBaseApi {
     }
     
     open class func getAppStatusWithCompletionBlock(_ completionBlock:@escaping PBAppStatusCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
-        PBRestController.request(.get, endPoint: settingEndPointWithPath("appStatus"), parameters: nil, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: settingEndPointWithPath("appStatus"), completionBlock: { (apiResponse) in
             if let json:[String:AnyObject] = apiResponse.parsedJson as? [String:AnyObject] {
                 var appPeriod:PBAppPeriod?
                 if let appPeriodJson:[String:String] = json["app_period"] as? [String:String] {
                     appPeriod = PBAppPeriod(appPeriodJson: appPeriodJson)
                 }
-                completionBlock(appStatus: json["app_status"] as? Bool ?? false, appPeriod: appPeriod)
+                completionBlock(json["app_status"] as? Bool ?? false, appPeriod)
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             }, failureBlock:failureBlock)
     }

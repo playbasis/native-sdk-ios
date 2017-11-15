@@ -17,10 +17,10 @@ open class PBLinkApi: PBBaseApi {
     open class func generateLinkWithParams(_ params:[String:String], completionBlock:@escaping PBLinkCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         PBRestController.request(.post, endPoint: linkEndPointWithPath("generate"), parameters: params, completionBlock: { (response) in
             if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], let link:String = json["link"] as? String {
-                completionBlock(link: link)
+                completionBlock(link)
             }
             else {
-                failureBlock(error: PBError(message: "Unknown Error"))
+                failureBlock(PBError(message: "Unknown Error"))
             }
             }, failureBlock:failureBlock)
     }

@@ -13,7 +13,7 @@ class PBRestController {
     
     class func uploadData(_ data:Data, endPoint: String, parameters: [String : AnyObject]?, encoding: ParameterEncoding = URLEncoding.httpBody, headers: [String: String]? = nil, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
         
-        Alamofire.SessionManager.sharedInstance.delegate.taskWillPerformHTTPRedirection = nil
+        Alamofire.SessionManager.default.delegate.taskWillPerformHTTPRedirection = nil
         
         func handleBadToken(_ error:PBError) -> Bool {
             if error.remoteError == .invalidToken {
@@ -29,12 +29,16 @@ class PBRestController {
             let authenticationData:[String:String] = ["token":PBAuthenticationController.sharedInstance.authenticationToken.token!]
             PBBaseRestController.sharedInstance.performUpload(request, data:data, authenticationData: authenticationData, completionBlock:completionBlock, failureBlock:{ (error) in
                 if handleBadToken(error) == false {
-                    failureBlock(error: error)
+                    failureBlock(error)
                 }
             })
         })
     }
-    
+
+    class func request(_ method:Alamofire.HTTPMethod, endPoint: String, parameters: [String : String]? = nil, asynchronous:Bool = true, encoding: ParameterEncoding = URLEncoding.httpBody, headers: [String: String]? = nil, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
+        request(method, endPoint: endPoint, parameters: parameters as [String: AnyObject]?, asynchronous: asynchronous, encoding: encoding, headers: headers, completionBlock: completionBlock, failureBlock: failureBlock)
+    }
+
     class func request(_ method:Alamofire.HTTPMethod, endPoint: String, parameters: [String : AnyObject]?, asynchronous:Bool = true, encoding: ParameterEncoding = URLEncoding.httpBody, headers: [String: String]? = nil, completionBlock: @escaping ((PBApiResponse) -> Void), failureBlock:@escaping PBFailureErrorBlock) {
         
         func handleBadToken(_ error:PBError) -> Bool {
@@ -56,7 +60,7 @@ class PBRestController {
                 let request = PBBaseRestController.sharedInstance.createRequest(endPoint, method: method, authenticationData: authenticationData, encoding: encoding, headers: headers, parameters: parameters)
                 PBBaseRestController.sharedInstance.performRequest(request, asynchronous: asynchronous, completionBlock: completionBlock, failureBlock: { (error) in
                     if handleBadToken(error) == false {
-                        failureBlock(error: error)
+                        failureBlock(error)
                     }
                     
                 })
@@ -67,7 +71,7 @@ class PBRestController {
             let request = PBBaseRestController.sharedInstance.createRequest(endPoint, method: method, authenticationData:authenticationData, encoding: encoding, headers: headers, parameters: parameters)
             PBBaseRestController.sharedInstance.performRequest(request, asynchronous: asynchronous, completionBlock: completionBlock, failureBlock: { (error) in
                 if handleBadToken(error) == false {
-                    failureBlock(error: error)
+                    failureBlock(error)
                 }
             })
         }

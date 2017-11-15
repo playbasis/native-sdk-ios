@@ -17,7 +17,7 @@ class PBSynchronousNetworkOperation : PBConcurrentOperation {
     
     // define init method that captures all of the properties to be used when issuing the request
     
-    init(request:URLRequest, manager:Alamofire.SessionManager, networkOperationCompletionHandler: (DataResponse<Any>) -> Void) {
+    init(request:URLRequest, manager:Alamofire.SessionManager, networkOperationCompletionHandler:@escaping (DataResponse<Any>) -> Void) {
         self.request = request
         self.manager = manager
         self.networkOperationCompletionHandler = networkOperationCompletionHandler

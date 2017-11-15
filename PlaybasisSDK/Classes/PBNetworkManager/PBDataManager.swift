@@ -51,7 +51,7 @@ open class PBDataManager: NSObject {
     }
 
     
-    open func saveValue(_ value: AnyObject?, forKey key: String) {
+    open func saveValue(_ value: Any?, forKey key: String) {
         let userDefaults = UserDefaults.standard
         userDefaults.set(value, forKey: key)
         userDefaults.synchronize()

@@ -21,7 +21,7 @@ open class PBPlayerApi: PBBaseApi {
     }
     
     open class func getPublicInfoForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
-        PBRestController.request(.get, endPoint: playerEndPointWithPath(playerId), parameters: nil, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath(playerId), completionBlock: { (apiResponse) in
             let player:PBPlayer = PBPlayer(apiResponse: apiResponse)
             player.playerId = playerId
             completionBlock(player)
@@ -29,7 +29,7 @@ open class PBPlayerApi: PBBaseApi {
     }
     
     open class func getPrivateInfoForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
-        PBRestController.request(.post, endPoint: playerEndPointWithPath(playerId), parameters: nil, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath(playerId), completionBlock: { (apiResponse) in
             let player:PBPlayer = PBPlayer(apiResponse: apiResponse)
             player.playerId = playerId
             completionBlock(player)
@@ -37,7 +37,7 @@ open class PBPlayerApi: PBBaseApi {
     }
     
     open class func getAllPrivateInfoForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
-        PBRestController.request(.post, endPoint: playerEndPointWithPath("\(playerId)/data/all"), parameters: nil, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: playerEndPointWithPath("\(playerId)/data/all"), completionBlock: { (apiResponse) in
             let player:PBPlayer = PBPlayer(apiResponse: apiResponse)
             player.playerId = playerId
             completionBlock(player)
@@ -46,8 +46,9 @@ open class PBPlayerApi: PBBaseApi {
     
     
     open class func getCustomFieldsForPlayerId(_ playerId:String, completionBlock:@escaping PBPlayerCustomFieldsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
-        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/custom"), parameters: nil, completionBlock: { (apiResponse) in
-            if  let customFields:[String:String] = apiResponse.parsedJson?["player"]!!["custom"] as? [String:String]{
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/custom"), completionBlock: { (apiResponse) in
+            let parsedJson = apiResponse.parsedJson as? [String: AnyObject]
+            if  let customFields:[String:String] = parsedJson?["player"]!["custom"] as? [String:String]{
                  completionBlock(customFields)
             }else{
                 completionBlock([:])
@@ -132,7 +133,7 @@ open class PBPlayerApi: PBBaseApi {
     
     open class func getBadgeWithPlayerId(_ playerId:String,completionBlock:
         @escaping PBPlayerBadgesCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
-        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/badge"), parameters: nil, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/badge"), completionBlock: { (response) in
             completionBlock(PBBadge.pbBadgeFromApiResponse(response))
         }, failureBlock: failureBlock)
     }
@@ -172,7 +173,7 @@ open class PBPlayerApi: PBBaseApi {
     }
     
     open class func getAllQuestWithPlayerId(_ playerId:String,completionBlock:@escaping PBQuestsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
-        PBRestController.request(.get, endPoint: playerEndPointWithPath("questAll/\(playerId)"), parameters: nil, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("questAll/\(playerId)"), completionBlock: { (apiResponse) in
             let quests:[PBQuest] = PBQuest.pbQuestFromApiResponse(apiResponse)
             completionBlock(quests)
             }, failureBlock:failureBlock)
@@ -206,7 +207,7 @@ open class PBPlayerApi: PBBaseApi {
     }
     
     open class func getPointsWithPlayerId(_ playerId:String, completionBlock:@escaping PBPointsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
-        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/points"), parameters: nil, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/points"), completionBlock: { (response) in
             let points:[PBPoint] = PBPoint.pbPointFromPointsApiResponse(response)
             completionBlock(points)
             }, failureBlock: failureBlock)
@@ -241,7 +242,7 @@ open class PBPlayerApi: PBBaseApi {
 
     open class func getRankWithRankTypeAndLimit(_ rankType:RankType,limit:Int, completionBlock:@escaping PBRanksCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         
-        PBRestController.request(.get, endPoint: playerEndPointWithPath("rank/\(rankType.rawValue)/\(limit)"), parameters: nil, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("rank/\(rankType.rawValue)/\(limit)"), completionBlock: { (response) in
             let ranks:[PBRank] = PBRank.pbrankFromApiResponse(response)
             completionBlock(ranks)
         }, failureBlock:failureBlock)
@@ -256,7 +257,7 @@ open class PBPlayerApi: PBBaseApi {
     }
     
     open class func getReferralCodeWithPlayerId(_ playerId:String, completionBlock:@escaping PBReferralCodeCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
-        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/code"), parameters: nil, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: playerEndPointWithPath("\(playerId)/code"), completionBlock: { (response) in
             if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], let code:String = json["code"] as? String {
                 completionBlock(code)
             }

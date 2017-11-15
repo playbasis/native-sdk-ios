@@ -18,10 +18,10 @@ open class PBCampaignApi: PBBaseApi {
         let params:[String:String] = ["campaign_name":campaignName]
         PBRestController.request(.get, endPoint: campaignEndPointWithPath(""), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
-                completionBlock(campaigns: PBCampaign.pbCampaignsFromApiResponse(apiResponse))
+                completionBlock(PBCampaign.pbCampaignsFromApiResponse(apiResponse))
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             }, failureBlock:failureBlock)
     }

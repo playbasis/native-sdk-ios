@@ -20,7 +20,7 @@ class Tests: XCTestCase {
     func testPlayerAPI_publicPlayerInfo() {
         XCTAssert(true, "Pass")
         
-        let expectation = self.expectation(withDescription: "public info for player")
+        let expectation = self.expectation(description: "public info for player")
         
         PBPlayerApi.getPublicInfoForPlayerId("jontestuser", completionBlock: { (player) in
             print("done: \(player.playerId)")
@@ -30,7 +30,7 @@ class Tests: XCTestCase {
             XCTFail()
         }
         
-        waitForExpectations(withTimeout: 5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
     
     func testPerformanceExample() {

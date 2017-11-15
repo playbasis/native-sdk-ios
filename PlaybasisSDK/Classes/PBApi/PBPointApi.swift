@@ -21,10 +21,10 @@ open class PBPointApi: PBBaseApi {
         }
         PBRestController.request(.get, endPoint: pointEndPointWithPath("custom/remaining"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
-                completionBlock(remainingPoints: PBRemainingPoint.pbRemainingPointFromPointsApiResponse(apiResponse))
+                completionBlock(PBRemainingPoint.pbRemainingPointFromPointsApiResponse(apiResponse))
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             }, failureBlock:failureBlock)
     }
@@ -36,7 +36,7 @@ open class PBPointApi: PBBaseApi {
                 completionBlock()
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             }, failureBlock:failureBlock)
     }

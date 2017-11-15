@@ -14,8 +14,8 @@ open class PBQuestApi: PBBaseApi {
         return PBEndPoint.QUEST_END_POINT + self.encodePath(path)
     }
     
-    open class func getQuestList(_ completionBlock:@escaping sPBQuestsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
-        PBRestController.request(.get, endPoint: questEndPointWithPath(""), parameters: nil, completionBlock: { (response) in
+    open class func getQuestList(_ completionBlock:@escaping PBQuestsCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
+        PBRestController.request(.get, endPoint: questEndPointWithPath(""), completionBlock: { (response) in
             let quests:[PBQuest] = PBQuest.pbQuestFromApiResponse(response)
             completionBlock(quests)
             debugPrint(response)
@@ -32,7 +32,7 @@ open class PBQuestApi: PBBaseApi {
     }
     
     open class func getQuestInfoWithQuestId(_ questId:String, completionBlock:@escaping PBQuestCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
-        PBRestController.request(.get, endPoint: questEndPointWithPath(questId), parameters: nil, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: questEndPointWithPath(questId), completionBlock: { (response) in
             let quest:PBQuest = PBQuest(apiResponse:response)
             completionBlock(quest)
             }, failureBlock:failureBlock)
@@ -57,7 +57,7 @@ open class PBQuestApi: PBBaseApi {
     open class func getQuestLeaderBoardWithForm(_ leaderBoardForm:PBLeaderBoardForm, completionBlock:@escaping PBLeaderBoardCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         PBRestController.request(.get, endPoint: questEndPointWithPath("leader"), parameters: leaderBoardForm.params(), completionBlock: { (response) in
             let parsedLeaderboard = PBLeaderBoard.pbLeaderBoardDataFromApiResponse(response)
-            completionBlock(leadearBoard: parsedLeaderboard.leaderBoardList, playerData: parsedLeaderboard.playerData)
+            completionBlock(parsedLeaderboard.leaderBoardList, parsedLeaderboard.playerData)
         }, failureBlock: failureBlock)
     }
 }

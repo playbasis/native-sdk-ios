@@ -45,10 +45,10 @@ open class PBEngineApi: PBBaseApi {
         PBRestController.request(.get, endPoint: engineEndPointWithPath("rules"), parameters: params, completionBlock: { (apiResponse) in
             
             if apiResponse.parsedJson != nil {
-                completionBlock(gameRules: PBGameRule.pbGameRuleFromApiResponse(apiResponse))
+                completionBlock(PBGameRule.pbGameRuleFromApiResponse(apiResponse))
             }
             else {
-                failureBlock(error: PBError(message: "Unknown error"))
+                failureBlock(PBError(message: "Unknown error"))
             }
             
 

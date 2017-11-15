@@ -29,8 +29,7 @@ open class PBMonthReportValue: PBModel {
         if let responseObject:[String:AnyObject] = dictionnary {
             if let allKey:[String] = Array(responseObject.keys) {
                 for key in allKey {
-                    
-                    print("month: \(key)    quantity: \(String(responseObject[key]!["quantity"]!))")
+                    print("month: \(key)    quantity: \(String(describing:responseObject[key]!["quantity"]!))")
 
                     if let reportValue:[String:AnyObject] = responseObject[key] as? [String:AnyObject]{
                         let report = PBMonthReportValue()
