@@ -42,7 +42,7 @@ open class PBDataManager: NSObject {
         return getTokenString(tokenType)
     }
     
-    open  func saveToken(_ token:String,withType type:PBTokenType)-> Bool{
+    @discardableResult open  func saveToken(_ token:String,withType type:PBTokenType)-> Bool{
         return self.saveTokenString(token, tokenType: type)
     }
     

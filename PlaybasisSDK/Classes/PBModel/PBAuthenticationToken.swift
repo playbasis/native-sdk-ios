@@ -18,7 +18,7 @@ class PBAuthenticationToken: Mappable {
     var expirationDate:Date? = nil
     
     init(apiResponse:PBApiResponse) {
-        Mapper<PBAuthenticationToken>().map(JSONObject: apiResponse.parsedJson, toObject: self)
+        _ = Mapper<PBAuthenticationToken>().map(JSONObject: apiResponse.parsedJson, toObject: self)
     }
     
     init() {
