@@ -15,7 +15,7 @@ open class PBLiveFeedApi: PBBaseApi {
     }
     
     open class func getRecentActivitiesWithForm(_ recentActivityForm:PBRecentActivityForm, completionBlock:PBRecentActivitiesCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.GET, endPoint: liveFeedEndPointWithPath("recentActivities"), parameters: recentActivityForm.params(), completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: liveFeedEndPointWithPath("recentActivities"), parameters: recentActivityForm.params(), completionBlock: { (response) in
             let recentActivities:[PBRecentActivity] = PBRecentActivity.pbRecentActivitiesFromApiResponse(response)
             completionBlock(activities: recentActivities)
             }, failureBlock: failureBlock)

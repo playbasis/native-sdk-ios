@@ -17,7 +17,7 @@ open class PBEngineApi: PBBaseApi {
     }
 
     open class func processAction(_ engineForm:PBEngineForm,completionBlock:PBRuleCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.POST, endPoint: engineEndPointWithPath("rule"), parameters: engineForm.params(), completionBlock: { (response) in
+        PBRestController.request(.post, endPoint: engineEndPointWithPath("rule"), parameters: engineForm.params(), completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
         }, failureBlock:failureBlock)
@@ -28,7 +28,7 @@ open class PBEngineApi: PBBaseApi {
         if let mPlayerId:String = playerId {
             params["player_id"] = mPlayerId
         }
-        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rule/\(ruleId)"), parameters: params, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: engineEndPointWithPath("rule/\(ruleId)"), parameters: params, completionBlock: { (response) in
             let rule:PBRule = PBRule(apiResponse:response)
             completionBlock(rule)
             }, failureBlock:failureBlock)
@@ -42,7 +42,7 @@ open class PBEngineApi: PBBaseApi {
         if let mAction:String = action {
             params["action"] = mAction
         }
-        PBRestController.request(.GET, endPoint: engineEndPointWithPath("rules"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: engineEndPointWithPath("rules"), parameters: params, completionBlock: { (apiResponse) in
             
             if apiResponse.parsedJson != nil {
                 completionBlock(gameRules: PBGameRule.pbGameRuleFromApiResponse(apiResponse))

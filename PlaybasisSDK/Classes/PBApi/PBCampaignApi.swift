@@ -16,7 +16,7 @@ open class PBCampaignApi: PBBaseApi {
     
     open class func getCampaignWithName(_ campaignName:String, completionBlock:PBCampaignsCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params:[String:String] = ["campaign_name":campaignName]
-        PBRestController.request(.GET, endPoint: campaignEndPointWithPath(""), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: campaignEndPointWithPath(""), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
                 completionBlock(campaigns: PBCampaign.pbCampaignsFromApiResponse(apiResponse))
             }

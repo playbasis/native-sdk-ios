@@ -35,14 +35,14 @@ open class PBGoodsApi: PBBaseApi {
     
     open class func redeemCouponWithGoodId(_ goodId:String, couponCode:String, playerId:String, completionBlock:@escaping PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params = ["goods_id":goodId, "coupon_code":couponCode, "player_id":playerId]
-        PBRestController.request(.POST, endPoint: goodsEndPointWithPath("couponVerify"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: goodsEndPointWithPath("couponVerify"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
     open class func getGoodsWithGoodIdAndPlayerId(_ goodId:String,playerId:String, completionBlock:@escaping (_ goods:PBGoods) -> Void, failureBlock:PBFailureErrorBlock) {
         let params = ["player_id":playerId]
-        PBRestController.request(.GET, endPoint: goodsEndPointWithPath("\(goodId)"), parameters: params, completionBlock: { (response) in
+        PBRestController.request(.get, endPoint: goodsEndPointWithPath("\(goodId)"), parameters: params, completionBlock: { (response) in
             let goods = PBGoods.init(apiResponse: response)
             completionBlock(goods: goods)
         }, failureBlock:failureBlock)

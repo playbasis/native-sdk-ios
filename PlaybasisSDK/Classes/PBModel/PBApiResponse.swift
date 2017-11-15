@@ -103,7 +103,7 @@ open class PBApiResponse:Mappable {
         self.processError()
     }
     
-    public convenience init(response:DataResponse<AnyObject>) {
+    public convenience init(response:DataResponse<Any>) {
         let jsonResponse = response.result.value as? [String:AnyObject]
         
         if response.result.isFailure {

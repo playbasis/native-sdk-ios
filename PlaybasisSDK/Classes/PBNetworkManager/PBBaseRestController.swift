@@ -31,14 +31,13 @@ open class PBBaseRestController {
     func createRequest(_ endPoint:String, method:Alamofire.HTTPMethod, authenticationData:[String:String]?, encoding:ParameterEncoding, headers: [String: String]? = nil, parameters:[String:AnyObject]?) -> URLRequest {
         
         let URLString:URLConvertible = PlaybasisSDK.sharedInstance.apiUrl + "/" + endPoint
-        
-        var mutableRequest: NSMutableURLRequest
-        do {
-            try mutableRequest = NSMutableURLRequest(url: URL(string: URLString.asURL().absoluteString)!)
-        } catch {
-            print("failed to create a request \(error)")
+
+        guard let url = try? URL(string: URLString.asURL().absoluteString), let unwrappedUrl = url else {
+            print("failed to create a request with url \(URLString)")
             assert(false)
         }
+
+        let mutableRequest = NSMutableURLRequest(url: unwrappedUrl)
         mutableRequest.httpMethod = method.rawValue
         
         var params = parameters ?? [String:AnyObject]()
@@ -101,7 +100,7 @@ open class PBBaseRestController {
         }
     }
     
-    fileprivate func parseResponse(_ response:DataResponse<AnyObject>, successBlock:((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
+    fileprivate func parseResponse(_ response:DataResponse<Any>, successBlock:((PBApiResponse) -> Void), failureBlock:PBFailureErrorBlock) {
        // print("Request completed, URL: \(response.request!.URL), response: \(response), status code = \(response.response?.statusCode)")
         let apiResponse:PBApiResponse = PBApiResponse(response:response)
         if let error = apiResponse.apiError {

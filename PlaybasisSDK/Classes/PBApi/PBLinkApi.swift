@@ -15,7 +15,7 @@ open class PBLinkApi: PBBaseApi {
     }
     
     open class func generateLinkWithParams(_ params:[String:String], completionBlock:PBLinkCompletionBlock, failureBlock:PBFailureErrorBlock){
-        PBRestController.request(.POST, endPoint: linkEndPointWithPath("generate"), parameters: params, completionBlock: { (response) in
+        PBRestController.request(.post, endPoint: linkEndPointWithPath("generate"), parameters: params, completionBlock: { (response) in
             if let json:[String:AnyObject] = response.parsedJson as? [String:AnyObject], let link:String = json["link"] as? String {
                 completionBlock(link: link)
             }

@@ -16,7 +16,7 @@ open class PBMerchantApi: PBBaseApi {
     
     open class func availableBranchForGoodsGroup(_ goodsGroup:String, completionBlock:PBAvailableRedeemPlacesCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params = ["goods_group":goodsGroup]
-        PBRestController.request(.GET, endPoint: merchantEndPointWithPath("availableBranchGoodsGroup"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: merchantEndPointWithPath("availableBranchGoodsGroup"), parameters: params, completionBlock: { (apiResponse) in
             let redeemPlaces = PBRedeemPlace.pbRedeemPlacesFromApiResponse(apiResponse)
             completionBlock(redeemPlaces: redeemPlaces)
             }, failureBlock:failureBlock)
@@ -30,7 +30,7 @@ open class PBMerchantApi: PBBaseApi {
         if let mPlayerId = playerId {
             params["player_id"] = mPlayerId
         }
-        PBRestController.request(.POST, endPoint: merchantEndPointWithPath("goodsGroup/redeem"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: merchantEndPointWithPath("goodsGroup/redeem"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }

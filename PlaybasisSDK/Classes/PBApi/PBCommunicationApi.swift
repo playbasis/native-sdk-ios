@@ -19,26 +19,26 @@ open class PBCommunicationApi: PBBaseApi {
     }
     
     open class func registerDeviceWithDeviceForm(_ deviceForm:PBDeviceForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.POST, endPoint: pushEndPointWithPath("deviceRegistration"), parameters: deviceForm.params(), completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: pushEndPointWithPath("deviceRegistration"), parameters: deviceForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
     open class func deRegisterDeviceWithDeviceToken(_ deviceToken:String, playerId:String, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params:[String:String] = ["device_token":deviceToken, "player_id":playerId]
-        PBRestController.request(.POST, endPoint: pushEndPointWithPath("deviceDeRegistration"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: pushEndPointWithPath("deviceDeRegistration"), parameters: params, completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
     open class func sendEmailWithEmailForm(_ emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.POST, endPoint: emailEndPointWithPath("send"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: emailEndPointWithPath("send"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }
     
     open class func sendCouponEmailWithEmailForm(_ emailForm:PBEmailForm, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
-        PBRestController.request(.POST, endPoint: emailEndPointWithPath("goods"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: emailEndPointWithPath("goods"), parameters: emailForm.params(), completionBlock: { (apiResponse) in
             completionBlock()
             }, failureBlock:failureBlock)
     }

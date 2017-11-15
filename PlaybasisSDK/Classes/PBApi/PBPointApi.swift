@@ -19,7 +19,7 @@ open class PBPointApi: PBBaseApi {
         if let mName:String = name {
             params["name"] = mName
         }
-        PBRestController.request(.GET, endPoint: pointEndPointWithPath("custom/remaining"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: pointEndPointWithPath("custom/remaining"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
                 completionBlock(remainingPoints: PBRemainingPoint.pbRemainingPointFromPointsApiResponse(apiResponse))
             }
@@ -31,7 +31,7 @@ open class PBPointApi: PBBaseApi {
     
     open class func approveTransactions(_ transactions:[String], approve:Bool, completionBlock:PBEmptyCompletionBlock, failureBlock:PBFailureErrorBlock) {
         let params:[String:String] = ["transaction_list":transactions.joined(separator: ","), "approve":String(approve)]
-        PBRestController.request(.POST, endPoint: pointEndPointWithPath("custom/approval"), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.post, endPoint: pointEndPointWithPath("custom/approval"), parameters: params, completionBlock: { (apiResponse) in
             if apiResponse.parsedJson != nil {
                 completionBlock()
             }

@@ -14,18 +14,18 @@ open class PBBadgeApi: PBBaseApi {
         return PBEndPoint.BADGE_END_POINT + self.encodePath(path)
     }
     
-    open class func getAllBadgesWithTags(_ tags:String?, completionBlock:PBPlayerBadgesCompletionBlock, failureBlock:PBFailureErrorBlock) {
+    open class func getAllBadgesWithTags(_ tags:String?, completionBlock:@escaping PBPlayerBadgesCompletionBlock, failureBlock:@escaping PBFailureErrorBlock) {
             var params:[String:String] = [:]
             if let mTag:String = tags {
                 params["tags"] = mTag
             }
-            PBRestController.request(.GET, endPoint: badgeEndPointWithPath(""), parameters: params, completionBlock: { (apiResponse) in
+        PBRestController.request(.get, endPoint: badgeEndPointWithPath(""), parameters: params as [String : AnyObject], completionBlock: { (apiResponse) in
                 
                 if let json:[String:AnyObject] = apiResponse.parsedJson as? [String:AnyObject] {
                     completionBlock(PBBadge.pbBadgesFromDicArray(json["badges"] as! [AnyObject]))
                 }
                 else {
-                    failureBlock(error: PBError(message: "Unknown error"))
+                    failureBlock(PBError(message: "Unknown error"))
                 }
 
                 }, failureBlock: failureBlock)
