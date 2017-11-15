@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PlaybasisSDK'
-  s.version          = '0.3.5.11'
+  s.version          = '0.4.0'
   s.summary          = 'PlaybasisSDK'
 
 # This description is used to generate tags and improve search results.
@@ -46,6 +46,9 @@ s.source           = { :git => 'https://github.com/playbasis/native-sdk-ios.git'
 
   s.source_files = 'PlaybasisSDK/Classes/**/*'
   s.resources = 'PlaybasisSDK/Resources/PlaybasisSDK.bundle'
+  s.pod_target_xcconfig = {
+    'SWIFT_VERSION' => '4.0',
+  }
 
   # s.resource_bundles = {
   #   'PlaybasisSDK' => ['PlaybasisSDK/Recources/*']
@@ -53,7 +56,7 @@ s.source           = { :git => 'https://github.com/playbasis/native-sdk-ios.git'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'Alamofire', '4.5'
-  s.dependency 'ObjectMapper', '3.0.0'
+  s.dependency 'Alamofire', '4.5.1'
+  s.dependency 'ObjectMapper', '3.1.0'
   s.dependency 'SAMKeychain', '1.5.3'
 end
