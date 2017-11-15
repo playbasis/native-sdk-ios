@@ -26,23 +26,18 @@ open class PBMonthReportValue: PBModel {
     open class func pbMonthReportValueReportFromDictionary(_ dictionnary:[String:AnyObject]) -> [PBMonthReportValue] {
         var monthReportValueList:[PBMonthReportValue] = []
         
-        if let responseObject:[String:AnyObject] = dictionnary {
-            if let allKey:[String] = Array(responseObject.keys) {
-                for key in allKey {
-                    print("month: \(key)    quantity: \(String(describing:responseObject[key]!["quantity"]!))")
+        let allKey:[String] = Array(dictionnary.keys)
+        for key in allKey {
+            print("month: \(key)    quantity: \(String(describing:dictionnary[key]!["quantity"]!))")
+            if let reportValue:[String:AnyObject] = dictionnary[key] as? [String:AnyObject]{
+                let report = PBMonthReportValue()
+                report.month = key
+                //print("month: \(key)    quantity: \(String(reportValue["quantity"]!))")
 
-                    if let reportValue:[String:AnyObject] = responseObject[key] as? [String:AnyObject]{
-                        let report = PBMonthReportValue()
-                        report.month = key
-                        //print("month: \(key)    quantity: \(String(reportValue["quantity"]!))")
-                        
-                        report.reportValue = Mapper<PBReportValue>().map(JSONObject: reportValue)
-                        
-                        monthReportValueList.append(report)
-                    }
-                }
+                report.reportValue = Mapper<PBReportValue>().map(JSONObject: reportValue)
+
+                monthReportValueList.append(report)
             }
-            
         }
         return monthReportValueList
     }

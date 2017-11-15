@@ -46,7 +46,7 @@ open class PBRuleEvent: PBModel {
     
     public  init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBRuleEvent>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
+        _ = Mapper<PBRuleEvent>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbRuleEventFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRuleEvent] {

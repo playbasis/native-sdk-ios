@@ -111,7 +111,7 @@ open class PBApiResponse:Mappable {
         }
         else if let jsonResponse = jsonResponse {
             self.init()
-            Mapper<PBApiResponse>().map(JSON: jsonResponse, toObject: self)
+            _ = Mapper<PBApiResponse>().map(JSON: jsonResponse, toObject: self)
         }
         else {
             print("Failed to get a valid JSON from server")

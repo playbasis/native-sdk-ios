@@ -27,18 +27,15 @@ open class PBActionReport: PBModel {
     open class func pbActionReportFromApiResponse(_ apiResponse:PBApiResponse) -> [PBActionReport] {
         var actionReportList:[PBActionReport] = []
         if let responseObject:[String:AnyObject] = (apiResponse.parsedJson as? [String:AnyObject]){
-            
-            if let allKey:[String] = Array(responseObject.keys) {
-                for key in allKey {
-                    if let reportValue:[String : AnyObject] = responseObject[key]  as? [String:AnyObject] {
-                       let report = PBActionReport()
-                       report.year = key
-                       report.value = PBMonthReportValue.pbMonthReportValueReportFromDictionary(reportValue)
-                       actionReportList.append(report)
-                    }
+            let allKey:[String] = Array(responseObject.keys)
+            for key in allKey {
+                if let reportValue:[String : AnyObject] = responseObject[key]  as? [String:AnyObject] {
+                    let report = PBActionReport()
+                    report.year = key
+                    report.value = PBMonthReportValue.pbMonthReportValueReportFromDictionary(reportValue)
+                    actionReportList.append(report)
                 }
             }
-            
         }
         return actionReportList
     }

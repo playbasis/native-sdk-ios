@@ -30,7 +30,7 @@ open class PBGoods: PBModel {
     
     init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBGoods>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
+        _ = Mapper<PBGoods>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     required public init?(map: Map) {

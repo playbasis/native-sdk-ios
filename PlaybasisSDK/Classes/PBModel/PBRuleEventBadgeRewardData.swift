@@ -40,7 +40,7 @@ open class PBRuleEventBadgeRewardData: PBModel {
     
     public init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBRuleEventBadgeRewardData>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
+        _ = Mapper<PBRuleEventBadgeRewardData>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbRuleEventBadgeRewardDataFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRuleEventBadgeRewardData] {

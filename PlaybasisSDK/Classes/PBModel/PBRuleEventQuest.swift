@@ -34,7 +34,7 @@ open class PBRuleEventQuest: PBModel {
     
     public  init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBRuleEventQuest>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
+        _ = Mapper<PBRuleEventQuest>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbRuleEventQuestFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRuleEventQuest] {

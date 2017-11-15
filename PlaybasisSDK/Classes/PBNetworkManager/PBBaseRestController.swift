@@ -33,8 +33,7 @@ open class PBBaseRestController {
         let URLString:URLConvertible = PlaybasisSDK.sharedInstance.apiUrl + "/" + endPoint
 
         guard let url = try? URL(string: URLString.asURL().absoluteString), let unwrappedUrl = url else {
-            print("failed to create a request with url \(URLString)")
-            assert(false)
+            fatalError("failed to create a request with url \(URLString)")
         }
 
         var mutableRequest = URLRequest(url: unwrappedUrl)
@@ -58,8 +57,7 @@ open class PBBaseRestController {
             return request
             
         } catch {
-            print("failed to encode request \(error)")
-            assert(false)
+            fatalError("failed to encode request \(error)")
         }
     }
     

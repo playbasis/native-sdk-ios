@@ -42,12 +42,12 @@ open class PBLeaderBoard: PBModel {
     
     init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBLeaderBoard>().map(JSONObject: apiResponse.parsedJson!["player_data"], toObject: self)
+        _ = Mapper<PBLeaderBoard>().map(JSONObject: apiResponse.parsedJson!["player_data"] as Any, toObject: self)
     }
     
     class func pbLeaderBoardDataFromApiResponse(_ apiResponse:PBApiResponse) -> (leaderBoardList:[PBLeaderBoard], playerData:PBLeaderBoard?) {
         var pbLeaderBoardList:[PBLeaderBoard] = []
-        pbLeaderBoardList = Mapper<PBLeaderBoard>().mapArray(JSONObject: apiResponse.parsedJson!["result"])!
+        pbLeaderBoardList = Mapper<PBLeaderBoard>().mapArray(JSONObject: apiResponse.parsedJson!["result"] as Any)!
         if let playerDataJson = apiResponse.parsedJson!["player_data"], let playerData:PBLeaderBoard = Mapper<PBLeaderBoard>().map(JSONObject: playerDataJson) {
             return (leaderBoardList:pbLeaderBoardList, playerData:playerData)
         }

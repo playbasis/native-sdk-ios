@@ -25,7 +25,7 @@ open class PBPlayer:PBModel {
     
     init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBPlayer>().map(JSONObject: apiResponse.parsedJson!["player"], toObject: self)
+        _ = Mapper<PBPlayer>().map(JSONObject: apiResponse.parsedJson!["player"] as Any, toObject: self)
     }
     
     public override init() {

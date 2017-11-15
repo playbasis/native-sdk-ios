@@ -33,7 +33,7 @@ open class PBRule: PBModel {
     
     public  init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBRule>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
+        _ = Mapper<PBRule>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBRule] {
@@ -75,7 +75,7 @@ open class PBGameRule: PBModel {
     
     public init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBGameRule>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
+        _ = Mapper<PBGameRule>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbGameRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameRule] {
@@ -132,7 +132,7 @@ open class PBGameRuleJigsawSet: PBModel {
     
     public init(apiResponse:PBApiResponse) {
         super.init()
-        Mapper<PBGameRuleJigsawSet>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
+        _ = Mapper<PBGameRuleJigsawSet>().map(JSONObject: apiResponse.parsedJson!, toObject: self)
     }
     
     open class func pbGameRuleFromApiResponse(_ apiResponse:PBApiResponse) -> [PBGameRuleJigsawSet] {

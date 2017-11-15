@@ -109,7 +109,6 @@ open class PBPlayerApi: PBBaseApi {
     open class func registerPlayerWithPlayerForm(_ registerForm:PBRegisterForm, completionBlock:@escaping PBPlayerCompletionBlock, failureBlock:@escaping PBFailureErrorBlock){
         PBPlayerApi.postProfilePicture(registerForm.profilePicture, completionBlock: { (imageUrl) in
             registerForm.profilePictureUrl = imageUrl
-            print(imageUrl)
             PBPlayerApi.updateMainData(registerForm, completionBlock: { (player) in
                 guard registerForm.customFields != nil else {
                     completionBlock(player)
